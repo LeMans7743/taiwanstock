@@ -1,0 +1,50 @@
+name: Deploy Website to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # 每日資料更新完成後自動重新部署（GITHUB_TOKEN 推送的 commit 不會觸發 push 事件）
+  workflow_run:
+    workflows: ["Daily TWSE & News Auto Analyzer"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Prepare Site
+        run: |
+          mkdir -p _site/data
+          cp index.html .nojekyll _site/
+          cp data/stocks_data.json _site/data/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

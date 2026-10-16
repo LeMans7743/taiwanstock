@@ -25,9 +25,20 @@ python -m http.server 8000
 
 編輯 `update_data.py` 最上方的 `WATCHLIST`（目前僅支援上市股票）。
 
-## 部署
+## 線上執行（GitHub Pages）
 
-1. 推上 GitHub 後，到 **Settings → Pages**，Branch 選 `main`、資料夾 `/ (root)`。
-2. 到 **Actions → Daily TWSE & News Auto Analyzer → Run workflow** 手動跑第一次。
+網站由 `.github/workflows/deploy_pages.yml` 自動部署到 GitHub Pages，網址為：
+
+**https://lemans7743.github.io/taiwanstock/**
+
+首次設定（只需一次）：
+
+1. 到 **Settings → Pages**，**Source** 選 **GitHub Actions**。
+2. 到 **Actions → Daily TWSE & News Auto Analyzer → Run workflow** 手動跑第一次資料更新。
+
+之後的流程全自動：
+
+- 每個交易日 16:30 資料更新 workflow 完成後，會自動觸發重新部署。
+- 推送到 `main` 時也會重新部署；亦可在 **Actions → Deploy Website to GitHub Pages** 手動執行。
 
 > 分數為規則化計算結果，僅供研究參考，不構成任何投資建議。
