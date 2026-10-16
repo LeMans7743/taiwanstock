@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17 01:29",
+  "updatedAt": "2026-10-17 03:32",
   "dataDate": "2026-10-16",
   "market": {
     "taiex": {
@@ -7,11 +7,11 @@
       "changePct": 0.3
     },
     "sox": {
-      "close": 11290.12,
-      "changePct": -2.51
+      "close": 11204.67,
+      "changePct": -3.25
     }
   },
-  "globalSentiment": 0.01,
+  "globalSentiment": 0.02,
   "localSentiment": 0.0,
   "macro": [
     {
@@ -29,17 +29,17 @@
         },
         {
           "region": "國際",
-          "source": "Benzinga",
+          "source": "TradingView",
           "time": "10/16 17:35",
           "title": "Taiwan Semiconductor Holds the Cards As NVIDIA, Apple and AMD Battle for Limited AI Chip Capacity",
-          "link": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxNQkJwR1ozRmlGcXpxTVBrWGlFdzJ2bmlKQ0FnUWRtbTZVaHdLM3JCVVlJem1tRG1zX3hSZ2dHQTV0NGxuRktnRjBFX2pPd1NrMkRPQUU3SEJ0Tk1rcWpkNEtRUmpRc3BkVnRiMmotN09ZNTFmWVU3NWx4ajRDaGJSNDZsODNvQ1p1TTlsX183SDBXdHU0cW5xZWhRTXIwZnZxMDFLQUtnc0tPQnZoV2RrRFExRGNkeDhvNXlIY0dNMHVaSXJzV1V4aXA1bVBkaTIwbmVwZ1EwVXNOZHpIN2V2R2ZjNA?oc=5",
+          "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQME4xRFV6RTIxcklKMXNGaXhUYkNoa0xjWG55Skk1azJsd2FYTTN6QmNwTlBjTW1DS3lPWUlpa1BBUDRXRWVVeW9BMlRMUnRtSDdLVWxDMG5FbHV3OE9ncmxNZ2VOWGNtNUNOR1hwVFdiREdCV1F1NGhRYzczLTVmVmh5ZE8wS2M5RnV1U0NSdGlYRVhEbS1aSHR4NUpSTXVBWGRXNzlwQ0JJSURrMzZMWkh5OTNDSU5rVzJGQS12TzBiaU5QakF2d1dENHlheE4tOU5iaE8wY2cyVHpvQzYzN0Q5Z1NJTkY0VEE?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國際",
           "source": "Yahoo Finance",
-          "time": "10/15 04:23",
+          "time": "10/15 16:16",
           "title": "Nvidia stock sinks as chip sell-off deepens on hot inflation data",
           "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQb1ZGcUkyMFZEdXYtUDhENXZ6Rkl6b29Ic3BlOUE2a2U5d3I3UWlPM2ZYRjRnZVYyRVdPRUFjTklPeG9OY2hrdUNZaXc4YU9JWGlsNXY2WFlkQ0lzNHl1VFZoaWNLamlGT3lKQVpyN2VTMm1HVEpRd2FzdUZUN3dTbFBkOEVVUnh6SE05QTZpRmlDTk4xVUoyckJQRjlIRVJaZTBkV2hWalNwd1pKOW9QSFh5ODY4VEVZcE51Wm5RMHZ1RlVnWDVvZw?oc=5",
           "sentiment": "中立",
@@ -71,6 +71,15 @@
       "news": [
         {
           "region": "國際",
+          "source": "PBS",
+          "time": "10/17 01:21",
+          "title": "Fed chair Warsh says price stability is key but shies away from signals about rates",
+          "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNWGRPeVhZRldYUzJNQ3NTYzB0eW5LVlVHMThkMEMxZ3VqUVlVNkN4WVNHTHBtZ2lBeTJ6alU2Y1NmN25kTGw5am5jSFk4Ul8xcHFhVTRJYWtCV3VWMi14TW5EYkloYm9GQlBwVGFnX0hmOTkyUFctQl9oQW92ZHRwSzFqaHhfSmpsZjdKejE3WkVXU1lKR3F1RXNnamlSUWlJdUpnZW8tUGUyXzJCYU5PRGZneEpaMkhPYWt4btIBwgFBVV95cUxNN1JwTW9kMkgtTnp1QWNuS2ZkTXNuWWRncV9MWDFqRFAzYWRDdk50anp1WVJ4OVE0UnRtTko0dE1ORnh1cFhMUmFBSXZRSzllMlR3QXlQMDlxa2tQanVGdUlGQnJUTURuM0J0Um5MbTVtWlg4SXJHS2d2SHhESzR1b3BFNElrWXBXWlM0R3BoOG5lcmV3NWNmQ3NfdnRubHpUVzMxd0ViclBmQk9DbWwwTlhJWV9NQ2VNTVphcVR6QjhKQQ?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國際",
           "source": "CNBC",
           "time": "10/16 23:38",
           "title": "Analysis: Everyone expects the Fed to hold rates in October. Kevin Warsh could surprise us all",
@@ -90,7 +99,7 @@
         {
           "region": "國際",
           "source": "Financial Times",
-          "time": "10/16 14:43",
+          "time": "10/16 13:25",
           "title": "Bets on Fed rate hold in October strengthen after Warsh comments",
           "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPSkowQ1I4RlFmbDVzQTBjVXJMdzlqamF3bnhidDJOTlc4VnBVT1F3VDE3cExoQzRJWWdsU1Uxc2F6Q3dmWlRBR01DNXhRV05KdGMwT1RacVVGNXFoMHlOVTJGbmVweHp5dzZGRUFEV1pDcWV2MlEtY21nMEY0WEE2SzEwclg?oc=5",
           "sentiment": "中立",
@@ -104,15 +113,6 @@
           "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQcFh2RDJiZ3J6czBZYk9ITmFXaDczMjJ6ZVlZaVUyUkV3X3ZDbGxKWDhNUVlROE5mVWFjbjVVbktaN2JnNF95NzBtWUxCMkZrT2ZiREdteDduNEVkQzJnNzFBZmdsb01DNnpKTjJNUl96dnpuakg1TDVJU2ZLM1pDZ09mVE5sMDlDM2JkaXZZakxrVTJMZmZEOVJYOTZramZTNkNnY2pEMWRPdEhwWlFPMUZPcVhrc1o3cmlXRVRKSQ?oc=5",
           "sentiment": "中立",
           "score": 0
-        },
-        {
-          "region": "國際",
-          "source": "WSJ",
-          "time": "10/16 13:23",
-          "title": "Warsh Avoids Signal on October Rate Move",
-          "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQaThqQ25PaWtHbG1VbkprR2Q4dXNOa3F1VDBDcVItS0dtRnBXQlVRS19VMFJ3YXdVVHlHWlFnZURQa3U4czRYQVJubmp2dXlGOHdneVU4cWp2YlVVdHlPNlh5dEo4V3k4Ri1KVHNaRmdLaDk1WDNYcVhEU1JxUzNsaDJPcGVuS0xsLUFJVG1yUjNUa24wRkdjVQ?oc=5",
-          "sentiment": "中立",
-          "score": 0
         }
       ]
     },
@@ -120,15 +120,6 @@
       "category": "🇹🇼 台灣月營收與法說會",
       "sentiment": -0.14,
       "news": [
-        {
-          "region": "國內",
-          "source": "Yahoo股市",
-          "time": "10/16 17:09",
-          "title": "外資提款不手軟台股反攻有援軍！PCB、衛星股雙引擎扛轎撐住4萬7｜Yahoo財經掃描",
-          "link": "https://news.google.com/rss/articles/CBMi6ANBVV95cUxOZzdLdy0yc21ITm1jQ1J5SmMtbjdaMHU3WXVoV1hxdjIxbFRmTExQUFI5aGNqRHpzLXA1N3JETW8xdHYyaGJzQm11bmpza21TMV9hV0RPaG1TelEzTmYxT3FRcVVZWTFWQi1PTVdaX0xKMXhwOWhUZE96SzR3SXVybnBKQXFmc1hSM0Y5eWFZSHBCSWx3Tk80MEp3RzV4MVVBXzhnTkROaE5KUk85ajhnNXlDUjlfSlc5NlMzblZZdWFqYU5hQVlMVkVqWjhyU3dHajRSZ0xWOTZxdl9Xak02QkFhUmdXdE1ENms0TTE3eFJyR09YSUd2TV8tQ21hNFZuLTFXekdiOHF5NmxSRm1ES05RVEZnQ24zOHJiYVB5b0pQdkNSOUNWYndrY1pEVDh4UDhQZS1rWnhMRTI4cWNMX1dmQWh6cUFUYjB0NUJjZFZsaU1FRXNuek55d1lvVEU1OWNvYnFTTFpVZTR6ZGZ3QTBQd0ViOF9hOGR0TmY3Z01fZjhXMUFabjdoTm1sZjhKWWkxakE3aG5CQVlDTFVUTzBGdU83d0xoY1lHRjhXRmdaak5rSUJtWDFsd1hwMXU5ZVh6NzltLVcxRFVQcmFhZzFjV2ZlcnZtQXJRamQ1UmkwbFhBMkdJQQ?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
         {
           "region": "國內",
           "source": "鉅亨網",
@@ -153,6 +144,15 @@
           "time": "10/16 17:48",
           "title": "外資續砍台股461億！台積電賣最多　買賣前10大個股一次看",
           "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBLUk8xN3l6SXRleXdqRVRwemJWeTBOUnNpcjFRUjFyM3Z1N2F0SzVxMTBaS3FWYU9vbExkTmtVV0l0dnJkc1U1Q0RfMXg5ZTh6cFHSAVBBVV95cUxOaFR1elh6bk0xMnlPZE9NLUh3Q01mV2VpMlkwczhoVEVqNGVOR1lLOFpJc1VUYVo1Y3A3alJ0cFFCVnNIVW45ZlZyc2dwLUc1eQ?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國內",
+          "source": "Yahoo股市",
+          "time": "10/16 17:09",
+          "title": "外資提款不手軟台股反攻有援軍！PCB、衛星股雙引擎扛轎撐住4萬7｜Yahoo財經掃描",
+          "link": "https://news.google.com/rss/articles/CBMi6ANBVV95cUxOZzdLdy0yc21ITm1jQ1J5SmMtbjdaMHU3WXVoV1hxdjIxbFRmTExQUFI5aGNqRHpzLXA1N3JETW8xdHYyaGJzQm11bmpza21TMV9hV0RPaG1TelEzTmYxT3FRcVVZWTFWQi1PTVdaX0xKMXhwOWhUZE96SzR3SXVybnBKQXFmc1hSM0Y5eWFZSHBCSWx3Tk80MEp3RzV4MVVBXzhnTkROaE5KUk85ajhnNXlDUjlfSlc5NlMzblZZdWFqYU5hQVlMVkVqWjhyU3dHajRSZ0xWOTZxdl9Xak02QkFhUmdXdE1ENms0TTE3eFJyR09YSUd2TV8tQ21hNFZuLTFXekdiOHF5NmxSRm1ES05RVEZnQ24zOHJiYVB5b0pQdkNSOUNWYndrY1pEVDh4UDhQZS1rWnhMRTI4cWNMX1dmQWh6cUFUYjB0NUJjZFZsaU1FRXNuek55d1lvVEU1OWNvYnFTTFpVZTR6ZGZ3QTBQd0ViOF9hOGR0TmY3Z01fZjhXMUFabjdoTm1sZjhKWWkxakE3aG5CQVlDTFVUTzBGdU83d0xoY1lHRjhXRmdaak5rSUJtWDFsd1hwMXU5ZVh6NzltLVcxRFVQcmFhZzFjV2ZlcnZtQXJRamQ1UmkwbFhBMkdJQQ?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -246,14 +246,14 @@
         2440.0,
         2420.0
       ],
-      "sentimentScore": 0.09,
+      "sentimentScore": 0.13,
       "scores": {
         "fundamental": 89,
         "chips": 63,
         "technical": 63,
-        "news": 63
+        "news": 65
       },
-      "summary": "2026-09 月營收年增 +54.6%、月增 -0.6%；收盤 2420.0（月線 2491.0／季線 2416.5，RSI 41.7）；近5日外資 -97,973 張、投信 +8,338 張；國內外新聞 8 則，平均情緒 +0.09。",
+      "summary": "2026-09 月營收年增 +54.6%、月增 -0.6%；收盤 2420.0（月線 2491.0／季線 2416.5，RSI 41.7）；近5日外資 -97,973 張、投信 +8,338 張；國內外新聞 8 則，平均情緒 +0.13。",
       "news": [
         {
           "region": "國際",
@@ -267,27 +267,27 @@
         {
           "region": "國際",
           "source": "Morningstar",
-          "time": "10/16 18:09",
+          "time": "10/16 18:00",
           "title": "TSMC Earnings: Tesla Talks and Texas Expansion Could Boost Stock",
-          "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOQmplN1k0c0JkUV9XTE9wVThOV0RPWERBUVRwbU5MWnhQN0xGaXBxbTRqNkwtbjczQWpuNVd2djBMTkRMUVppVElzMkpUSXlTbUVEdDc1eUxwdHhaRlZFYnRoSUVNZE54MTRlZTEtUDJleG9RXzFoWkhfd2pfUzdza1JpOXFlTHI3eExkVHFadUotOHJrMlJIOVJaRGxMeTFBTmc?oc=5",
+          "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPdTlZX1NPcFA3RkNfeWhnWVJRMHlua25QSUZteUV3b2lTTHk2WEloTDVLUUY4TmpheGRLdEpNOW5LVjRpSjlyMXVpTVFLVVBrdENUWDRmWFFIZm5nc1F5OE16T3p0cC1WRUNUdDZMTGFiWERfckZQWHl1bDhhdXY5bV9CR1VuZEVpR01QRk8xT2haYTdOZDh4V2hKcVhOVDVoalE?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國際",
-          "source": "Money Morning",
-          "time": "10/16 21:06",
-          "title": "TSMC Just Posted Another Record. The Caution Is About 2027.",
-          "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQWC1aVmItbURiVVdWdjNST01raFdONHB6aWs4bkZDV21kbG9oM3JDTFNhRjl4UnFQUlV1eWxFRWhzbzJoY3FmU0k3WURKZVpGRW1Lcmp1MGhqclpDTmoycW9NTkZkZFZJNWVpekZtQU1ha2V0LUVKbHliVUMyVjZXazNTaDFTT28zcjd4T2xFdlJGRjA?oc=5",
+          "source": "Yahoo Finance",
+          "time": "10/16 22:00",
+          "title": "TSMC's Record Q3 Earnings & Upbeat Outlook Put These ETFs in Focus",
+          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTHhUU2tUWlVkN0xNRWQ0QXB5NjZBSUVKZU1rN1piRGRRLVdtMEduQmNRLVVYREJoTjljc0NUb3J1aXRyWFpnc0JxaTc3ZnF5bHpIOFhkSVNBWEFxMW0yVHB5QXFWOV9HRVByQzJ2OHhjMGY5Z3Y5Y1JPOWdTRy1GV3VYa09HTmIzMm9YNmg0QnUxUG9Yak00?oc=5",
           "sentiment": "利多",
-          "score": 0.35
+          "score": 0.7
         },
         {
           "region": "國際",
-          "source": "Yahoo Finance",
-          "time": "10/16 20:46",
-          "title": "TSMC Record Quarter Highlights Unprecedented Demand for AI Chips",
-          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPVFJZbXlwRWROSGdhaElEcmtad1RXd3RxaG9QRFZHLVpaMXNNcEt2d2JoMUZCbDBmdG0tRVRsT3ZZS3NSSUJnN3N6cWV5dm1CYXNsNjBjbVRyVFdVM1pWWk1SWHo1YVlqbnBCcE1GSnY4X0NON3cyZFNNb1Z2TEVFb2dkQUhNaWsxcU9SQkJmd0RvRE9qRC00Q0lVSFlZNjJVMTV5bHBLbklyeFE4?oc=5",
+          "source": "Dallas Express",
+          "time": "10/16 21:05",
+          "title": "TSMC Eyes Texas Expansion As AI Chip Demand Surges, Terafab Talks Confirmed",
+          "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPeUR0VnJLODRmbnltc1ZtaUsycmdhS0ljbjVoeDB4NEtSamc5NnRxWjZ6a1hrV056VkZhS3lzV1hjR09TSEJtS2NrczZqaU5XazBnNnRyZVZSQ1g1a0o2SzhIMmtFNEQ0VVlRTFFZOWZ5Nk1NdW4ycU82eXY2eTR2SWY4WGNxSFlXdEpCMG9RWm1SNmVwRWUzbE11aU1ITk5MaDFpbHhERkJTbkI3UXhmR1BiOUdFdmpqU0E?oc=5",
           "sentiment": "利多",
           "score": 0.35
         },
@@ -454,7 +454,7 @@
         {
           "region": "國內",
           "source": "自由時報",
-          "time": "10/16 21:57",
+          "time": "10/16 23:53",
           "title": "日月光投控：漲價有必要",
           "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5KV1BNRFlqemdXZzFLcUhjMnVVWHpiUmxKR1pQeERBdEhnaWhHZTZSSDZENExVYWdGeUdjNG55aVVDQVhyX3lFSjJyMk9YVW5taWM4aW1hX1g?oc=5",
           "sentiment": "中立",
@@ -597,19 +597,19 @@
         },
         {
           "region": "國際",
-          "source": "TradingView",
-          "time": "10/16 14:11",
-          "title": "Taiwan plans $4B Texas hub for AI, Nvidia suppliers",
-          "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNSU9SRk1nOTV1b1kzVjJDMUdTSkt0czkyUnl3TEhKeVpnNmFQVG9DTVF4dnppa2NhclZtV0tfZmlEbUNBNF9wSENWbTFkYVQ1WlZHQ1laZmgyZ3NzLTItZHZEblh0NVpiSDBYSmN5UlhHeWp5OXRsbmRFQTNDRDBjNFp1ZldmRnRCSFBBRlcwZVFBYUR4MW4zRGh0T0k3SlZiZnk1ekswLTZCQWttTkJUM3R3?oc=5",
+          "source": "Global Sources",
+          "time": "10/14 13:13",
+          "title": "Foxconn expands AI server layout with OCP showcase",
+          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWk90aU1tdlJFbkpkeXI1RENZRE5rbmRWUEtHZWdwTnFqUmhkbk15aDlfRWlTY3FqVG9FNnVsVkdJOHk4XzdUOGhvMlVSamlRNE5PN3lENUlpb0pBX19vWmdJNThKOEpLVlVRVGpvcFRBdjBsU1djR21QNElXSjBiV3VTYTU2WkNNM1l2X0VZbmxlQ3pYU0oxdk9sZzEwZw?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國際",
-          "source": "ad-hoc-news.de",
-          "time": "10/14 22:21",
-          "title": "US patent probe hits Foxconn Industrial Internet stock",
-          "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNVnFtUzRidVg2VUFOeGZXMzkxQnNWSXdDN29TOXNmd2pKSEJtMEJ4Tk9rVmJUMUVSMGgzU2RWc2VlaU9Ca3pveDU0bVVCUW40VFgwOHdqSjQwRzRrZzUzQ2w4SVNNLWRrSW1aX2c4ZzZ1TTJrSDBCTVN3TDB4NzZHQ0VuYk8zWEF5ZVVPVzRLNlZ1OFRhc2ZNS0dncjJwUXJaSjZMbVNNUTVLV1IxdENoZ3BDcUQ3NlBm?oc=5",
+          "source": "TradingView",
+          "time": "10/16 14:11",
+          "title": "Taiwan plans $4B Texas hub for AI, Nvidia suppliers",
+          "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNSU9SRk1nOTV1b1kzVjJDMUdTSkt0czkyUnl3TEhKeVpnNmFQVG9DTVF4dnppa2NhclZtV0tfZmlEbUNBNF9wSENWbTFkYVQ1WlZHQ1laZmgyZ3NzLTItZHZEblh0NVpiSDBYSmN5UlhHeWp5OXRsbmRFQTNDRDBjNFp1ZldmRnRCSFBBRlcwZVFBYUR4MW4zRGh0T0k3SlZiZnk1ekswLTZCQWttTkJUM3R3?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -625,18 +625,18 @@
         {
           "region": "國內",
           "source": "Yahoo股市",
-          "time": "10/16 15:52",
-          "title": "不只鴻海！東元擬合作日美AI大咖 拚3年內營收衝破千億元",
-          "link": "https://news.google.com/rss/articles/CBMigANBVV95cUxOQTAyMEtYLUVTcXJTcG5BU2VMMFFtb0FUT2F1VlUzT2Y4Z2RqaHRscFA0NEtuVlZFd0NPVUhzS0s0UW8tTEJUeTNtVzhPRl9GeU9DVDFFTHN1V1BBUFFZZ2dKY3dkVEI4VlhsWGFuYWVUZHdaazZqRHFNdnZxLUNsQzkxdmIwQ0pZWjJweHBMLUhjYXl4WHdhNGN6UWhQaVlNNDhCaVlqcGpydElKYmJJUjcwLXZoMVZLWnQzY0tmdjdYa0pZa3NHOVdtd2VsT1hvM2Z5RGg0SGZ6dmNkNGRtd0VmM0pqQnR1TFVxWHUyTDREQXdNM1ItVXVIb3NRR082Z0dpbE1EdGFVN1MxbnlBLU5EUHhJTzZIc3BaNHlzZ19oam5rSVNqOW9GLUxjSGhwbHA1dERvREZUUUpCQWlCaElBRXFqZjM3QnIxRDJEVFJETlRtRllrUUJfQjRCbXkzN0JVOTJtTXc4ZC1SUk5GZXhQN3RIYjgzeUFtRTVBMFA?oc=5",
+          "time": "10/17 00:00",
+          "title": "AI股最好時光已過 巴克萊示警不再只漲不跌、選股看四條件",
+          "link": "https://news.google.com/rss/articles/CBMigANBVV95cUxQdlZpRWozNkVHZVBsbzNMeG9lU2hxbF9LWExhUzNMZEtlSjN6TDFfNnh4WGhTZldsU1FKcXBhWWNXb2lucU9lQ0hjYVpuZUZRVUh4akpyemt2Sk9NZXBmNGFhM3BPQzR3Vy1zYzNqNE1SNEdacXh1M2lQVDl5aEdEOTgxYUNKVjd5NE5lSWJGU0VfZmwtdTV0bGJTemMta3VqNV9DdnlERmU2RnFlVDVLRV9LSXZycW5qOVB6d3dtSVROemYxbVpCSWhucHAwNmM5WFhNVmtEaEg0Z0psZUE4VEpFUXRlRUtNWHNoY1d0MjZxM0lkcXV1VW00THZOY0NEMkVUdElJRUx4SW1MZ2M1RWhtdmtKdlhSNmJaQW5GQUFRbzI2Wk1objNkbEoteXdiUnZvOG84aE9Ic1RPYjkxZjJNS2ZxdldmMkZlUWVvLTU1cGFPRTdRTXlJSGZQZ204VVExWEZId09yLXBxVlg4TFVLQjByeTZKUnZpVEtWbEM?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國內",
           "source": "Yahoo股市",
-          "time": "10/16 21:41",
-          "title": "〈美股早盤〉AI疑慮壓抑晶片股、特斯拉撐盤 主要指數漲跌互現",
-          "link": "https://news.google.com/rss/articles/CBMiggNBVV95cUxNaFpVWDNHR2pYb3NGZFZRTHZYa0djTm4tdTBRRUxsSGFxVFhBVUc3bm5WcXM4TVdUSlN5c1c5QkRfOERDS004bkR4WVcyeWs0NGhMVVNtOHBXblVrcjhwU2U0QVhWeXNBYXN5dnVzMGNiVkRUZXdGNTVCa25ZVEVQWFdMX0xkcFNIWUxpWVpiWjlKd2Z1Z2xFS1AtMGxsNGlmT3BvOThCNk4yRkd3OHlFN090SWtodi0tUTY4eVVMYlBFd01oQmdweFlyNGd4Y2NCWTQ4Z0hRRHpVbmZja0RaU0ZHRFBjUVNDem5IcnByQy12amNIdkI3N1NvaVdGY0NvcUxfeWRoUHBMdWhLWGo5blRPMXdjeXh2bUQ0RGI2MWxFdVF1TTlPMUdpZU5pYzFCVVJzX21QdUNBTnVoNzQ3TFlCTDlyc3Z0Skk2SXhJQzd2bk94VGw4eEVaeTBCQ2ppY2JFNVNxR1NOYWx2WHdJYWhHdlVXanJtQW96d0piVWcwQQ?oc=5",
+          "time": "10/16 15:52",
+          "title": "不只鴻海！東元擬合作日美AI大咖 拚3年內營收衝破千億元",
+          "link": "https://news.google.com/rss/articles/CBMigANBVV95cUxOQTAyMEtYLUVTcXJTcG5BU2VMMFFtb0FUT2F1VlUzT2Y4Z2RqaHRscFA0NEtuVlZFd0NPVUhzS0s0UW8tTEJUeTNtVzhPRl9GeU9DVDFFTHN1V1BBUFFZZ2dKY3dkVEI4VlhsWGFuYWVUZHdaazZqRHFNdnZxLUNsQzkxdmIwQ0pZWjJweHBMLUhjYXl4WHdhNGN6UWhQaVlNNDhCaVlqcGpydElKYmJJUjcwLXZoMVZLWnQzY0tmdjdYa0pZa3NHOVdtd2VsT1hvM2Z5RGg0SGZ6dmNkNGRtd0VmM0pqQnR1TFVxWHUyTDREQXdNM1ItVXVIb3NRR082Z0dpbE1EdGFVN1MxbnlBLU5EUHhJTzZIc3BaNHlzZ19oam5rSVNqOW9GLUxjSGhwbHA1dERvREZUUUpCQWlCaElBRXFqZjM3QnIxRDJEVFJETlRtRllrUUJfQjRCbXkzN0JVOTJtTXc4ZC1SUk5GZXhQN3RIYjgzeUFtRTVBMFA?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -1063,10 +1063,10 @@
       "news": [
         {
           "region": "國際",
-          "source": "Yahoo Finance Singapore",
-          "time": "10/15 23:12",
-          "title": "MediaTek Inc. (2454.TW) stock price, news, quote and history",
-          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1PVzFlaU1PMlI5YTRvVzNLTDlnQU9CTEJ0VGZaQ2RZYUg5b1o4M19MWFlOcmlMSHQtQnQwc2ZsM2ZIRmFJTWZNRFRjMVBYc2tFaUpTMUlR?oc=5",
+          "source": "Yahoo! Finance Canada",
+          "time": "10/16 10:14",
+          "title": "MediaTek Inc. (2454.TW) Stock Price, News, Quote & History",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5EVVZuZ3pWN1Z3VVFGYWk3b1FHdHBxZ0oxYUtkUTlKQXNERktVNnI5bVdYb3gwZ1plVi1hYVZFQXFkWF9peURQR1V0eXZsY29KczZQbW1B?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -1090,10 +1090,10 @@
         },
         {
           "region": "國際",
-          "source": "MediaTek",
-          "time": "10/16 03:55",
-          "title": "Inside MediaTek’s Approach to Scalable Silicon Design",
-          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNa1ZwM2hZRVpTSTFsZVo3VFRGTGV2ZHhNMm9rUlUzWmVraXRBSG9UMEVfS1BwaFdZSFUzdDdxV0IzSmlaNDJxaEJ4OURjZGJGcTdqS1VuRXRRVFlGMG96aUJSb0p6bkxiZGZSSEs3WHBNY0cxc0tLS2IxLXlqQU1pMVllWXZndXBrMll0N0psZkVOZU5EWVc40gGnAUFVX3lxTFBBVXVfMWlad1dWd2JqSnZuczdqS3djN0dOMHloNFg1bGNXcWs0VzlFZnVlUXdSd3hfNTFoUlNWeW1zRU41aWNYMzVfWC1Sa3ZUMkVEelBib3o4YWI4WElnVW4wUGhBWjB4VGx3b2o4RGlncXJoZ1VmUk15MFBYTEJqSDZoR0tzLUJ0NHcyV2xqZXJzUUxsd0JZSTFOR1N6bGV3cURxTWV3?oc=5",
+          "source": "www.briefasia.com",
+          "time": "10/17 00:03",
+          "title": "ByteDance in Late-Stage Talks with MediaTek for Custom Data Centre ASICs",
+          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNUDY4emNjTDRJTmdhQVVXeUVycUwyd1NsWDRaVUtBcVhpdEJTS2pGVm04SVZKRGJnZTQwWnJ5U3B2aDBQUW5vUndfR3JFZUs2ZWxkVTZIY3psWGo5MnFuaENudXdJOWxpcFdrUEEtOS1YdjRjWWo0UVh0WnZDenlhZ0NSdWdkbEk?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -1108,6 +1108,15 @@
         },
         {
           "region": "國內",
+          "source": "Yahoo股市",
+          "time": "10/17 02:44",
+          "title": "進軍Windows PC市場 輝達攜手台廠推超強算力AI筆電",
+          "link": "https://news.google.com/rss/articles/CBMiuAJBVV95cUxQbk9OVFhjeVp0Z1JyQm4tSmFTN3NqUW5vMGZwM1RRVUVYXzA0QllUeXpHZlNZRnA4RXd5a1JPR2l4WTY2WXZJTzdLR25oQnZPTzhnU285SUg2dEJUc0lCcndGUk9VaFJuS2pMRU5XRzNIVmphRFhlM3JtTnhZUzlxLUtjLUVhYU1IWDRodzlnTFlxeDVBYVo2QW5NREYzZ1F1YkJuYW96a1U4WDh6SFhWZnBiNzltUFE0enE2YmxyMXpjR0Y5bVowRUlSQ3JYcG5JQVQ1a05SZFJySDFiVXUteFU2QTF2NFJuNm1Tb2VtVF9qSTdwcFhSYlNSZW5NdDBKaXd6QzRZRDNMX0dtNVJGZ0pOQUFleFJqeWZ5MDkyOHVjRFVIZEtKZUVMeGFVX05ZQVlyOXZDcEk?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國內",
           "source": "自由時報",
           "time": "10/16 19:39",
           "title": "焦點股》聯發科：搶單傳言衝擊股價 外資力挺市場低估",
@@ -1117,19 +1126,10 @@
         },
         {
           "region": "國內",
-          "source": "Yahoo股市",
-          "time": "10/15 12:19",
-          "title": "搶到字節跳動大單也沒用？聯發科慘摔315元苦吞7連黑 分析師喊話：未來夢很大",
-          "link": "https://news.google.com/rss/articles/CBMi7gNBVV95cUxPa1F6QVRZYTJraHB4N3RHOHBMaDlCMFlaTnNFMFpxZld0cGd6Wl9Ca0d0RHMtSDBFSlFWc2VWVHRpWURHRjhrTUNDeXBqR0EtaThEWHE1cU9UZkZ6aDBNd1BuWkFPQWdqTjhOVXN1M1I5aUNaMUMydU1kZXNpMzk5NlM1MlhmVkVQV25BbFhrby10OHcxQXFwOXRhcncySDg5WWtOU1NyWE15QnhaV1BKdHhCUE9oWWlPck1WM3hnOThhVlIyQm9NV0FRZWNvb1o4LUtKZzc4VG5NbHpJcmp6d2Z5S09lc2dMbldVZUJTUDhfd214S3VScTVEOTNOWGZaY1ZvUmhvMDZlRzJwX1FNd3Qtd21VS01xbC03SmI2RkdBd2plUC10YUVlVFYxeXZhMEtrZFFIR24zbE9XS05wcTc2T3owRmF5OVNfOWZrRzJoNTZITkpZTzhHbUtSc1BOYVpKTUtIMG1YVjBoZVBEcnRSdm85NHV3MTdQYlRqSnZwVGgxNWVFZDBDM08xSDJMY0lObC1FWnVBeV9qV29YdDRxQUtfNjdCSU1nMEF0WW92c2thbnpYT2xMTVR3aThJZ0lMTEhhZjZqNW1ORHJEalZqZ191YjJuSUxlbFY2dEdwYml4a3RjVHhHX1UxZw?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
-        {
-          "region": "國內",
-          "source": "經濟日報",
-          "time": "10/16 02:30",
-          "title": "聯發科傳奪字節跳動 ASIC 大單 有望與勁敵高通一較高下",
-          "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1MdnRVNm1aemhIbV9BSGg1eWllZFVScy1kbXUyX3MzMWJObUg0X3RrY2Z5MThHdThXZExLTHBYT2JORG01cGtrNlRpbEJuMF9xQUNqdnJxUVNEZ9IBX0FVX3lxTFBKV0xUS2E0a3IzblBVU3JHbVpJS19MdWFjYmtsR2FtYXJkaGVtZk1wdmdzbUVKcm1OV3JncWJlUGYtLW5ZTXl2WWRydW5pcG5MazBIZWY2ZWNrYkcyQmln?oc=5",
+          "source": "口袋證券",
+          "time": "10/16 17:32",
+          "title": "聯發科傳洽ByteDance ASIC：新客戶機會，距離營收還有幾關？",
+          "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9vcFBGZmw2VFZobXNzc1c0NzZDaUJsWE52QkxoNXAxdlhHOTdPbElPbFBYcFBGSXRrQk1saFRpMHZzOTYxMkZhb2dqX09kZVUyR2pyWUR6Wkh0TC1RWUtuU1ZfNGNUdw?oc=5",
           "sentiment": "中立",
           "score": 0
         }
@@ -1225,19 +1225,19 @@
       "news": [
         {
           "region": "國際",
-          "source": "DataCenterNews Asia Pacific",
-          "time": "10/16 23:30",
-          "title": "Delta unveils AI modular data centre for NVIDIA Vera Rubin",
-          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQa1R0a1NWM3hEQjVPV05PcmM1QVZmT1IxSlVlZzZncThNSU9uY1hkWG9kWVM5b2pzNjZtLWdnU0VNOVpkS0h0OGlTUDFjMnRZdUdOUHlELWNjQ2RZeXBXMnU3b3FnNlRiWkF3bnIwU3F1TThBbHdhQkZPTXlEdUd3MF9SdHVsbDZYY2RPVkt0QjZ6YlI1UVBv?oc=5",
+          "source": "Yahoo Finance",
+          "time": "10/16 00:00",
+          "title": "Delta Highlights Collaboration with NVIDIA in Advancing Energy-efficient 800 VDC Power and Cooling Solutions for AI Data Centers at OCP Global Summit 2026",
+          "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQam1WMjYtN21yd0JwZnkzMWlKVVJBNGxBOVYwSmRVZ2Z6UnVRY3plY004dlpON284QmxjN1JpbVpVVGRDN19qSnBXTGQxWmZCVXA3M2hzU2JEaXlIaURncnZnOThVWFJJTC0wYkhjS0NmNkVad3hPd0N5djRPbzhZRXRUX1h2RVZla1lTNEtOcDM5Sm44ZThTTURDdXRveHFHQ1pJbVNFeWRKdWEzVzBsZQ?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國際",
-          "source": "Yahoo! Finance Canada",
-          "time": "10/16 08:16",
-          "title": "Delta Electronics, Inc. (2308.TW) Stock Price, News, Quote & History",
-          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9EekNLZTlnb0h1elF3VHF3UTJvVk1qS29CcFJvZUE0a3R1d282WTBHQ2Y0SjF2eEtybklKdlJKNzRtMm1ZSEthRXkzcnhuX091T3RLSkF3?oc=5",
+          "source": "DataCenterNews Asia Pacific",
+          "time": "10/16 23:30",
+          "title": "Delta unveils AI modular data centre for NVIDIA Vera Rubin",
+          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQa1R0a1NWM3hEQjVPV05PcmM1QVZmT1IxSlVlZzZncThNSU9uY1hkWG9kWVM5b2pzNjZtLWdnU0VNOVpkS0h0OGlTUDFjMnRZdUdOUHlELWNjQ2RZeXBXMnU3b3FnNlRiWkF3bnIwU3F1TThBbHdhQkZPTXlEdUd3MF9SdHVsbDZYY2RPVkt0QjZ6YlI1UVBv?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -1252,10 +1252,10 @@
         },
         {
           "region": "國際",
-          "source": "Taipei Times",
-          "time": "10/15 00:00",
-          "title": "Delta forecasts increases in solid-state transformer shipments for data centers",
-          "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1Qa3dDM1hZUXRhMVVmbTV0c29nVmlSUHRUTGZnamZVUlBETEZHcklhYlJENGQtdEg3X2sxNmltYjVHY3VuY0xPcFNibE9mWXhGZlFzZjBqSk9aVDdkTHFHR1dBbkkwVWh5WGVDbmFqU2tuSVk1QWc?oc=5",
+          "source": "PR Newswire UK",
+          "time": "10/17 02:43",
+          "title": "Green Data Center Market to Reach USD 90.38 Billion by 2035 as AI Density Accelerates Liquid Cooling, Power Efficiency and Retrofit Spending - DC Market Insights",
+          "link": "https://news.google.com/rss/articles/CBMivwJBVV95cUxPbDRSUjhsLTJTQjV1N3R5eWlIQXdFdHN4QTQwSjdpNUhHaGdxbUVwSmdrWWhteHNZaVEzQ21lcEpqZkdjNTQxUXBqUUtBSkxGejVPcVpFUlpiNHZ1NU9MUnhGaDdtYW5IMkFRc2lRd05GcnA5bXVSTzdoYzlENVhmMkhzX1NJZWV0SDhGR0Z5Wmsta2tjVkF0Qm9TVW4tZ09TaVRmOGp1djE4eHltUXI5Q0JqV0k5UzBQN0tmZXBNb2QxcUdkUkVraTcwRmtGdExOR0JEQi1DTlVqckxwWEpJdXExUk9ueWFIa282TWYyUGlHU211V3JmR3VWZG5OQmt4M2tGdkRTWUJMWUNabDNuNHFsTndLU0VuM3ZjZUlpZ0tnWmNqS3pndXBMTXFuRTdXTVhXampwVVJtMGhMalRZ?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -1279,19 +1279,19 @@
         },
         {
           "region": "國內",
-          "source": "自由時報",
-          "time": "10/16 12:54",
-          "title": "台達電布局星馬AI 雙引擎同步啟動",
-          "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFB3OWl4MVRObG45SFhndDg5VTFOSDc4MTZ1ZmVOZHJnV3pqTXVFSzY4eklob2JscVVWSi02S2lldVFLU3VXLWw3aVgtSDJJWjM1LTd6bkgwdWQ?oc=5",
+          "source": "BigGo 財經",
+          "time": "10/16 09:59",
+          "title": "台達電子 | 2308.TW 股價走勢與即時報價",
+          "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE55X3A0aHRQTnQxbXc1UXZSdWR0YmZybjUtcEptM18wSGp4MFRSamROaGJoTmhkUVJZSmxFNXpfYldqUWthTm5IcndOR2VVRVRxNGhRdw?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國內",
-          "source": "三立新聞網SETN.com",
-          "time": "10/14 04:51",
-          "title": "337調查後 這檔電源供應器龍頭4天掉340元崩跌16%！法人新目標價曝光",
-          "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5sbFhXOG01Q1g4WW55cTVvTXJvejBVZ3RERldGMFo4UDA3N1dYeXZHRk5JaHMzaUt3alhBcW41YkhscTRyRUp1d3VXQQ?oc=5",
+          "source": "自由時報",
+          "time": "10/16 12:54",
+          "title": "台達電布局星馬AI 雙引擎同步啟動",
+          "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFB3OWl4MVRObG45SFhndDg5VTFOSDc4MTZ1ZmVOZHJnV3pqTXVFSzY4eklob2JscVVWSi02S2lldVFLU3VXLWw3aVgtSDJJWjM1LTd6bkgwdWQ?oc=5",
           "sentiment": "中立",
           "score": 0
         }
@@ -1396,6 +1396,15 @@
         },
         {
           "region": "國際",
+          "source": "energynews.pro",
+          "time": "10/14 22:54",
+          "title": "Delta Unveils Prefabricated SST-Based DC Power System for AI at Energy Taiwan 2026",
+          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxORkNLd1Q2T2sxNVFXXzV4bFVjMXZxakdZcHRIVXpkenJrbDVTdzNDeVBUNEZlRUNqeTFVQVVrcV93TFJRWXJ0TWxKUExwYjlpRXExWlhXQU5LaUdLWHltS2lLamxlOG8zaTc1cjZXXzc4ODk4MFcwSGFOXzVUS0NvQVZqRUF5RXp0MXR5UUNWMXY2anlnSjVGQkdSaThtUDF0LXpxMnpMMkZZeWxz?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國際",
           "source": "IndexBox",
           "time": "10/14 19:01",
           "title": "Signal Transformer Market To 2035: Industrial Iot and Medical Isolation Drive Growth - News and Statistics",
@@ -1409,15 +1418,6 @@
           "time": "10/14 15:56",
           "title": "TECO's New Transformer Plant in Indonesia to Begin Production in Second Half of Next Year, Targeting U.S. and Southeast Asian Markets",
           "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBOXzJhZTJseTMtTGV2dDdsUnJUbmhWRWFycGZ0SDI1clhuU0kxXzVuclNjMkJ1ZW0yaF9MVGxLTnJVVExxYWF1ZGhHalduZi1CWXVVVTJVdVR0U3FNOWN4NEIwUmhiNEhYRDhpQjMyeHpMbC04cmc?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
-        {
-          "region": "國際",
-          "source": "The Manila Times",
-          "time": "10/14 19:50",
-          "title": "Delta Unveils Microgrid Solutions and the Newly Launched SST-based DC Power System for the AI Era at Energy Taiwan 2026.",
-          "link": "https://news.google.com/rss/articles/CBMioAJBVV95cUxQUURkNjhOQ3lZQ2t4MnBpaUliNGVURzBORm5Id2NNN1FQM0pjb0Y4dHdLQWxqdlg5bjFnODlVZ0djU3BFZlo3VmRtYWtDWFQwbFlJdlpjYU1BMFc1M0g2R2FMOTliRkU0ZG5EYnR6cDdTUjY0Z1dJY0gwbTA0NVZjTjBYZDNYM0Vob0o1SXhtdVBNRlNYQzY2eXZ4MEVsX0VyYkZya2VpMjZFZXJMalFIcllRRkV3ODBWOGFERHlxYzVvdk1SMDhLdG9kMXFhcjY5eVdISEdpdExNR3JLdmUtMzNjU3Viem5RN0t3ODJHS3RDdnhTTEdhWmZCSlhFNlhITXhEcWVWSWhLNk9mekJvNWNpUkxiSmZJMVVPdmtFQzfSAaACQVVfeXFMUFFEZDY4TkN5WUNreDJwaWlJYjRlVEcwTkZuSHdjTTdRUDNKY29GOHR3S0FsanZYOW4xZzg5VWdHY1NwRWZaN1ZkbWFrQ1hUMGxZSXZaY2FNQTBXNTNINkdhTDk5YkZFNGRuRGJ0enA3U1I2NGdXSWNIMG0wNDVWY04wWGQzWDNFaG9KNUl4bXVQTUZTWEM2Nnl2eDBFbF9FcmJGcmtlaTI2RWVyTGpRSHJZUUZFdzgwVjhhRER5cWM1b3ZNUjA4S3RvZDFxYXI2OXlXSEhHaXRMTUdyS3ZlLTMzY1N1YnpuUTdLdzgyR0t0Q3Z4U0xHYVpmQkpYRTZYSE14RHFlVkloSzZPZnpCbzVjaVJMYkpmSTFVT3ZrRUM3?oc=5",
           "sentiment": "中立",
           "score": 0
         },
