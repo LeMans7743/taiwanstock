@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>台股多因子新聞儀表板</title>
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { twRed: '#ef4444', twGreen: '#10b981', darkBg: '#0f172a', cardBg: '#1e293b' } } }
+    };
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', 'Microsoft JhengHei', 'PingFang TC', sans-serif; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    input[type=range] { accent-color: #6366f1; }
+  </style>
+</head>
+<body class="bg-darkBg text-slate-100 min-h-screen flex flex-col">
+
+  <!-- 頂部導覽列 -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-lg shadow-lg">TW</div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold text-white">台股 AI 多因子 × 國內外新聞趨勢分析</h1>
+          <p class="text-xs text-slate-400">資料更新：<span id="updatedAt">—</span>　<span id="dataSource" class="text-slate-500"></span></p>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <label class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-3 py-2 rounded-lg border border-slate-700">
+          📂 匯入 JSON
+          <input type="file" id="jsonUpload" accept=".json" class="hidden" onchange="handleJsonUpload(event)">
+        </label>
+        <button onclick="exportJson()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-3 py-2 rounded-lg border border-slate-700">⬇️ 下載 JSON</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full space-y-6">
+
+    <!-- 1. 市場摘要卡 -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-cardBg border border-slate-800 rounded-xl p-4 shadow">
+        <div class="text-xs text-slate-400">加權指數 / 費城半導體</div>
+        <div id="marketCard" class="mt-2 space-y-1 font-mono text-sm"></div>
+      </div>
+      <div class="bg-cardBg border border-slate-800 rounded-xl p-4 shadow">
+        <div class="flex justify-between items-start">
+          <span class="text-xs text-slate-400">國際新聞情緒指數</span>
+          <span id="globalBadge"></span>
+        </div>
+        <div class="text-2xl font-bold mt-2" id="globalSentiment">—</div>
+        <p class="text-xs text-slate-400 mt-1">本土新聞情緒：<b id="localSentiment">—</b>（-1 空 ~ +1 多）</p>
+      </div>
+      <div class="bg-cardBg border border-slate-800 rounded-xl p-4 shadow">
+        <div class="flex justify-between items-start">
+          <span class="text-xs text-slate-400">「多頭共振」家數</span>
+          <span class="text-xs px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300">總分 ≥ 75</span>
+        </div>
+        <div class="text-2xl font-bold mt-2 text-indigo-400" id="strongPickCount">—</div>
+        <p class="text-xs text-slate-400 mt-1">依目前權重計算的綜合分數</p>
+      </div>
+      <div class="bg-cardBg border border-slate-800 rounded-xl p-4 shadow">
+        <div class="flex justify-between items-start">
+          <span class="text-xs text-slate-400">模型權重（拖曳調整）</span>
+          <button onclick="resetWeights()" class="text-[11px] text-indigo-300 hover:underline">重設</button>
+        </div>
+        <div id="weightControls" class="mt-2 space-y-1 text-xs"></div>
+      </div>
+    </section>
+
+    <!-- 2. 主分析區 -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- 左側：選股總表 -->
+      <div class="lg:col-span-7 bg-cardBg border border-slate-800 rounded-xl p-4 shadow flex flex-col min-w-0">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-base font-bold text-white">📊 多因子 × 新聞趨勢評分排行</h2>
+            <p class="text-xs text-slate-400">點擊股票列，右側切換雷達圖、走勢與關聯新聞</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <select id="sectorFilter" onchange="renderStockTable()" class="bg-slate-900 border border-slate-700 text-xs rounded-lg px-2 py-1.5">
+              <option value="ALL">全部產業</option>
+            </select>
+            <input type="text" id="searchInput" oninput="renderStockTable()" placeholder="搜尋代號/名稱" class="bg-slate-900 border border-slate-700 text-xs rounded-lg px-2 py-1.5 w-28">
+          </div>
+        </div>
+        <div class="overflow-x-auto mt-3">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="border-b border-slate-800 text-slate-400">
+                <th class="py-2.5 px-2">代號 / 名稱</th>
+                <th class="py-2.5 px-2 text-right">收盤 (漲跌)</th>
+                <th class="py-2.5 px-2 text-right">月營收 YoY</th>
+                <th class="py-2.5 px-2 text-center">法人籌碼</th>
+                <th class="py-2.5 px-2 text-center">新聞情緒</th>
+                <th class="py-2.5 px-2 text-right">總分</th>
+              </tr>
+            </thead>
+            <tbody id="stockTableBody" class="divide-y divide-slate-800/60"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 右側：個股診斷 -->
+      <div class="lg:col-span-5 space-y-6 min-w-0">
+        <div class="bg-cardBg border border-slate-800 rounded-xl p-4 shadow">
+          <div class="flex items-start justify-between border-b border-slate-800 pb-3 gap-3">
+            <div class="min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span id="detailCode" class="text-sm font-mono bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded"></span>
+                <h3 id="detailName" class="text-base font-bold text-white"></h3>
+                <span id="detailSector" class="text-xs text-slate-400"></span>
+              </div>
+              <div id="detailSignals" class="flex flex-wrap gap-1 mt-1.5"></div>
+              <p id="detailSummary" class="text-xs text-slate-300 mt-1.5 leading-relaxed"></p>
+            </div>
+            <div class="text-right shrink-0">
+              <div class="text-xs text-slate-400">綜合評分</div>
+              <div id="detailTotalScore" class="text-2xl font-extrabold text-twRed"></div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+            <div class="h-52"><canvas id="radarChart"></canvas></div>
+            <div class="h-52"><canvas id="priceChart"></canvas></div>
+          </div>
+        </div>
+
+        <div class="bg-cardBg border border-slate-800 rounded-xl p-4 shadow">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <h3 class="text-sm font-bold text-white">🌍 關聯國內外新聞</h3>
+            <div class="flex gap-1" id="newsFilterBtns">
+              <button data-f="ALL" class="text-[11px] px-2 py-0.5 rounded bg-slate-700 text-white">全部</button>
+              <button data-f="國際" class="text-[11px] px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">國際</button>
+              <button data-f="國內" class="text-[11px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">國內</button>
+            </div>
+          </div>
+          <div id="newsListContainer" class="mt-3 space-y-3 max-h-80 overflow-y-auto pr-1"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 宏觀新聞牆 -->
+    <section class="bg-cardBg border border-slate-800 rounded-xl p-4 shadow">
+      <div class="border-b border-slate-800 pb-3">
+        <h2 class="text-base font-bold text-white">📰 國內外宏觀與產業鏈新聞監控牆</h2>
+        <p class="text-xs text-slate-400">Google News RSS 自動收集，詞庫情緒評分（僅供參考，非投資建議）</p>
+      </div>
+      <div id="globalNewsWall" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4"></div>
+    </section>
+
+    <p class="text-[11px] text-slate-500 text-center pb-4">
+      資料來源：證交所 OpenAPI、三大法人日報、Yahoo Finance、Google News。分數為規則化計算結果，不構成任何投資建議。
+    </p>
+  </main>
+
+<script>
+// ==========================================
+// 內建示範資料（找不到 data/stocks_data.json 時使用）
+// 台股慣例：紅漲、綠跌
+// ==========================================
+const SAMPLE = {
+  updatedAt: "示範資料",
+  market: { taiex: { close: 22850.3, changePct: 0.85 }, sox: { close: 5120.4, changePct: 1.42 } },
+  globalSentiment: 0.42, localSentiment: 0.35,
+  macro: [
+    { category: "🇺🇸 國際科技與美股財報", sentiment: 0.6, news: [{ region: "國際", source: "示範", time: "", title: "北美雲端大廠上修 AI 資本支出", link: "", sentiment: "利多", score: 0.7 }] },
+    { category: "🏦 全球總經與聯準會", sentiment: 0.1, news: [{ region: "國際", source: "示範", time: "", title: "市場等待 CPI 數據，美債殖利率持平", link: "", sentiment: "中立", score: 0 }] },
+    { category: "🇹🇼 台灣月營收與法說會", sentiment: 0.5, news: [{ region: "國內", source: "示範", time: "", title: "AI 供應鏈月營收創新高家數居冠", link: "", sentiment: "利多", score: 0.7 }] }
+  ],
+  stocks: [
+    { code: "2330", name: "台積電", sector: "晶圓與先進封裝", close: 1085, changePct: 2.36, revYoY: 36.4, pe: 22.8, instDays: "外資連4買 / 投信連6買", sentimentScore: 0.7, signals: ["多頭排列"], spark: [], scores: { fundamental: 90, chips: 88, technical: 86, news: 88 }, summary: "示範資料：請執行 update_data.py 產生真實數據。", news: [] },
+    { code: "2454", name: "聯發科", sector: "IC設計與邊緣AI", close: 1310, changePct: -0.75, revYoY: 14.2, pe: 19.4, instDays: "法人動向中性", sentimentScore: 0.2, signals: [], spark: [], scores: { fundamental: 72, chips: 60, technical: 65, news: 68 }, summary: "示範資料。", news: [] }
+  ]
+};
+
+const DEFAULT_WEIGHTS = { fundamental: 30, chips: 30, technical: 20, news: 20 };
+const WEIGHT_LABELS = { fundamental: "基本面", chips: "籌碼面", technical: "技術面", news: "新聞面" };
+let weights = loadWeights();
+let db = SAMPLE;
+let selectedStockCode = null;
+let currentNewsFilter = "ALL";
+let radarChart = null, priceChart = null;
+
+function loadWeights() {
+  try { const w = JSON.parse(localStorage.getItem("twse_weights")); if (w && w.fundamental != null) return w; } catch (e) {}
+  return { ...DEFAULT_WEIGHTS };
+}
+function saveWeights() { try { localStorage.setItem("twse_weights", JSON.stringify(weights)); } catch (e) {} }
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+function safeUrl(u) { return /^https?:\/\//i.test(u || "") ? u : ""; }
+function fmtSigned(v, digits = 2) { return v == null ? "—" : (v >= 0 ? "+" : "") + Number(v).toFixed(digits); }
+function upDownClass(v) { return v == null ? "text-slate-400" : (v >= 0 ? "text-twRed" : "text-twGreen"); }
+
+function calcTotalScore(s) {
+  const sum = Object.values(weights).reduce((a, b) => a + b, 0) || 1;
+  return Math.round(Object.keys(weights).reduce((acc, k) => acc + (s.scores?.[k] ?? 50) * weights[k], 0) / sum);
+}
+
+// ---------- 權重滑桿 ----------
+function renderWeightControls() {
+  const box = document.getElementById("weightControls");
+  const sum = Object.values(weights).reduce((a, b) => a + b, 0) || 1;
+  box.innerHTML = Object.keys(weights).map(k => `
+    <div class="flex items-center gap-2">
+      <span class="w-12 text-slate-300">${WEIGHT_LABELS[k]}</span>
+      <input type="range" min="0" max="60" step="5" value="${weights[k]}" data-k="${k}" class="flex-1">
+      <b class="w-9 text-right text-slate-200">${Math.round(weights[k] / sum * 100)}%</b>
+    </div>`).join("");
+  box.querySelectorAll("input").forEach(el => el.addEventListener("input", e => {
+    weights[e.target.dataset.k] = Number(e.target.value);
+    saveWeights();
+    renderWeightControls();
+    renderStockTable();
+    selectStock(selectedStockCode);
+  }));
+}
+function resetWeights() { weights = { ...DEFAULT_WEIGHTS }; saveWeights(); renderWeightControls(); renderStockTable(); selectStock(selectedStockCode); }
+
+// ---------- 摘要卡 ----------
+function sentimentBadge(v) {
+  if (v >= 0.3) return `<span class="text-xs px-2 py-0.5 rounded bg-red-500/20 text-red-400 font-semibold">偏多</span>`;
+  if (v <= -0.3) return `<span class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">偏空</span>`;
+  return `<span class="text-xs px-2 py-0.5 rounded bg-slate-700 text-slate-300 font-semibold">中性</span>`;
+}
+function renderSummaryCards() {
+  document.getElementById("updatedAt").textContent = db.updatedAt || "—";
+  document.getElementById("dataSource").textContent = db === SAMPLE ? "（示範資料）" : (db.dataDate ? `交易日 ${db.dataDate}` : "");
+  const m = db.market || {};
+  const line = (label, x) => x ? `<div class="flex justify-between"><span class="text-slate-300">${label}</span><span>${Number(x.close).toLocaleString()} <span class="${upDownClass(x.changePct)}">${fmtSigned(x.changePct)}%</span></span></div>` : "";
+  document.getElementById("marketCard").innerHTML = line("加權", m.taiex) + line("費半", m.sox) || `<span class="text-slate-500">無資料</span>`;
+  const g = db.globalSentiment ?? 0, l = db.localSentiment ?? 0;
+  const gEl = document.getElementById("globalSentiment");
+  gEl.textContent = fmtSigned(g);
+  gEl.className = "text-2xl font-bold mt-2 " + (g >= 0.3 ? "text-twRed" : g <= -0.3 ? "text-twGreen" : "text-white");
+  document.getElementById("globalBadge").innerHTML = sentimentBadge(g);
+  document.getElementById("localSentiment").textContent = fmtSigned(l);
+}
+
+function renderSectorOptions() {
+  const sel = document.getElementById("sectorFilter");
+  const sectors = [...new Set(db.stocks.map(s => s.sector))];
+  sel.innerHTML = `<option value="ALL">全部產業</option>` + sectors.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
+}
+
+// ---------- 選股總表 ----------
+function renderStockTable() {
+  const tbody = document.getElementById("stockTableBody");
+  const sectorVal = document.getElementById("sectorFilter").value;
+  const searchVal = document.getElementById("searchInput").value.trim().toLowerCase();
+  const sorted = [...db.stocks].sort((a, b) => calcTotalScore(b) - calcTotalScore(a));
+  const strongCount = sorted.filter(s => calcTotalScore(s) >= 75).length;
+
+  tbody.innerHTML = sorted.filter(s =>
+    (sectorVal === "ALL" || s.sector === sectorVal) &&
+    (!searchVal || s.code.toLowerCase().includes(searchVal) || s.name.toLowerCase().includes(searchVal))
+  ).map(s => {
+    const total = calcTotalScore(s);
+    const sel = s.code === selectedStockCode;
+    const sent = s.sentimentScore ?? 0;
+    const sentBadge = sent >= 0.3
+      ? `<span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 font-semibold whitespace-nowrap">利多 ${fmtSigned(sent)}</span>`
+      : sent <= -0.3
+        ? `<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 whitespace-nowrap">利空 ${fmtSigned(sent)}</span>`
+        : `<span class="px-2 py-0.5 rounded bg-slate-700 text-slate-300 whitespace-nowrap">中性 ${fmtSigned(sent)}</span>`;
+    const totalCls = total >= 80 ? "bg-red-500/20 text-twRed border border-red-500/30"
+      : total >= 65 ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
+      : "bg-slate-700 text-slate-300";
+    return `
+      <tr class="cursor-pointer transition hover:bg-slate-800/80 ${sel ? "bg-indigo-950/60" : ""}" onclick="selectStock('${esc(s.code)}')">
+        <td class="py-3 px-2 ${sel ? "border-l-4 border-indigo-500" : ""}">
+          <div class="font-bold text-white whitespace-nowrap">${esc(s.code)} ${esc(s.name)}</div>
+          <div class="text-[11px] text-slate-400 whitespace-nowrap">${esc(s.sector)}｜PE ${s.pe ?? "—"}</div>
+        </td>
+        <td class="py-3 px-2 text-right font-mono">
+          <div class="font-bold text-white">${s.close ?? "—"}</div>
+          <div class="${upDownClass(s.changePct)} text-[11px]">${fmtSigned(s.changePct)}%</div>
+        </td>
+        <td class="py-3 px-2 text-right font-mono">
+          <span class="${s.revYoY >= 20 ? "text-twRed font-bold" : s.revYoY < 0 ? "text-twGreen" : "text-slate-200"}">${s.revYoY == null ? "—" : fmtSigned(s.revYoY, 1) + "%"}</span>
+        </td>
+        <td class="py-3 px-2 text-center">
+          <span class="text-[11px] text-slate-300 bg-slate-800 px-2 py-0.5 rounded whitespace-nowrap">${esc(s.instDays)}</span>
+        </td>
+        <td class="py-3 px-2 text-center">${sentBadge}</td>
+        <td class="py-3 px-2 text-right">
+          <span class="text-sm font-extrabold px-2.5 py-1 rounded-lg ${totalCls}">${total}</span>
+        </td>
+      </tr>`;
+  }).join("");
+
+  document.getElementById("strongPickCount").textContent = `${strongCount} 檔 / ${db.stocks.length} 檔`;
+}
+
+// ---------- 個股詳情 ----------
+function selectStock(code) {
+  const stock = db.stocks.find(s => s.code === code) || db.stocks[0];
+  if (!stock) return;
+  selectedStockCode = stock.code;
+  renderStockTable();
+
+  document.getElementById("detailCode").textContent = stock.code;
+  document.getElementById("detailName").textContent = stock.name;
+  document.getElementById("detailSector").textContent = stock.sector;
+  document.getElementById("detailSummary").textContent = stock.summary || "";
+  document.getElementById("detailSignals").innerHTML = (stock.signals || []).map(sig => {
+    const bad = sig.includes("跌破");
+    return `<span class="text-[10px] px-1.5 py-0.5 rounded ${bad ? "bg-emerald-500/20 text-emerald-300" : "bg-red-500/20 text-red-300"}">${esc(sig)}</span>`;
+  }).join("");
+  const total = calcTotalScore(stock);
+  const totalEl = document.getElementById("detailTotalScore");
+  totalEl.textContent = total;
+  totalEl.className = "text-2xl font-extrabold " + (total >= 80 ? "text-twRed" : total >= 65 ? "text-amber-300" : "text-slate-300");
+
+  updateRadarChart(stock);
+  updatePriceChart(stock);
+  renderStockNews(stock);
+}
+
+function updateRadarChart(stock) {
+  const data = ["fundamental", "chips", "technical", "news"].map(k => stock.scores?.[k] ?? 50);
+  if (radarChart) radarChart.destroy();
+  radarChart = new Chart(document.getElementById("radarChart"), {
+    type: "radar",
+    data: {
+      labels: ["基本面", "籌碼面", "技術面", "新聞情緒"],
+      datasets: [{ data, backgroundColor: "rgba(99,102,241,0.25)", borderColor: "#6366f1", pointBackgroundColor: "#ef4444", pointBorderColor: "#fff", borderWidth: 2 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: { r: { min: 20, max: 100, ticks: { stepSize: 20, display: false }, grid: { color: "rgba(148,163,184,0.15)" }, angleLines: { color: "rgba(148,163,184,0.2)" }, pointLabels: { color: "#cbd5e1", font: { size: 11 } } } },
+      plugins: { legend: { display: false } }
+    }
+  });
+}
+
+function updatePriceChart(stock) {
+  if (priceChart) priceChart.destroy();
+  const spark = stock.spark || [];
+  const canvas = document.getElementById("priceChart");
+  if (!spark.length) { canvas.parentElement.classList.add("hidden"); return; }
+  canvas.parentElement.classList.remove("hidden");
+  const up = spark[spark.length - 1] >= spark[0];
+  priceChart = new Chart(canvas, {
+    type: "line",
+    data: { labels: spark.map((_, i) => i - spark.length + 1), datasets: [{ data: spark, borderColor: up ? "#ef4444" : "#10b981", backgroundColor: up ? "rgba(239,68,68,0.1)" : "rgba(16,185,129,0.1)", fill: true, pointRadius: 0, borderWidth: 1.8, tension: 0.2 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, title: { display: true, text: "近 60 日收盤（還原）", color: "#94a3b8", font: { size: 11 } }, tooltip: { callbacks: { title: () => "" } } },
+      scales: { x: { display: false }, y: { ticks: { color: "#94a3b8", font: { size: 10 } }, grid: { color: "rgba(148,163,184,0.1)" } } }
+    }
+  });
+}
+
+function newsItemHtml(item) {
+  const isGlobal = item.region === "國際";
+  const regionBadge = `<span class="text-[10px] px-1.5 py-0.5 rounded ${isGlobal ? "bg-blue-500/20 text-blue-300" : "bg-amber-500/20 text-amber-300"}">${isGlobal ? "國際" : "國內"}</span>`;
+  const sentBadge = item.sentiment === "利多"
+    ? `<span class="text-[10px] font-bold text-twRed whitespace-nowrap">▲ 利多 ${fmtSigned(item.score)}</span>`
+    : item.sentiment === "利空"
+      ? `<span class="text-[10px] font-bold text-twGreen whitespace-nowrap">▼ 利空 ${fmtSigned(item.score)}</span>`
+      : `<span class="text-[10px] font-bold text-slate-400 whitespace-nowrap">● 中立 ${fmtSigned(item.score)}</span>`;
+  const url = safeUrl(item.link);
+  const title = url
+    ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-300 hover:underline">${esc(item.title)}</a>`
+    : esc(item.title);
+  return `
+    <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 space-y-1.5">
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-1.5 min-w-0">${regionBadge}<span class="text-[11px] text-slate-400 truncate">${esc(item.source)}${item.time ? "・" + esc(item.time) : ""}</span></div>
+        ${sentBadge}
+      </div>
+      <p class="text-xs text-slate-200 leading-relaxed">${title}</p>
+    </div>`;
+}
+
+function renderStockNews(stock) {
+  const list = (stock.news || []).filter(n => currentNewsFilter === "ALL" || n.region === currentNewsFilter);
+  document.getElementById("newsListContainer").innerHTML = list.length
+    ? list.map(newsItemHtml).join("")
+    : `<p class="text-xs text-slate-500 py-4 text-center">目前沒有相關新聞</p>`;
+}
+
+document.getElementById("newsFilterBtns").addEventListener("click", e => {
+  const f = e.target.dataset?.f;
+  if (!f) return;
+  currentNewsFilter = f;
+  document.querySelectorAll("#newsFilterBtns button").forEach(b => b.classList.toggle("ring-1", b.dataset.f === f));
+  const stock = db.stocks.find(s => s.code === selectedStockCode);
+  if (stock) renderStockNews(stock);
+});
+
+// ---------- 宏觀新聞牆 ----------
+function renderMacroNewsWall() {
+  document.getElementById("globalNewsWall").innerHTML = (db.macro || []).map(ev => {
+    const v = ev.sentiment ?? 0;
+    const cls = v >= 0.3 ? "text-twRed" : v <= -0.3 ? "text-twGreen" : "text-amber-300";
+    return `
+      <div class="p-3.5 rounded-lg bg-slate-900/70 border border-slate-800 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-white">${esc(ev.category)}</span>
+          <span class="text-xs font-bold ${cls}">${fmtSigned(v)}</span>
+        </div>
+        <div class="space-y-2">${(ev.news || []).map(newsItemHtml).join("") || `<p class="text-xs text-slate-500">無資料</p>`}</div>
+      </div>`;
+  }).join("");
+}
+
+// ---------- 資料載入 ----------
+function normalize(payload) {
+  if (Array.isArray(payload)) return { ...SAMPLE, updatedAt: "匯入資料", stocks: payload, macro: [] };
+  if (payload && Array.isArray(payload.stocks)) return payload;
+  throw new Error("格式不符");
+}
+
+function renderAll() {
+  if (!db.stocks.some(s => s.code === selectedStockCode)) selectedStockCode = db.stocks[0]?.code;
+  renderSummaryCards();
+  renderSectorOptions();
+  renderWeightControls();
+  selectStock(selectedStockCode);
+  renderMacroNewsWall();
+}
+
+async function loadData() {
+  try {
+    const res = await fetch("./data/stocks_data.json?t=" + Date.now());
+    if (res.ok) db = normalize(await res.json());
+  } catch (e) {
+    console.log("使用內建示範資料", e);
+  }
+  renderAll();
+}
+
+function exportJson() {
+  const blob = new Blob([JSON.stringify(db, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "twse_quant_news_data.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function handleJsonUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      db = normalize(JSON.parse(e.target.result));
+      renderAll();
+    } catch (err) {
+      alert("❌ JSON 格式解析失敗，請確認檔案格式。");
+    }
+  };
+  reader.readAsText(file);
+}
+
+loadData();
+</script>
+</body>
+</html>

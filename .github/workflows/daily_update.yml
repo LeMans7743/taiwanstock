@@ -1,0 +1,40 @@
+name: Daily TWSE & News Auto Analyzer
+
+on:
+  schedule:
+    # 台灣時間週一至週五 16:30（UTC 08:30）：三大法人資料已公布
+    - cron: '30 8 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-update
+  cancel-in-progress: false
+
+jobs:
+  update-stock-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run TWSE & Global News Analyzer
+        run: python update_data.py
+
+      - name: Commit and Push Updated JSON
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/stocks_data.json
+          git diff --staged --quiet || (git commit -m "Auto update TWSE & News data" && git push)
