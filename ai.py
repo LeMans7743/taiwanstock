@@ -13,7 +13,7 @@ from sources import log
 
 API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash").strip()
-MIN_INTERVAL = float(os.environ.get("GEMINI_MIN_INTERVAL", "6.5"))  # 免費額度約每分鐘 10 次
+MIN_INTERVAL = float(os.environ.get("GEMINI_MIN_INTERVAL", "13"))  # 免費額度每分鐘次數有限
 ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 
 _last_call = 0.0
@@ -40,6 +40,7 @@ def _call(prompt, schema, retries=3):
         "contents": [{"role": "user", "parts": [{"text": prompt}]}],
         "generationConfig": {"temperature": 0.2, "responseMimeType": "application/json", "responseSchema": schema},
     }
+    res = None
     for attempt in range(retries):
         wait = MIN_INTERVAL - (time.time() - _last_call)
         if wait > 0:
@@ -47,7 +48,7 @@ def _call(prompt, schema, retries=3):
         _last_call = time.time()
         stats["calls"] += 1
         try:
-            res = requests.post(ENDPOINT.format(model=MODEL), json=body, timeout=90,
+            res = requests.post(ENDPOINT.format(model=MODEL), json=body, timeout=180,
                                 headers={"x-goog-api-key": API_KEY, "Content-Type": "application/json"})
         except requests.RequestException as e:
             log(f"⚠️ Gemini 連線失敗：{e}")
@@ -69,12 +70,17 @@ def _call(prompt, schema, retries=3):
             _disabled_reason = f"Gemini 錯誤 {res.status_code}：{msg}"
             log(f"⚠️ {_disabled_reason}（停用 AI，改用詞庫）")
             break
-        if res.status_code == 429 and "PerDay" in msg:
+        if res.status_code == 429 and "PerDay" in res.text:  # quotaId 在 details 裡，需檢查完整內容
             _disabled_reason = "Gemini 今日免費額度已用完"
-            log(f"⚠️ {_disabled_reason}")
+            log(f"⚠️ {_disabled_reason}：{msg}")
             break
-        log(f"⚠️ Gemini {res.status_code}，{20 * (attempt + 1)} 秒後重試")
+        log(f"⚠️ Gemini {res.status_code}，{20 * (attempt + 1)} 秒後重試：{msg[:120]}")
         time.sleep(20 * (attempt + 1))
+    else:
+        if res is not None and res.status_code == 429:
+            # 重試後仍被限流，視為額度用盡，避免耗到逾時
+            _disabled_reason = "Gemini 持續限流（免費額度可能已用完）"
+            log(f"⚠️ {_disabled_reason}，其餘改用詞庫")
     stats["failed"] += 1
     return None
 
@@ -126,9 +132,10 @@ def _avg(values):
 # ==========================================
 # 個股分析
 # ==========================================
-STOCK_SCHEMA = {
+STOCK_ITEM = {
     "type": "OBJECT",
     "properties": {
+        "code": {"type": "STRING"},
         "news": {"type": "ARRAY", "items": {"type": "OBJECT", "properties": {
             "id": {"type": "INTEGER"},
             "score": {"type": "NUMBER", "description": "對該股股價影響 -1.0(強烈利空)~+1.0(強烈利多)"},
@@ -140,53 +147,64 @@ STOCK_SCHEMA = {
         "bullPoints": {"type": "ARRAY", "items": {"type": "STRING"}},
         "risks": {"type": "ARRAY", "items": {"type": "STRING"}},
     },
-    "required": ["news", "sentiment", "outlook", "summary", "bullPoints", "risks"],
+    "required": ["code", "news", "sentiment", "outlook", "summary", "bullPoints", "risks"],
 }
+BATCH_SCHEMA = {"type": "OBJECT", "properties": {"stocks": {"type": "ARRAY", "items": STOCK_ITEM}},
+                "required": ["stocks"]}
 
 
-def analyze_stock(stock, news):
-    """news: [{"title","source","region"}...]，回傳 (news 加上 score/sentiment, ai 結果 dict)"""
+def _keyword_result(news):
     for n in news:
         n["score"] = keyword_score(n["title"])
         n["sentiment"] = _label(n["score"])
-    fallback = {"sentiment": _avg([n["score"] for n in news]), "engine": "keyword"}
+    return {"sentiment": _avg([n["score"] for n in news]), "engine": "keyword"}
+
+
+def analyze_stocks(batch):
+    """batch: [(stock, news)...]，stock 含 code/name/sector/facts。
+    一次呼叫分析多檔以節省免費額度。回傳 {code: (news, result)}"""
+    out = {s["code"]: (news, _keyword_result(news)) for s, news in batch}
     if not enabled():
-        return news, fallback
+        return out
 
-    headlines = "\n".join(f"[{i}] ({n['region']}/{n['source']}) {n['title']}" for i, n in enumerate(news)) or "（無新聞）"
-    prompt = f"""你是專業的台股研究員。請根據以下量化數據與近 3 日國內外新聞，評估「{stock['code']} {stock['name']}」（{stock.get('sector', '')}）的短中期股價趨勢。
+    blocks = []
+    for s, news in batch:
+        headlines = "\n".join(f"  [{i}] ({n['region']}/{n['source']}) {n['title']}" for i, n in enumerate(news)) or "  （無新聞）"
+        blocks.append(f"### {s['code']} {s['name']}（{s.get('sector', '')}）\n"
+                      f"量化數據：{json.dumps(s['facts'], ensure_ascii=False)}\n新聞：\n{headlines}")
+    prompt = f"""你是專業的台股研究員。以下有 {len(batch)} 檔股票，各附量化數據與近 3 日國內外新聞標題，請逐檔評估短中期股價趨勢，stocks 陣列每檔一筆（code 填股票代號）。
 
-【量化數據】
-{json.dumps(stock['facts'], ensure_ascii=False)}
+{chr(10).join(blocks)}
 
-【新聞標題】
-{headlines}
-
-要求：
-1. news：逐則給出對該股股價的影響分數（-1~+1）與關聯度（0~1）；與該公司無關或僅順帶提及的新聞，關聯度給低分、影響分數趨近 0。
+每檔要求：
+1. news：逐則給出對「該股」股價的影響分數（-1~+1）與關聯度（0~1），id 對應該股新聞編號；與該公司無關或僅順帶提及的新聞，關聯度給低分、影響分數趨近 0。
 2. sentiment：綜合新聞情緒（以關聯度加權）。
 3. outlook：結合量化數據與新聞，研判偏多／中性／偏空。
 4. summary：60~100 字繁體中文，說明主要驅動因素，不要重複列數字。
 5. bullPoints、risks：各 1~3 點，每點 25 字以內，具體指出題材或風險。
 不要給買賣建議或目標價。"""
-    result = _call(prompt, STOCK_SCHEMA)
+    result = _call(prompt, BATCH_SCHEMA)
     if not result:
-        return news, fallback
-    for item in result.get("news", []):
-        i = item.get("id")
-        if isinstance(i, int) and 0 <= i < len(news):
-            s = round(max(-1.0, min(1.0, float(item.get("score", 0)))), 2)
-            news[i]["score"] = s
-            news[i]["relevance"] = round(float(item.get("relevance", 0)), 2)
-            news[i]["sentiment"] = _label(s)
-    return news, {
-        "sentiment": round(max(-1.0, min(1.0, float(result.get("sentiment", 0)))), 2),
-        "outlook": result.get("outlook"),
-        "summary": result.get("summary", "").strip(),
-        "bullPoints": [p for p in result.get("bullPoints", []) if p][:3],
-        "risks": [p for p in result.get("risks", []) if p][:3],
-        "engine": "gemini",
-    }
+        return out
+    for item in result.get("stocks", []):
+        code = str(item.get("code", "")).strip()
+        if code not in out:
+            continue
+        news = out[code][0]
+        for n_item in item.get("news", []):
+            i = n_item.get("id")
+            if isinstance(i, int) and 0 <= i < len(news):
+                sc = round(max(-1.0, min(1.0, float(n_item.get("score", 0)))), 2)
+                news[i].update(score=sc, relevance=round(float(n_item.get("relevance", 0)), 2), sentiment=_label(sc))
+        out[code] = (news, {
+            "sentiment": round(max(-1.0, min(1.0, float(item.get("sentiment", 0)))), 2),
+            "outlook": item.get("outlook"),
+            "summary": item.get("summary", "").strip(),
+            "bullPoints": [p for p in item.get("bullPoints", []) if p][:3],
+            "risks": [p for p in item.get("risks", []) if p][:3],
+            "engine": "gemini",
+        })
+    return out
 
 
 # ==========================================

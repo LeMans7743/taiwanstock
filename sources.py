@@ -36,7 +36,7 @@ def round2(v):
     return round(n, 2) if n is not None else None
 
 
-def get_json(url, strict=True, retries=2, **kw):
+def get_json(url, strict=True, retries=4, **kw):
     for attempt in range(retries):
         try:
             res = requests.get(url, headers=HEADERS, timeout=40, **kw)
@@ -45,7 +45,7 @@ def get_json(url, strict=True, retries=2, **kw):
         except requests.RequestException:
             if attempt == retries - 1:
                 raise
-            time.sleep(5)
+            time.sleep(5 * (attempt + 1))
 
 
 def safe(label, fn, default):

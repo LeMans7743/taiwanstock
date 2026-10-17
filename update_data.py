@@ -25,6 +25,7 @@ TDCC_PATH = os.path.join(BASE, "data", "tdcc_history.json")
 TOP_TWSE = 250        # 上市取成交金額前 N 名
 TOP_TPEX = 120        # 上櫃取成交金額前 N 名
 DEEP_TOP = 30         # 量化分數前 N 名做新聞 + AI 深度分析
+AI_BATCH = 5          # 每次 AI 呼叫分析幾檔（節省免費額度）
 QUANT_WEIGHTS = {"fundamental": 30, "chips": 30, "technical": 20}
 
 # 核心追蹤清單：一定納入深度分析，並搜尋英文國際新聞
@@ -140,37 +141,11 @@ def main():
     stocks.sort(key=lambda s: s["quantScore"], reverse=True)
     log(f"完成量化評分 {len(stocks)} 檔")
 
-    # ---------- 3. 深度分析：新聞 + AI ----------
-    material = src.fetch_material_news()
-    deep = [s for s in stocks if s["code"] in CORE]
-    deep += [s for s in stocks[:DEEP_TOP] if s["code"] not in CORE]
-    for i, s in enumerate(deep, 1):
-        log(f"深度分析 {i}/{len(deep)} {s['code']} {s['name']}")
-        news = src.google_news(s["name"], "國內", limit=5) + src.cnyes_news(s["name"], limit=5)
-        news += material.get(s["code"], [])[:3]
-        if s["code"] in CORE:
-            news += src.google_news(CORE[s["code"]], "國際", limit=5)
-        news = src.dedupe_news(news)[:14]
-        facts = {
-            "收盤": s["close"], "漲跌%": s["changePct"], "20日報酬%": s["tech"]["ret20"], "季線乖離%": s["tech"]["bias60"],
-            "RSI": s["tech"]["rsi"], "技術訊號": s["signals"], "月營收年增%": s["revYoY"], "累計營收年增%": s["revCumYoY"],
-            "毛利率%": s["grossMargin"], "營益率%": s["opMargin"], "EPS(今年累計)": s["eps"], "本益比": s["pe"],
-            "法人": s["instDays"], "外資5日張數": s["chips"].get("foreign5d"), "投信5日張數": s["chips"].get("trust5d"),
-            "融資增減張數": s["chips"].get("marginChg"), "千張大戶%": s["chips"].get("big1000"),
-            "千張大戶週變化": s["chips"].get("big1000Chg"),
-        }
-        news, result = ai.analyze_stock({"code": s["code"], "name": s["name"], "sector": s["sector"], "facts": facts}, news)
-        s["news"] = news
-        s["sentimentScore"] = result["sentiment"]
-        s["scores"]["news"] = int(scoring.clamp(60 + result["sentiment"] * 38, 20, 99))
-        s["deep"] = True
-        if result.get("engine") == "gemini":
-            s["ai"] = {k: result.get(k) for k in ("outlook", "summary", "bullPoints", "risks")}
-
-    # ---------- 4. 大盤 ----------
+    # ---------- 3. 大盤（先做，確保 AI 額度優先用在大盤研判） ----------
     market = {"taiex": src.fetch_taiex(d) or src.yf_last("^TWII"), "otc": src.fetch_otc_index(),
               "sox": src.yf_last("^SOX"), "nasdaq": src.yf_last("^IXIC"), "usdtwd": src.yf_last("TWD=X"),
               "futuresOI": src.fetch_futures_oi(), **market_margin}
+
     # 外資現貨買賣超金額（張數 × 最新收盤價估算，單位：億元）
     def foreign_yi(days):
         return round(sum(h["foreign"] * 1000 * quotes[c]["close"] for c in inst if c in quotes
@@ -186,8 +161,43 @@ def main():
             items += src.cnyes_category("tw_stock", limit=8)
         macro.append({"category": t["category"], "news": src.dedupe_news(items)[:10]})
     top_brief = [{"code": s["code"], "name": s["name"], "sector": s["sector"], "quant": s["quantScore"],
-                  "outlook": (s["ai"] or {}).get("outlook")} for s in stocks[:15]]
+                  "signals": s["signals"]} for s in stocks[:15]]
     mkt_ai = ai.analyze_market(market, macro, top_brief)
+    log(f"大盤分析完成（{mkt_ai.get('engine')}）")
+
+    # ---------- 4. 個股深度分析：新聞 + AI（每次呼叫分析 AI_BATCH 檔） ----------
+    material = src.fetch_material_news()
+    deep = [s for s in stocks if s["code"] in CORE]
+    deep += [s for s in stocks[:DEEP_TOP] if s["code"] not in CORE]
+    batch = []
+    for i, s in enumerate(deep, 1):
+        news = src.google_news(s["name"], "國內", limit=5) + src.cnyes_news(s["name"], limit=5)
+        news += material.get(s["code"], [])[:3]
+        if s["code"] in CORE:
+            news += src.google_news(CORE[s["code"]], "國際", limit=5)
+        news = src.dedupe_news(news)[:12]
+        facts = {
+            "收盤": s["close"], "漲跌%": s["changePct"], "20日報酬%": s["tech"]["ret20"], "季線乖離%": s["tech"]["bias60"],
+            "RSI": s["tech"]["rsi"], "技術訊號": s["signals"], "月營收年增%": s["revYoY"], "累計營收年增%": s["revCumYoY"],
+            "毛利率%": s["grossMargin"], "營益率%": s["opMargin"], "EPS(今年累計)": s["eps"], "本益比": s["pe"],
+            "法人": s["instDays"], "外資5日張數": s["chips"].get("foreign5d"), "投信5日張數": s["chips"].get("trust5d"),
+            "融資增減張數": s["chips"].get("marginChg"), "千張大戶%": s["chips"].get("big1000"),
+            "千張大戶週變化": s["chips"].get("big1000Chg"),
+        }
+        batch.append(({"code": s["code"], "name": s["name"], "sector": s["sector"], "facts": facts}, news))
+        if len(batch) == AI_BATCH or i == len(deep):
+            log(f"深度分析 {i}/{len(deep)}（{', '.join(b[0]['name'] for b in batch)}）")
+            results = ai.analyze_stocks(batch)
+            for st, _ in batch:
+                target = next(x for x in deep if x["code"] == st["code"])
+                news_out, result = results[st["code"]]
+                target["news"] = news_out
+                target["sentimentScore"] = result["sentiment"]
+                target["scores"]["news"] = int(scoring.clamp(60 + result["sentiment"] * 38, 20, 99))
+                target["deep"] = True
+                if result.get("engine") == "gemini":
+                    target["ai"] = {k: result.get(k) for k in ("outlook", "summary", "bullPoints", "risks")}
+            batch = []
 
     payload = {
         "updatedAt": datetime.datetime.now(src.TW_TZ).strftime("%Y-%m-%d %H:%M"),
