@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17 03:32",
+  "updatedAt": "2026-10-17 11:56",
   "dataDate": "2026-10-16",
   "market": {
     "taiex": {
@@ -7,12 +7,12 @@
       "changePct": 0.3
     },
     "sox": {
-      "close": 11204.67,
-      "changePct": -3.25
+      "close": 11137.29,
+      "changePct": -3.83
     }
   },
-  "globalSentiment": 0.02,
-  "localSentiment": 0.0,
+  "globalSentiment": 0.0,
+  "localSentiment": -0.01,
   "macro": [
     {
       "category": "🇺🇸 國際科技與美股財報",
@@ -20,19 +20,19 @@
       "news": [
         {
           "region": "國際",
-          "source": "CNBC",
-          "time": "10/15 08:42",
-          "title": "Nvidia, AMD, Dell sink in global tech rout on AI funding worries",
-          "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPaGhRTkZ4cjB1WFcxY0ZaekZ0anhJSW1MYlRMVV9pZzFacHJySWt5QkZaSEFoMmVBbVZKRzc0TmloQXkydmRSaGs5RW1vQjIyZ1hhQzFBSXN1ZGlJVmI1b2VKU1FIaXlZVTJBZHZZMUkxemJ1ZWZUY3E5Q205RWp1WFItS2FJMEx2Zjg4ejRHQy11UjRMbkFPSXJnSkluT01nMVNKbHRn0gGrAUFVX3lxTE1fQkI2UFBBMEExelZWTnRzQ1lzaE1Hdms2R3hjLW9tVmdsZ1hWNGdxRVE1VnlZWVBQU1ZZTW56SUJrYVNYX25QTFFOMExfZmpZY1RCRkpwZmFZX3d6T1BCdU5Rd3ZsME5zdHJhUFRkNG5KUHdkNUsyRHBjX3I1VWNpZkhWRVZ4eFZlS3Jhc1ZoS1dBbVpPRlFyTkRUd1pRNDNqMHNDTWgzV1VGaw?oc=5",
+          "source": "The Motley Fool",
+          "time": "10/17 11:03",
+          "title": "TSMC Says AI Chip Demand Is Still Far Above What It Can Supply. That's Why I'd Buy Nvidia Stock.",
+          "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNNUo1TjQxakNiT2tFaUFidFJPM3JpTG44QV9XZS1kR1NoRmgwb3N1UFJzLXdPVUlFSzd0T2dvdlFKX1M5SEh2bk5wb3N4YThYM2t3RElBUUVYRDVWbHo0QlR2NDZXQjZtc1NpZGhVWFpBdzB1RkZlTnNTaUJfd0lqNTc5WkpKb1BTZ2cxVTA4Y2poUDl4a29HR2U5V0NLSFp4cHppc3JQaHJiU2RhcG8zU2ZPVE1GcW45Tkx6LTNjQXJzOEVIZTVJaTd3TEU3RkVoMEhN?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國際",
-          "source": "TradingView",
-          "time": "10/16 17:35",
-          "title": "Taiwan Semiconductor Holds the Cards As NVIDIA, Apple and AMD Battle for Limited AI Chip Capacity",
-          "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQME4xRFV6RTIxcklKMXNGaXhUYkNoa0xjWG55Skk1azJsd2FYTTN6QmNwTlBjTW1DS3lPWUlpa1BBUDRXRWVVeW9BMlRMUnRtSDdLVWxDMG5FbHV3OE9ncmxNZ2VOWGNtNUNOR1hwVFdiREdCV1F1NGhRYzczLTVmVmh5ZE8wS2M5RnV1U0NSdGlYRVhEbS1aSHR4NUpSTXVBWGRXNzlwQ0JJSURrMzZMWkh5OTNDSU5rVzJGQS12TzBiaU5QakF2d1dENHlheE4tOU5iaE8wY2cyVHpvQzYzN0Q5Z1NJTkY0VEE?oc=5",
+          "source": "CNBC",
+          "time": "10/15 08:42",
+          "title": "Nvidia, AMD, Dell sink in global tech rout on AI funding worries",
+          "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPaGhRTkZ4cjB1WFcxY0ZaekZ0anhJSW1MYlRMVV9pZzFacHJySWt5QkZaSEFoMmVBbVZKRzc0TmloQXkydmRSaGs5RW1vQjIyZ1hhQzFBSXN1ZGlJVmI1b2VKU1FIaXlZVTJBZHZZMUkxemJ1ZWZUY3E5Q205RWp1WFItS2FJMEx2Zjg4ejRHQy11UjRMbkFPSXJnSkluT01nMVNKbHRn0gGrAUFVX3lxTE1fQkI2UFBBMEExelZWTnRzQ1lzaE1Hdms2R3hjLW9tVmdsZ1hWNGdxRVE1VnlZWVBQU1ZZTW56SUJrYVNYX25QTFFOMExfZmpZY1RCRkpwZmFZX3d6T1BCdU5Rd3ZsME5zdHJhUFRkNG5KUHdkNUsyRHBjX3I1VWNpZkhWRVZ4eFZlS3Jhc1ZoS1dBbVpPRlFyTkRUd1pRNDNqMHNDTWgzV1VGaw?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -47,19 +47,19 @@
         },
         {
           "region": "國際",
-          "source": "The Globe and Mail",
-          "time": "10/16 17:04",
-          "title": "Not AMD. Not Broadcom. This is the Chip Designer Nvidia Investors Should Be Watching",
-          "link": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxOLU5nNFRzeWREWHVkNXhDYmdwLVp4TGFCbk1NTzB0NmpyWUVkc2E5cnNxX1paaFM4cDNXaGFaeUxtXzdxLTkxT1p0NDdxckJ2YlNDU3VEeGZkQ084ZXdBdG1yeS04QW5ZXzRSc29hcnVCOUlxUmtpSW9EMWdrNkVyMWNTRGo4ZWdDUF9NWkRZbm9xUUVvWFlhcHplLXNUcmhrLWxEOUdGRWcyZG1GcDYybjNuaUs3UTFfbWxodEFXU3paNGpWMUl2SnBINjB1U25EaDVoQ0lkTWtlSUlDeHhibUtjT3M3VzJ3SzNEV1lOekZ6MEQ3bWpIUUQwVmM?oc=5",
+          "source": "Benzinga",
+          "time": "10/16 17:35",
+          "title": "Taiwan Semiconductor Holds the Cards As NVIDIA, Apple and AMD Battle for Limited AI Chip Capacity",
+          "link": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxNQkJwR1ozRmlGcXpxTVBrWGlFdzJ2bmlKQ0FnUWRtbTZVaHdLM3JCVVlJem1tRG1zX3hSZ2dHQTV0NGxuRktnRjBFX2pPd1NrMkRPQUU3SEJ0Tk1rcWpkNEtRUmpRc3BkVnRiMmotN09ZNTFmWVU3NWx4ajRDaGJSNDZsODNvQ1p1TTlsX183SDBXdHU0cW5xZWhRTXIwZnZxMDFLQUtnc0tPQnZoV2RrRFExRGNkeDhvNXlIY0dNMHVaSXJzV1V4aXA1bVBkaTIwbmVwZ1EwVXNOZHpIN2V2R2ZjNA?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國際",
-          "source": "The Motley Fool",
-          "time": "10/14 20:00",
-          "title": "Best Semiconductor Stocks to Buy and Hold Through 2030",
-          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTkZ6Mi1yODRXM1AxeU9BbVRaTU9YeE9sbkMyUUwyR0QwOVBuR1duc2RVbDJHNlozWl9fams0ZGRuZUxQVTJ4QkFKazhETHVRNnBNVnN1M1pHdjZzbGs5YmZ6UU95ZDdSRmNYVmswbFFJallLTlplMXY3N0ppUUo1TDdtTmVVUERBd2YtdXNoNmRrOUtTUDhv?oc=5",
+          "source": "The Globe and Mail",
+          "time": "10/16 17:04",
+          "title": "Not AMD. Not Broadcom. This is the Chip Designer Nvidia Investors Should Be Watching",
+          "link": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxOLU5nNFRzeWREWHVkNXhDYmdwLVp4TGFCbk1NTzB0NmpyWUVkc2E5cnNxX1paaFM4cDNXaGFaeUxtXzdxLTkxT1p0NDdxckJ2YlNDU3VEeGZkQ084ZXdBdG1yeS04QW5ZXzRSc29hcnVCOUlxUmtpSW9EMWdrNkVyMWNTRGo4ZWdDUF9NWkRZbm9xUUVvWFlhcHplLXNUcmhrLWxEOUdGRWcyZG1GcDYybjNuaUs3UTFfbWxodEFXU3paNGpWMUl2SnBINjB1U25EaDVoQ0lkTWtlSUlDeHhibUtjT3M3VzJ3SzNEV1lOekZ6MEQ3bWpIUUQwVmM?oc=5",
           "sentiment": "中立",
           "score": 0
         }
@@ -80,15 +80,6 @@
         },
         {
           "region": "國際",
-          "source": "CNBC",
-          "time": "10/16 23:38",
-          "title": "Analysis: Everyone expects the Fed to hold rates in October. Kevin Warsh could surprise us all",
-          "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNZFl6VlNnRU5TX2V4NEx3eEEwWDhfZGMxS3FsUVd2Z0FMZzJLcnNfOEQ1Z2xxYmc5Nk1SYVNFQkhQeFZiX21fdFJTOWZ4aEhvTU1mQTRIdEFYMms2Q093RS0xMURjb3RwTVNfQXp0cVhjTHpGUEdENzBHeERCYW84dnRkRE1DVjRuTXo5c3M5aEkzOXNkMnlFX9IBngFBVV95cUxQUjQ0SjZBMDNsSDI4cDdJVTgtUFlVdnlhQXN4ZjViU2R2bWdobHQ4RDM2cDVIc1J5RGJwOXZsNnRUQTh6QkFyVEFjbUc0blFvNUE4M2tZN1NnRTJhbnVLa1AxYkk3R0xCTUpQN1dRV0dNckx2NzFXZktaLW1QOXlCMVJmN1FfWjJNZmJma3hQcGZvQUF6NkNaZGwySWtmQQ?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
-        {
-          "region": "國際",
           "source": "Reuters",
           "time": "10/15 05:25",
           "title": "Dollar hits 18-month high, then cools as investors await patient Fed",
@@ -98,10 +89,19 @@
         },
         {
           "region": "國際",
-          "source": "Financial Times",
-          "time": "10/16 13:25",
-          "title": "Bets on Fed rate hold in October strengthen after Warsh comments",
-          "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPSkowQ1I4RlFmbDVzQTBjVXJMdzlqamF3bnhidDJOTlc4VnBVT1F3VDE3cExoQzRJWWdsU1Uxc2F6Q3dmWlRBR01DNXhRV05KdGMwT1RacVVGNXFoMHlOVTJGbmVweHp5dzZGRUFEV1pDcWV2MlEtY21nMEY0WEE2SzEwclg?oc=5",
+          "source": "CNBC",
+          "time": "10/16 23:38",
+          "title": "Analysis: Everyone expects the Fed to hold rates in October. Kevin Warsh could surprise us all",
+          "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNZFl6VlNnRU5TX2V4NEx3eEEwWDhfZGMxS3FsUVd2Z0FMZzJLcnNfOEQ1Z2xxYmc5Nk1SYVNFQkhQeFZiX21fdFJTOWZ4aEhvTU1mQTRIdEFYMms2Q093RS0xMURjb3RwTVNfQXp0cVhjTHpGUEdENzBHeERCYW84dnRkRE1DVjRuTXo5c3M5aEkzOXNkMnlFX9IBngFBVV95cUxQUjQ0SjZBMDNsSDI4cDdJVTgtUFlVdnlhQXN4ZjViU2R2bWdobHQ4RDM2cDVIc1J5RGJwOXZsNnRUQTh6QkFyVEFjbUc0blFvNUE4M2tZN1NnRTJhbnVLa1AxYkk3R0xCTUpQN1dRV0dNckx2NzFXZktaLW1QOXlCMVJmN1FfWjJNZmJma3hQcGZvQUF6NkNaZGwySWtmQQ?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國際",
+          "source": "ABC News - Breaking News, Latest News and Videos",
+          "time": "10/17 00:12",
+          "title": "Fed Chair Kevin Warsh warns of AI 'shock' for economy, pledges to contain inflation",
+          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOSHRMYTRHanJFWjJnNGNLRExKaGZOdEtWWlNKdHFhdmRHc3dJcnZNV2NfZmxkTFJQdmRKYkllRFVsN1lIbGVsWFdxN3NJRVZCLWNVNzhPaU5aUGlSMDE3bTN4RFpCT01KVlZ1R0dieUhhQ1pmNlh5RjhXLWpCWFE2VEhYQy10OHRFU2dLX0owMlMtbnVTR0NN0gGcAUFVX3lxTE9NczBRSGxTSUhocXdVbmRiQVdhRUg2d0FaTk9nZkpQRDdnNUlMS1BJeFZrOVhiU0RYZEt6VUVjRm52SDdJaHFWeHFSQVI3Q09hZVB1dFQtZDRGb3pfVndMY1lJVklyRUVwM2p5R2c0cmJIc3VLbXJsczR1SHlCNGZfUVB2R1dnTlBIamphWUtQQzNQdnRzY2xsSTNEVw?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -118,34 +118,25 @@
     },
     {
       "category": "🇹🇼 台灣月營收與法說會",
-      "sentiment": -0.14,
+      "sentiment": 0.0,
       "news": [
         {
           "region": "國內",
+          "source": "CMoney投資網誌",
+          "time": "10/17 09:46",
+          "title": "台股震盪外資週賣5800億，半導體與金融股受矚，台積電營收亮眼！-財經焦點情報站",
+          "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNXzV1TUNOazVEbm83ZlBGQWhocVZwZUhpSnhQT3dkd1B1UU9nbVdWUEJRSWhTZHA3NzE2aHpaa2JWZ1V5YmhoNUctTHdxa0ZGVS1PeXhDS2NkUnlNS1h3aXhNYUZxcXdlWk5wSVlWMjZNcFIwRnU5YUhkSTZLcHkyUnJB?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國內",
           "source": "鉅亨網",
-          "time": "10/16 19:26",
-          "title": "外資連8賣台股461億元 權王台積電遭倒貨2.2萬張最多、大砍0050",
-          "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9Md0I4RGZPaWtvWGFfNTJ5eVRhbEZEeVVEVTFaZVF2QnpIdjNUWG1fQ1VNOEU3QW1mcTRvVndzSXFmUlhqcUNFdUFFaHZKWDA?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
-        {
-          "region": "國內",
-          "source": "UDN",
-          "time": "10/16 19:09",
-          "title": "台股淪提款機…外資連8日賣超今調節台積電2.2萬張| 股市要聞| 股市",
-          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5La3ZjRW1BX0lLU3hZRTItV1EtVGNreTgxemN3R3cxMzJHSFZFcjRzTFVMMWR3ZDBVMmNjSXlTRFJnNjBFNGZGLVNpWXdzU0VS?oc=5",
-          "sentiment": "利空",
-          "score": -0.35
-        },
-        {
-          "region": "國內",
-          "source": "ETtoday財經雲",
-          "time": "10/16 17:48",
-          "title": "外資續砍台股461億！台積電賣最多　買賣前10大個股一次看",
-          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBLUk8xN3l6SXRleXdqRVRwemJWeTBOUnNpcjFRUjFyM3Z1N2F0SzVxMTBaS3FWYU9vbExkTmtVV0l0dnJkc1U1Q0RfMXg5ZTh6cFHSAVBBVV95cUxOaFR1elh6bk0xMnlPZE9NLUh3Q01mV2VpMlkwczhoVEVqNGVOR1lLOFpJc1VUYVo1Y3A3alJ0cFFCVnNIVW45ZlZyc2dwLUc1eQ?oc=5",
-          "sentiment": "中立",
-          "score": 0
+          "time": "10/17 09:40",
+          "title": "〈熱門股〉中信金周漲9.36%寫新天價 法人看好配息動能提前卡位",
+          "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE00cGotSllXclVOUWlzUE1vYWloeWpLUDV6Uk5peG0zbU9KZmJQQXF3YV84aGFiYUlSelllcXZHLWdaUGhxVzgzSnQtMTdGUGM?oc=5",
+          "sentiment": "利多",
+          "score": 0.35
         },
         {
           "region": "國內",
@@ -164,6 +155,15 @@
           "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5OUUVOUTMxdWNzMGRzamptYldaQUZEZkppek1iZTBCNWhWeUVqbmlvYWtGeWFFQXFWRDFhdk9zeEVqM0Y4NFZXZVM5dUN0LWM?oc=5",
           "sentiment": "利空",
           "score": -0.35
+        },
+        {
+          "region": "國內",
+          "source": "UDN",
+          "time": "10/17 02:39",
+          "title": "台股何時大反攻…盯五訊號",
+          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9FdTVEQzFUb1Jxd1JRV3pPSnBERkZ6RHdOUG5zQW1zaXQxQnFpWHR3b3hRaFlwSU5mMl90LUtnSDkwcVZ4V2gtUXJZRVN6alQ30gFWQVVfeXFMTU1DWktKdTJISVlKdzNyV0hZYzJRa1RsM2hpTjBFdWhUcFU1VGlqUUs3cjJTRENMaDBxcGl4QWtBR0Z4Yl9tb1JXbWdLQUxYQWZxQlUwY2c?oc=5",
+          "sentiment": "中立",
+          "score": 0
         }
       ]
     }
@@ -178,8 +178,8 @@
       "revYoY": 54.65,
       "revMoM": -0.57,
       "revMonth": "2026-09",
-      "pe": 28.28,
-      "dividendYield": 0.9,
+      "pe": 28.05,
+      "dividendYield": 0.91,
       "instDays": "外資連8賣 / 投信連10買",
       "foreign5d": -97973,
       "trust5d": 8338,
@@ -246,14 +246,14 @@
         2440.0,
         2420.0
       ],
-      "sentimentScore": 0.13,
+      "sentimentScore": 0.0,
       "scores": {
         "fundamental": 89,
         "chips": 63,
         "technical": 63,
-        "news": 65
+        "news": 60
       },
-      "summary": "2026-09 月營收年增 +54.6%、月增 -0.6%；收盤 2420.0（月線 2491.0／季線 2416.5，RSI 41.7）；近5日外資 -97,973 張、投信 +8,338 張；國內外新聞 8 則，平均情緒 +0.13。",
+      "summary": "2026-09 月營收年增 +54.6%、月增 -0.6%；收盤 2420.0（月線 2491.0／季線 2416.5，RSI 41.7）；近5日外資 -97,973 張、投信 +8,338 張；國內外新聞 8 則，平均情緒 +0.00。",
       "news": [
         {
           "region": "國際",
@@ -266,64 +266,64 @@
         },
         {
           "region": "國際",
-          "source": "Morningstar",
-          "time": "10/16 18:00",
-          "title": "TSMC Earnings: Tesla Talks and Texas Expansion Could Boost Stock",
-          "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPdTlZX1NPcFA3RkNfeWhnWVJRMHlua25QSUZteUV3b2lTTHk2WEloTDVLUUY4TmpheGRLdEpNOW5LVjRpSjlyMXVpTVFLVVBrdENUWDRmWFFIZm5nc1F5OE16T3p0cC1WRUNUdDZMTGFiWERfckZQWHl1bDhhdXY5bV9CR1VuZEVpR01QRk8xT2haYTdOZDh4V2hKcVhOVDVoalE?oc=5",
+          "source": "The Motley Fool",
+          "time": "10/17 11:03",
+          "title": "TSMC Says AI Chip Demand Is Still Far Above What It Can Supply. That's Why I'd Buy Nvidia Stock.",
+          "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNNUo1TjQxakNiT2tFaUFidFJPM3JpTG44QV9XZS1kR1NoRmgwb3N1UFJzLXdPVUlFSzd0T2dvdlFKX1M5SEh2bk5wb3N4YThYM2t3RElBUUVYRDVWbHo0QlR2NDZXQjZtc1NpZGhVWFpBdzB1RkZlTnNTaUJfd0lqNTc5WkpKb1BTZ2cxVTA4Y2poUDl4a29HR2U5V0NLSFp4cHppc3JQaHJiU2RhcG8zU2ZPVE1GcW45Tkx6LTNjQXJzOEVIZTVJaTd3TEU3RkVoMEhN?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國際",
           "source": "Yahoo Finance",
-          "time": "10/16 22:00",
-          "title": "TSMC's Record Q3 Earnings & Upbeat Outlook Put These ETFs in Focus",
-          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTHhUU2tUWlVkN0xNRWQ0QXB5NjZBSUVKZU1rN1piRGRRLVdtMEduQmNRLVVYREJoTjljc0NUb3J1aXRyWFpnc0JxaTc3ZnF5bHpIOFhkSVNBWEFxMW0yVHB5QXFWOV9HRVByQzJ2OHhjMGY5Z3Y5Y1JPOWdTRy1GV3VYa09HTmIzMm9YNmg0QnUxUG9Yak00?oc=5",
-          "sentiment": "利多",
-          "score": 0.7
+          "time": "10/17 11:17",
+          "title": "TSMC Says AI Chip Demand Is Still Far Above What It Can Supply. That's Why I'd Buy Nvidia Stock.",
+          "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPT2JhQVVYRlR0dWIxZjBLVVI1eEM5bWF0UWU2LUNtdXVZN19vVTJlTG50Rk9YX3hNSzdMTUxKNTBCYjFXR1FRT1pBSFBlVlBBQ3dwNmJIcTRiSGQ2QXZWRGdfUWh6YnF5RjFOcjJkMWZseVpZeDltTEdJVUJTSE9xMm1wVGQyNXdTQU9UUGpBdC1qZw?oc=5",
+          "sentiment": "中立",
+          "score": 0
         },
         {
           "region": "國際",
-          "source": "Dallas Express",
-          "time": "10/16 21:05",
-          "title": "TSMC Eyes Texas Expansion As AI Chip Demand Surges, Terafab Talks Confirmed",
-          "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPeUR0VnJLODRmbnltc1ZtaUsycmdhS0ljbjVoeDB4NEtSamc5NnRxWjZ6a1hrV056VkZhS3lzV1hjR09TSEJtS2NrczZqaU5XazBnNnRyZVZSQ1g1a0o2SzhIMmtFNEQ0VVlRTFFZOWZ5Nk1NdW4ycU82eXY2eTR2SWY4WGNxSFlXdEpCMG9RWm1SNmVwRWUzbE11aU1ITk5MaDFpbHhERkJTbkI3UXhmR1BiOUdFdmpqU0E?oc=5",
-          "sentiment": "利多",
-          "score": 0.35
-        },
-        {
-          "region": "國內",
-          "source": "自由財經",
-          "time": "10/16 22:46",
-          "title": "台股下週小心？台積電ADR又跌了 台指期夜盤一度狂殺逾500點",
-          "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1Uek9lU2laS2FhVlFQeUg0dV8wY2FSRTNOTkhEaEhvaDdIYWZTR2lYb1RxUF9CYjluY0t6NXJUYUJGMXA0SUp0c2dyVWIyNURUdEZRMXhwYXFMWG5ORlFn0gFkQVVfeXFMT1JGUlM4RXhJZjlrUUV1SjBNdnY5Q0JoOVExUVpJellYYnZPQTFMbHZWRFlFamFfNm9yN2VLb192OHZiWDlhVTNMMENyenN6Mmk4VlVoQVN5OG4wOHpLY1ZYT01mSA?oc=5",
+          "source": "The American Bazaar",
+          "time": "10/17 04:55",
+          "title": "TSMC explores Texas expansion as AI chip demand outpaces production",
+          "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPMlVjSEJIaVVBbFBJZGlUSlV2TWQzY3VBTVNoZ2h2aE9LM2J1VEhVaGFhdm8xT25TeGF2czhVeTBFRWxST2R0UjNnWFRFX1pRY2hJS1NiUGloQjdwT3kyOWtFb2tqUjkxcTFmeXdWVlZDSFdMODJuMWtCbWw1T3V0bUtlMXJXS3M2cExFbmRjNlFpdDl6UlNNRDJCQ3NIdVJ6b0FfRjVMMlI0ckp5Q2t5Uk5POFltSHQyelg0?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國內",
-          "source": "Yahoo新聞",
-          "time": "10/16 17:45",
-          "title": "難怪魏哲家早知股價會跌！台積電連兩日遭砍5.6萬張 凶手是「它」",
-          "link": "https://news.google.com/rss/articles/CBMihwNBVV95cUxONU9iaXpPdkR4Mk1waUViUXRfUWcyNzZ3a0N0OU9uV3VsSE5ISkwyOV8tN3J5cTRHTWZWOFRJc05kYllReDI1bmZUamRLX01vUHFldzhKbWg2QThFNXRMMGhpd3p0c1dKMm5aeGJJQWc3YWt3Q2tEZVlGYjNUZVhRanJJT0M4SjRTdE9uWUItRnloLWpqLXhERHoySTBQMklJejE1eGlXTWRPcXFNaHExdm5lWW0zT0NvcUNiV09wcXhESC0xTVAyODh2QzJiOVU1UC1ybXVMSUh0NUdDQm5fbG1GUUlMS2h4eTZJRlFyVHB4UzBCU1VseENzQVFNeVRMV2FQZ0dvbDZ3NEkwYVplb0VNNnZZNUl4TFFKQXNWaXE5VjU4TWV2Z0Y4S2k0Z3dVclRHMHZJTDJVVEZEVThMNDZmMEJmY1RZYk1PYmZMc1NtT0JvRlZhQ2x4Rl9hUzNDcjkzWVlZVUFwaG1pOG9qcHNRRXhsMmpMZnlXWm1sWEdHVHdBV2pB?oc=5",
+          "source": "Yahoo股市",
+          "time": "10/17 06:33",
+          "title": "星期一恐慘了！台指期夜盤崩跌1144點 台積電期貨同步跳水",
+          "link": "https://news.google.com/rss/articles/CBMi4AJBVV95cUxONUdRRndOWnlRbkhvUS14SjJsUEEtMjBSR2R6NUpnUHRNRC02Rm8yX2lkaVZRdTJXYVAweEZXWWk0ZjdqVFdFbjlaWEpBaDB1X3VSVDRWdFdlSUVLNmdaQkI4dVgyelUxT2pKX0xwSGI1dzdOdE1FRXFRSGZqOXF2X2UwR2UwdVlmTk1ST2tZOU5yZDBLQmZGMXU2eDNWdzEwNGYwMnN3N0ZDMndhQkMxaXRHaGU4VjZ5TFNnMFRmaHhQYk5KcndTdUtoSkMzWlc3Z1NGRWZTWFhLeUpEQUIzMFFkU184S0FqQmV5VnhJNHlwODJOSVZYVmxNN3E3TDJTYUZVLUtjOVRWbk1HcXBOaWFDMURwRHZPSUZQSDc5OWhqZ3BwNGpJWm5vQi1EeTVibFp4YXNWNWhJV3ZJZDNDNnZucEZOaEREMkppNW9wdDV1cnoyRmtPUEhKZ1ZlR1Bt?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國內",
+          "source": "TechNews 科技新報",
+          "time": "10/17 11:03",
+          "title": "台積電進駐熊本滿五年：地方財政霸榜大豐收，在地中小企業為何卻苦喊吃不消",
+          "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPeHE4N0JaeUxaWl9Ib3ZSR0ZaY1dseGZtTFhRSU84S2dPV25wUDVGTVphR0pvVnVYcnVjRnJWWGEtN0NhaVBlWGp1cW5vUWlxODVlSms1TWprVE81VkFaU0syOUZYSUZPRlRWTU1aQS1kb2xsZGRvSGx4YU9JZ0d0RG1yUjJYOFhPOUxvMkM5eDNvM0phWklSTFBwWQ?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國內",
+          "source": "自由財經",
+          "time": "10/17 05:45",
+          "title": "美股收盤》恐慌飆升！費半連8黑 台積電ADR續跌逾2％",
+          "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1CLW5jN3BoLVh5VUhaVHdOT0EtUHItMkpXSDBYUVRwUTRLVXpBNlctLWU5M2o1dktRNkh1V2YyVnhUQVg3a2ppLXRDMFZpVkJkNUJNdldxRzBSNDg2eHZB0gFkQVVfeXFMTS1uTGZXX0JBLXBUSlZQQjZyWDRPOTJvMHpySGxUU3FDYThtdUdhLWJnVWdxWVlRbmowX3FuRFZlMENJX2g5dEtGWVA3N0M4MzhFRC1GT0ZwMmdSZy1URVFZOWU4MA?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國內",
           "source": "經濟日報",
-          "time": "10/16 12:26",
-          "title": "台積電法說會後為何平平淡淡？分析師曝原因但強調買點來了",
-          "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9NOWdkQzZOeG8taG5LNjlVR1h5elI4cTBQUS01MkxWd2kzTmpjcjE5ZjJHT0Z4WWxhZ2NEMnZfNjZfbWxTZkFwakJaX0tPUUh2VWJJZUw0R1ZqQdIBX0FVX3lxTFB4ZkNrVExHU1hCMDFrSjV3Q1JubjNva1Y3aWZNeWMwTXZrV3FEdWl4QVRvOGt4dU5mOTdtVE5yZGp6QXNneFJ1ejktM1lucjlIVGx1allXbFo2RnctSzYw?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
-        {
-          "region": "國內",
-          "source": "ETtoday財經雲",
-          "time": "10/16 20:40",
-          "title": "台積電法說會後股價下跌！　魏哲家首露面「心情不太好」",
-          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1tNXRLdC1OTTJYcXlvSmZ1S3cyVmJJcExsLXJKS251NGJGcEg2d3ZyWkwtNWtXSDdhMXBVTTdlN2FaZ1JiOFB5ZDM3YWtVempSUEHSAVBBVV95cUxQZ0Y4SFFmTFFMVjF3Z0x3VWljcWw0TmZhaDFtbzRQZHN5V0ZwMlJiaWxuUDBGZzE2blRoMmFPczE4T3BIYkNOekhvWnZLZUhzLQ?oc=5",
+          "time": "10/17 11:09",
+          "title": "費半周跌逾11% 台積電 ADR 挫近9% 下周就看 AI 財報能否止血",
+          "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5HSFpiLVdVb1dJTVR3WVFMd2ZzTTM0aGhHbG9XbjBFOVlwV1BPOFNzT1pUSlQ1VnlXYXpIRmVzNi1lb2kwenRQancwbDdKeVlwbExCcFNZSS1Vbzk00gFiQVVfeXFMTVEzVVdTNHhXb1I3VFZCLWk2WmFwUVEzM2pWNG1XS01iNGYyOXN5eEJSQ2RRbEJVVjBiRng3dWk4cXlZNl9CcnFSZU9Pd0M0TmtqLWU4blRjWVVDZk42OGloLWc?oc=5",
           "sentiment": "中立",
           "score": 0
         }
@@ -338,7 +338,7 @@
       "revYoY": 45.52,
       "revMoM": 7.15,
       "revMonth": "2026-09",
-      "pe": 48.7,
+      "pe": 48.55,
       "dividendYield": 0.98,
       "instDays": "外資連2賣",
       "foreign5d": -24445,
@@ -406,24 +406,15 @@
         673.0,
         671.0
       ],
-      "sentimentScore": -0.09,
+      "sentimentScore": 0.0,
       "scores": {
         "fundamental": 81,
         "chips": 50,
         "technical": 63,
-        "news": 56
+        "news": 60
       },
-      "summary": "2026-09 月營收年增 +45.5%、月增 +7.2%；收盤 671.0（月線 698.65／季線 633.22，RSI 46.7）；近5日外資 -24,445 張、投信 +3,980 張；國內外新聞 8 則，平均情緒 -0.09。",
+      "summary": "2026-09 月營收年增 +45.5%、月增 +7.2%；收盤 671.0（月線 698.65／季線 633.22，RSI 46.7）；近5日外資 -24,445 張、投信 +3,980 張；國內外新聞 8 則，平均情緒 +0.00。",
       "news": [
-        {
-          "region": "國際",
-          "source": "BigGo Finance",
-          "time": "10/14 11:26",
-          "title": "ASE Technology's 3D Packaging Breakthrough Cuts Power Delivery Losses in Half for AI Data Centers",
-          "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE4weWVzSnNWczJWSTIwRUFiM1dmV3h5cDhyQ1pZN3dwLTN1UGR2b2dzWmF3ZWZuSG8tclNFWXBwVlhKVWItTlZPOXVVdVRaQW1xM3pqZEJDeGlrMkpNelVSY3Z2YVpPTXJJdmVhUUdHT0Ytejl1Wnc?oc=5",
-          "sentiment": "利空",
-          "score": -0.7
-        },
         {
           "region": "國際",
           "source": "동아일보",
@@ -452,9 +443,18 @@
           "score": 0
         },
         {
+          "region": "國際",
+          "source": "TradingKey",
+          "time": "10/17 04:15",
+          "title": "ASE Technology Holding Co Ltd Stock (ASX) Closed Down by 5.63% on Oct 16: Facts Behind the Movement",
+          "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxORTJ1cHNTMmMyYjNzUDVxcEZiSndXTFRKNjR6bElmSGpoLTcxZ09ZUlJPSERtRjBaY3R0enZzMkFFbjhtNkVpTFdqU1FyQnNaQVRGaWs2dGtrYjhQZVdocnc5b05QMUN2S2M3YzdTdENuUll2WmtaYXhQcVBlekdWTTRnSEJTUDVyMVE?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
           "region": "國內",
           "source": "自由時報",
-          "time": "10/16 23:53",
+          "time": "10/16 20:38",
           "title": "日月光投控：漲價有必要",
           "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5KV1BNRFlqemdXZzFLcUhjMnVVWHpiUmxKR1pQeERBdEhnaWhHZTZSSDZENExVYWdGeUdjNG55aVVDQVhyX3lFSjJyMk9YVW5taWM4aW1hX1g?oc=5",
           "sentiment": "中立",
@@ -462,10 +462,10 @@
         },
         {
           "region": "國內",
-          "source": "非凡新聞台",
-          "time": "10/16 14:15",
-          "title": "馬年風向球／封測強強滾！日月光投控股價翻倍市值登台股第五| 產經",
-          "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE51LWdjZlROX2pGbTJhOXNMcjFFazg1VE5keDJ4Q3NLQ1hTT2JrOVBnaWpqSHdDcjE0UmtLanFHclpSMXJuWkpadUd1VDBTR0oxZGhaMlhMWkV2eEh1eHhN?oc=5",
+          "source": "台視全球資訊網",
+          "time": "10/16 17:48",
+          "title": "日月光投控：矽品精密工業10/8~16向聯純取得廠務工程，計約5.17億元",
+          "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNRlFUVzhEcXpFRFZCdXM3dWNxVTVyQ2txLWEyamktck1SQTFqQUJ3QjZ0cVIwLUNuZXdSQ2ZXRkdRWU96c0FHYnk0c3F3TVFxU3J1MDVwZHNieFRWMGNoaENTdHJXdmJqU2pzdzBDYi05MkJHRlVrWE5OeldVeEdoNU5vT1RMWDZ6N0xCTnhfdFNKUQ?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -480,10 +480,10 @@
         },
         {
           "region": "國內",
-          "source": "台視全球資訊網",
-          "time": "10/16 17:48",
-          "title": "日月光投控：矽品精密工業10/8~16向聯純取得廠務工程，計約5.17億元",
-          "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNRlFUVzhEcXpFRFZCdXM3dWNxVTVyQ2txLWEyamktck1SQTFqQUJ3QjZ0cVIwLUNuZXdSQ2ZXRkdRWU96c0FHYnk0c3F3TVFxU3J1MDVwZHNieFRWMGNoaENTdHJXdmJqU2pzdzBDYi05MkJHRlVrWE5OeldVeEdoNU5vT1RMWDZ6N0xCTnhfdFNKUQ?oc=5",
+          "source": "工商時報",
+          "time": "10/15 19:33",
+          "title": "10／15台股雷達│日月光投控、南亞慘吞跌停金融股靠什麼逆襲收紅？原因一次看- 證券",
+          "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9UQ2JkYXpZb3FJYmpkVzdJd1MyeHJJalZKWVNhZEs0aXlERUk1RGhNci04LS1oVnJsQ3VpbmJBNVV4MXY0Vktvb09hTWVRRzdWdFZOSW1BV05uVlkxT1dB?oc=5",
           "sentiment": "中立",
           "score": 0
         }
@@ -498,8 +498,8 @@
       "revYoY": 38.42,
       "revMoM": 25.7,
       "revMonth": "2026-09",
-      "pe": 15.79,
-      "dividendYield": 2.99,
+      "pe": 16.08,
+      "dividendYield": 2.94,
       "instDays": "法人動向中性",
       "foreign5d": -33364,
       "trust5d": 2406,
@@ -568,15 +568,24 @@
         239.5,
         244.0
       ],
-      "sentimentScore": 0.0,
+      "sentimentScore": -0.04,
       "scores": {
         "fundamental": 92,
         "chips": 59,
         "technical": 43,
-        "news": 60
+        "news": 58
       },
-      "summary": "2026-09 月營收年增 +38.4%、月增 +25.7%；收盤 244.0（月線 249.38／季線 250.92，RSI 44.3）；近5日外資 -33,364 張、投信 +2,406 張；國內外新聞 8 則，平均情緒 +0.00。",
+      "summary": "2026-09 月營收年增 +38.4%、月增 +25.7%；收盤 244.0（月線 249.38／季線 250.92，RSI 44.3）；近5日外資 -33,364 張、投信 +2,406 張；國內外新聞 8 則，平均情緒 -0.04。",
       "news": [
+        {
+          "region": "國際",
+          "source": "Global Sources",
+          "time": "10/14 13:13",
+          "title": "Foxconn expands AI server layout with OCP showcase",
+          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWk90aU1tdlJFbkpkeXI1RENZRE5rbmRWUEtHZWdwTnFqUmhkbk15aDlfRWlTY3FqVG9FNnVsVkdJOHk4XzdUOGhvMlVSamlRNE5PN3lENUlpb0pBX19vWmdJNThKOEpLVlVRVGpvcFRBdjBsU1djR21QNElXSjBiV3VTYTU2WkNNM1l2X0VZbmxlQ3pYU0oxdk9sZzEwZw?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
         {
           "region": "國際",
           "source": "Bloomberg.com",
@@ -597,55 +606,46 @@
         },
         {
           "region": "國際",
-          "source": "Global Sources",
-          "time": "10/14 13:13",
-          "title": "Foxconn expands AI server layout with OCP showcase",
-          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWk90aU1tdlJFbkpkeXI1RENZRE5rbmRWUEtHZWdwTnFqUmhkbk15aDlfRWlTY3FqVG9FNnVsVkdJOHk4XzdUOGhvMlVSamlRNE5PN3lENUlpb0pBX19vWmdJNThKOEpLVlVRVGpvcFRBdjBsU1djR21QNElXSjBiV3VTYTU2WkNNM1l2X0VZbmxlQ3pYU0oxdk9sZzEwZw?oc=5",
+          "source": "Stocktwits",
+          "time": "10/15 01:42",
+          "title": "Dell, Super Micro Stocks Rise Premarket After Elon Musk Denies Report Of $52B AI Server Deal With Foxconn",
+          "link": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxPVDlwTWlqalpndWtPWEdZODdHYkF4dzNXMVNBTFRMb3BBQV9IbU9DdGF0eFJtalpqWkdOZmxUQXNLcHByNmx3dDhEV01PQndmam1JYVQwRlRDa1JGWkMtOGwwZHUzT0FlSWl6TGZrVDMyMkNxS1ctYW5MczR6Qk5QVnlfcEplcm1CbkRRYjl1U1ptY3RjT3AxTVhIX2lKYzE1MS1tTnVIV1VSZzYzbXdmR1ZTeTZqU2JBRjZXN0h6aFRJZ25Fa3h6V0M5R01yeEpJUlR2eFVhOXh6WDdKWVkzclNpbGdDMjRvM2lUVWJ6N1VfT2ExTVFFSVRaemU?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
-          "region": "國際",
-          "source": "TradingView",
-          "time": "10/16 14:11",
-          "title": "Taiwan plans $4B Texas hub for AI, Nvidia suppliers",
-          "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNSU9SRk1nOTV1b1kzVjJDMUdTSkt0czkyUnl3TEhKeVpnNmFQVG9DTVF4dnppa2NhclZtV0tfZmlEbUNBNF9wSENWbTFkYVQ1WlZHQ1laZmgyZ3NzLTItZHZEblh0NVpiSDBYSmN5UlhHeWp5OXRsbmRFQTNDRDBjNFp1ZldmRnRCSFBBRlcwZVFBYUR4MW4zRGh0T0k3SlZiZnk1ekswLTZCQWttTkJUM3R3?oc=5",
+          "region": "國內",
+          "source": "Yahoo新聞",
+          "time": "10/17 11:06",
+          "title": "迎戰AI缺電！老牌機電大翻身 東元三大主軸曝光",
+          "link": "https://news.google.com/rss/articles/CBMivAJBVV95cUxOLVdhUm5qMjVjMHczZHBjUnRmUDNGSXhHVWRLRnp3WVAzSGw4REFCamlpbGREblJuX0ZvX0VOZlFKR1ZhUjVfSlJZa0VfNmU1d3g0djhPNEYyVko1b2J5NmQtVlRHLUMyeVBIUHljeHhMQUdwOUE4V2hTUWdFU0gwREc2NVo4T0I4RVd2cFQxRVhuU2RZUU5KcXFoV2NDVHc3R3dGcVlla2gxN1h0aUFSQkRYUWdqZUhKbFlEOXROS1VBNnkwLU9YWjdRSmhYUmJMcFdBYVVVRXd4ZXlScW51Zk5icE12OEpCYi1hLWNGS2lIM0FUYUVWZjFqVHU5b19YdFduZzhFZE9McjhzaXdidGxKSmZSSndocUVDc1BERGVGMTNxcmgxM3lVNHdFak4xLUM1Q3JrbDA4a2xa?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國內",
           "source": "Yahoo股市",
-          "time": "10/16 22:39",
-          "title": "市場對AI疑慮未減！美股開盤四大指數漲跌互見 特斯拉強勢撐盤",
-          "link": "https://news.google.com/rss/articles/CBMimANBVV95cUxPUTNrSDRNbUxjWUtLQk9zVmdTX2VfWjgzMXdDVnNwQjRaeld6T0hUemhBX3pRZ2tGRHBmeVo3TExmZmd5Rnl0dl9MRUlaeTNxSkN1T2JBcXpBdTlsRDR5eHF5eXkyc0VIamNHNkdheWR4MUl4dHdxYXUtTnRUSWVlZnhPcnlIbjZ0c015dGFpS0pQQXlrb1V4Z3pKZFlBUjhhTEZzWjRQYXZfaXRFaGd2OWktV3FxZXJKNjhEejZ1MUQtVDhRZk9tVExXSVliVURtVHdBcWJHZ0wwUzFNbUtPVUNmbzZodkZmSXI1c1lyQmRRS2k1SmJld1JmV3NwcW1XTjJoRnh3QzBFY05qOXZIVzNZYmlkTW1vcEgydGRDWUc1LUcwbVExVHNDc0dwTXBDb3prcWJ6ak5jWWtvWXNQX1Z6ckZ4V05jTHRxVjdzSjlPWTBHTnV4WHJaajVlMTZ5ZWxnQWVwemhwOGxJa0VfdVlKcERnWkhEcHZhcWF3MVhSQk5QVUREMkFkLVVwM0FnMEZCSTdwRkc?oc=5",
+          "time": "10/17 07:30",
+          "title": "AI、科技股持續承壓！美股收黑、那指摔逾2% 記憶體大廠全跌、台指期夜盤下滑1144點",
+          "link": "https://news.google.com/rss/articles/CBMi7AJBVV95cUxOTmVlX08wTlM2YXVTTGdRdlp1Nnh5OWN3bVo2WXU3YkZWR0lhZWR3WVVhZHNxdDlfU0c3cnltNjdRZ1E2ZlFQa05oMW92X1BLSWJyTWZGNndPU3M5OF9MMUQ5ckFmc3RMVGtYd1VkbkpMXzZFbVpPaldOa1lpTHJvX3NFX0YtOS0yY3E2VkFLVkM0d0dMSEJSUldDRHFzSmkzUG9kUWhxTER6TlZyMEJxd3IxRjQtckRDRlFWSU9zTHJBRGRoMGFqdVIzUHN3WVNNRE9nbnBtWGg5bHRGNUhEaGdKMXhsU1NVS19ScC0wYnVaamhJNnhNS2R2Rk92X3JOUUZtcWVPSjFTNld4QnV2aGo0VlplZkJBU2Z4UVBxODFYYVFMbnBwX21qMk9VTzkweFlyQ3lxd3poejYyXzFXb21tMktZcEEybUZWSVBDTjNmOEdnUndUTVJ2RDhJajljN3ZVT1phaWNXNktZ?oc=5",
+          "sentiment": "利空",
+          "score": -0.35
+        },
+        {
+          "region": "國內",
+          "source": "Yahoo新聞",
+          "time": "10/17 06:45",
+          "title": "魏哲家鼓勵多用AI 照顧台積生意",
+          "link": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxPa3cwbGFnTENzRXp5NUdfWTR6T2cyZHExTVJ2Z2Q2dlpPSGw0c3haai12Zlc5SGdfZ3F0cWJiMEhJLVNOX0gyelZLbTExUGJQeFdqNXVvY0p6U20zNFpJQm5UaG5xODg2VjNPWUZfcmZydWJZaG5qcjRnZER0d2twOHhjcDlXNVd5a2w4X3QxTHhoNEVjLUtnT3hlczB4ZklPRzN0QzFDSzBFbXhvTmE5VVNDWE01XzJJZE8tRTRlVlZsS05hcXMtcHpkRWpLZTdMYVNnbGQtOFlvNXhTRUJWVVlBV281SjlldXBPeFJ0ODhaQms?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國內",
-          "source": "Yahoo股市",
-          "time": "10/17 00:00",
-          "title": "AI股最好時光已過 巴克萊示警不再只漲不跌、選股看四條件",
-          "link": "https://news.google.com/rss/articles/CBMigANBVV95cUxQdlZpRWozNkVHZVBsbzNMeG9lU2hxbF9LWExhUzNMZEtlSjN6TDFfNnh4WGhTZldsU1FKcXBhWWNXb2lucU9lQ0hjYVpuZUZRVUh4akpyemt2Sk9NZXBmNGFhM3BPQzR3Vy1zYzNqNE1SNEdacXh1M2lQVDl5aEdEOTgxYUNKVjd5NE5lSWJGU0VfZmwtdTV0bGJTemMta3VqNV9DdnlERmU2RnFlVDVLRV9LSXZycW5qOVB6d3dtSVROemYxbVpCSWhucHAwNmM5WFhNVmtEaEg0Z0psZUE4VEpFUXRlRUtNWHNoY1d0MjZxM0lkcXV1VW00THZOY0NEMkVUdElJRUx4SW1MZ2M1RWhtdmtKdlhSNmJaQW5GQUFRbzI2Wk1objNkbEoteXdiUnZvOG84aE9Ic1RPYjkxZjJNS2ZxdldmMkZlUWVvLTU1cGFPRTdRTXlJSGZQZ204VVExWEZId09yLXBxVlg4TFVLQjByeTZKUnZpVEtWbEM?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
-        {
-          "region": "國內",
-          "source": "Yahoo股市",
-          "time": "10/16 15:52",
-          "title": "不只鴻海！東元擬合作日美AI大咖 拚3年內營收衝破千億元",
-          "link": "https://news.google.com/rss/articles/CBMigANBVV95cUxOQTAyMEtYLUVTcXJTcG5BU2VMMFFtb0FUT2F1VlUzT2Y4Z2RqaHRscFA0NEtuVlZFd0NPVUhzS0s0UW8tTEJUeTNtVzhPRl9GeU9DVDFFTHN1V1BBUFFZZ2dKY3dkVEI4VlhsWGFuYWVUZHdaazZqRHFNdnZxLUNsQzkxdmIwQ0pZWjJweHBMLUhjYXl4WHdhNGN6UWhQaVlNNDhCaVlqcGpydElKYmJJUjcwLXZoMVZLWnQzY0tmdjdYa0pZa3NHOVdtd2VsT1hvM2Z5RGg0SGZ6dmNkNGRtd0VmM0pqQnR1TFVxWHUyTDREQXdNM1ItVXVIb3NRR082Z0dpbE1EdGFVN1MxbnlBLU5EUHhJTzZIc3BaNHlzZ19oam5rSVNqOW9GLUxjSGhwbHA1dERvREZUUUpCQWlCaElBRXFqZjM3QnIxRDJEVFJETlRtRllrUUJfQjRCbXkzN0JVOTJtTXc4ZC1SUk5GZXhQN3RIYjgzeUFtRTVBMFA?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
-        {
-          "region": "國內",
-          "source": "Yahoo股市",
-          "time": "10/16 23:37",
-          "title": "AI生成非同意親密圖像風險難防 基礎模型緩解措施仍不足",
-          "link": "https://news.google.com/rss/articles/CBMi_wJBVV95cUxPYU91ZHpUU1hNS2JmMEdkdTd6VEJkTTJ0S2VTb0p6NUhXRmYtNGFxbDRLOVNGOUc2SmRFT3pTWHA1azFjdUZsRHhYVXhSWWU4TWxCS0hEU2Nrem1EYmtGRHpLWDI0d3NOSXAyNjFzclRyblZvVkxKbjl4eV9NTmNqdk1nOFpDdXZwVFBHSGlGT01SM3VfbklPZWo4RHBwNDZHRDByVmVxNUVfTDdnMFZLQ01rdjNaZEF3MXNEUjlMX2NESjU4ZUdvdHJ1U1lreVJiZWsxTk1KUTNuTVFTOGp1MWg1NUtyNzI2SHJJZkYyYWlSVUxkT3hwOTRLaXgzSzF6enlZZTJqRGRPWmtxWU1BeVYyWUdTeWVzYThRT1F2LVhjNE54UnZUYUFqOGs4M0xKclRPalNIb0Z1YW9JUzZYVGVqZ2FWTWIwZlJNZGdjTVhvNmNfa3VNTlpTajlhT2c0MmsxUkU5cHlxZFVoX3ZPMXYwZ2xOZ3BNUWxxeUVXaw?oc=5",
+          "source": "Yahoo新聞",
+          "time": "10/17 07:12",
+          "title": "金融業AI使用率達43% 逾7成已導入生成式AI",
+          "link": "https://news.google.com/rss/articles/CBMikgJBVV95cUxONXZad29mWDZmVnBmNk5fdy16U3RBeTIxSDJrMUExSXBWRGg2Y0JNUFFYMmxwTElucW5oQlZPSG1RcXpuWkRwakk4MHhrdy1TTHhPSHZZcENtelRJUkVBRDhSSWdqSHJZR1RUcjRtZUhsQ2EtMDl3R0lVZUM1X3pBdnZKRnBScERuNDk0eTJOLWtRd0UyQWhIVUwyOU9vWXJrQzlROFJSWWRiaktFZVpKTUU0QTdBSk1QdldmSFVfR3I2TG5fMVN5V3ltaVFkX28tZnd1b2ZhZXlWYU1BYnhaQnh3UkhidEZIbmpWUDJtOEFFV0t2SVFVTmhHSGRyd1k3NUVQa1YxS2x4MVBvQmhYbkdB?oc=5",
           "sentiment": "中立",
           "score": 0
         }
@@ -660,8 +660,8 @@
       "revYoY": 76.69,
       "revMoM": -23.27,
       "revMonth": "2026-09",
-      "pe": 13.79,
-      "dividendYield": 4.93,
+      "pe": 14.03,
+      "dividendYield": 4.84,
       "instDays": "投信連3買",
       "foreign5d": -993,
       "trust5d": 2823,
@@ -730,14 +730,14 @@
         316.5,
         322.0
       ],
-      "sentimentScore": 0.09,
+      "sentimentScore": 0.04,
       "scores": {
         "fundamental": 99,
         "chips": 75,
         "technical": 33,
-        "news": 63
+        "news": 61
       },
-      "summary": "2026-09 月營收年增 +76.7%、月增 -23.3%；收盤 322.0（月線 333.07／季線 327.05，RSI 41.2）；近5日外資 -993 張、投信 +2,823 張；國內外新聞 8 則，平均情緒 +0.09。",
+      "summary": "2026-09 月營收年增 +76.7%、月增 -23.3%；收盤 322.0（月線 333.07／季線 327.05，RSI 41.2）；近5日外資 -993 張、投信 +2,823 張；國內外新聞 8 則，平均情緒 +0.04。",
       "news": [
         {
           "region": "國際",
@@ -759,19 +759,19 @@
         },
         {
           "region": "國際",
-          "source": "Yahoo Finance",
-          "time": "10/14 07:18",
-          "title": "Quanta Computer Stock And AI Infrastructure Names Facing The Next Spending Test",
-          "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOQnV5VXRtSTQ4TlNrTXRJQ2RKQjROQXN6LTdJVmh5YzNvSUN2MGJYMXFWb1dFUjYzR1laNVNjaE95Sl81NmVPeFNJMUh1UlMtaEpySVhGbjBOel9BUnlUY2FtS3VjVmtaSkJxcVRrQlRMTHVLTHgtVlA0WksyYVMwZTE1b3lhZHZZT0VONTFhTWZxbkY4Y3dfX2JsTTJpUmFfajRBZVZR?oc=5",
+          "source": "Moomoo",
+          "time": "10/16 18:58",
+          "title": "Morgan Stanley Sizes Up $1.58 Trillion in 2027 AI Capex — and Maps Where Every Dollar Lands",
+          "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQRUV1SVJBS0VTV2tVdUdsQ1ZlbUQtRDBmMW5aSzJ3a0gtNDRPSTRMTkFoMDhEQ2tmd1dSUmNPZGJybElITmlsUXZlTkpva081cjAtNGVHdDRJYXphWVhuaEtPdTZmc3JMYzVBY05jVHRDU0gxYm96MU1nUENYZ2ZKWkxsM01HMFJ2QkVLNmtQUVFHOGdYR3R2NWEtUjEzSWZreFdIWg?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國際",
-          "source": "Moomoo",
-          "time": "10/16 18:58",
-          "title": "Morgan Stanley Sizes Up $1.58 Trillion in 2027 AI Capex — and Maps Where Every Dollar Lands",
-          "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQRUV1SVJBS0VTV2tVdUdsQ1ZlbUQtRDBmMW5aSzJ3a0gtNDRPSTRMTkFoMDhEQ2tmd1dSUmNPZGJybElITmlsUXZlTkpva081cjAtNGVHdDRJYXphWVhuaEtPdTZmc3JMYzVBY05jVHRDU0gxYm96MU1nUENYZ2ZKWkxsM01HMFJ2QkVLNmtQUVFHOGdYR3R2NWEtUjEzSWZreFdIWg?oc=5",
+          "source": "Global Sources",
+          "time": "10/14 13:13",
+          "title": "Foxconn expands AI server layout with OCP showcase",
+          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWk90aU1tdlJFbkpkeXI1RENZRE5rbmRWUEtHZWdwTnFqUmhkbk15aDlfRWlTY3FqVG9FNnVsVkdJOHk4XzdUOGhvMlVSamlRNE5PN3lENUlpb0pBX19vWmdJNThKOEpLVlVRVGpvcFRBdjBsU1djR21QNElXSjBiV3VTYTU2WkNNM1l2X0VZbmxlQ3pYU0oxdk9sZzEwZw?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -781,6 +781,15 @@
           "time": "10/16 13:05",
           "title": "廣達Vera Rubin明年Q1放量，ASIC伺服器倍增",
           "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPYWwweHlfNjN6d2lOc0ppNy1PQ29fM2d2d0FXYlBWMDZtb1RZVUxHNGx2X21ZcUFlVWlQalU2bnpFdVRVMVZZby1CQ3MxdkNsYkh2VjJIVlM4aWl4WTZZZC0tMHh1TWl3SExtYmVfX2pGcmFrUTFITWdBbUJqRVhITHVrQ0E4bmFrVlhSQmM4TVo5dw?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國內",
+          "source": "自由時報",
+          "time": "10/16 19:46",
+          "title": "加州AI伺服器組裝廠 廣達加碼美國313億元",
+          "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9LTWlaZVU3dEs0Z3M3QUVCMmZrLWlYVFVPcURJcDRmRDdEYkdIUXYyYkV5eF9VR0lLbktsUV9TbkY5SnlKbWRONEIyX2NrSUxMZi1STjN1amo?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -801,15 +810,6 @@
           "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOamdLMUZzMjNwZkRxNXRia1NvZmIwTDRCcDRMZGk5ckVqbll4Zi1XaC1sYk1sc2JNYmltNUs2WG9sUnJPU0hlLV9CdGoyQVY1WmltSzZQb0NjNTJzcXozeDZnbi1TWWoxUEVYeUJRU2d1eDJQNGxfMHVONF96Qm5heEVR?oc=5",
           "sentiment": "利多",
           "score": 0.35
-        },
-        {
-          "region": "國內",
-          "source": "自由時報",
-          "time": "10/16 15:33",
-          "title": "AI鏈擴產帶動跨國融資 星展看好台印半導體合作潛力",
-          "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5leVNlYWptcFA4TmFXVl9vazYxRmQwLWpoTFJSQUVFbE84dEY3bVlmTWdXSUo5RlpjSjBER2ptWEJ1S2VuWnRyZG0yYlRtampwZXQ5OTVraW0?oc=5",
-          "sentiment": "利多",
-          "score": 0.35
         }
       ]
     },
@@ -822,8 +822,8 @@
       "revYoY": 44.92,
       "revMoM": 7.89,
       "revMonth": "2026-09",
-      "pe": 41.12,
-      "dividendYield": 0.68,
+      "pe": 44.19,
+      "dividendYield": 0.63,
       "instDays": "外資連4賣 / 投信連4買",
       "foreign5d": -2892,
       "trust5d": 982,
@@ -901,6 +901,15 @@
       "news": [
         {
           "region": "國際",
+          "source": "HPCwire",
+          "time": "10/17 05:55",
+          "title": "Giga Computing Powers Scaleway's New AMD Instinct GPU Services to Accelerate AI Workloads",
+          "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOUnJUZ3V0UWhwNXdFYnNHT2JVT0ZlNzFrcjhhM2g2SktmdHpfZGZEMVl0dlZJMTU0d2g1MUdkNFp0V3R6aWJpMWtfODNYZGVwZlRXd3Z6TnZYNm42TEpMMXJ5Ql9XQm1zSmlON2VNTWR1R3NkZGpiOGNfWGJyUmZNeVN0YkpnbXgtdU5fazRvck5XMFZOZWMydkE4clpHcmZabG9yWTl3RzhHV3ZYOWR5Qmd5NnlIUDhNczNzTFBTT0pFZUFL?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國際",
           "source": "Global Data Center Hub",
           "time": "10/16 10:00",
           "title": "Why AI Chips Need Plumbing (And What It Means for the Buildings Behind Your AI)",
@@ -910,28 +919,19 @@
         },
         {
           "region": "國際",
-          "source": "StorageNewsletter",
-          "time": "10/16 20:01",
-          "title": "OCP Global Summit 2026: MiTAC Computing Showcases Full-Stack Innovation to Scale Open AI Infrastructure",
-          "link": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQZWM2NV9oZEM3ZDdCV1VCUjVDUEV4OXJxRG5yZzVLSXhOdGNNUHdFa0Y5eHRTWHRxRUVlbjFzY2kwVEM1SzNMUVNoOHBHc0VhMkRwS2YzYTM0UkhXVXlUbEpKa0ZCVVZ1UmlZRm9uT2FJSUVfdElPS015Y0M0ZVdPbWExVkl3cGR4cmhjUWl5Q1FjTXp5VVd6N19SRWVIdFlneDVudXNWUXNabDZYV1VnNDRYZGNsa0ZuaHQ4VmxneWg1eWpYeU94dWw1UmU5bW83SU1BZU0tdlBZSVA5TmxhVGN3?oc=5",
+          "source": "Moomoo",
+          "time": "10/16 15:00",
+          "title": "The more powerful the AI chips, the costlier the cooling: A data center giant being re-priced by the market",
+          "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcWc3Q2hRVmRJdW5meFMzdlBNelZuY0FWYmdCbWp6RGJkd3dBU0xqeWo4X3lYNkxTb0NobVZnWHJkWHlLTzR0SDNtbUNLUVhORWtzREpsaklUUm40bGVaN3poTE03a1FlLUI5OWdFWnVYbkVnSVMxaGlqTkRFelZqUk1IdjNJLUd3Yk4xTmliTVFjdW5iSGVza0UwY2VnT0cxc0F1cFFuX1VTUQ?oc=5",
           "sentiment": "中立",
           "score": 0
         },
         {
           "region": "國際",
-          "source": "Fierce Network",
-          "time": "10/15 07:57",
-          "title": "Supermicro bets on open hardware to speed AI data center construction",
-          "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOTzJDV2dDX0hzS0tmcjFmTGpQLXJQZmE1d1pvUjRaQ204M3ExcHlxM3dNcU50ejhaZUQ1SFc4QjlZaFpTRzVpTGRRZFo2emduNURjdlFGUWNQZEd1NG9Cd0d5VEhUSUl2aGpWZ1lTc1NCcmZRaDFzNHdYWVRldS03TWNkTFZMQ1NoMTRmcG5pZk5MRDZwSXBwUE9qRnV6aGhIbkE?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
-        {
-          "region": "國際",
-          "source": "Data Centre Solutions",
-          "time": "10/14 17:17",
-          "title": "Cooler Master unveils 2,500kW CDU-anchored AI cooling portfolio for 2026",
-          "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQaTYtMy13N0ZPaHE4eUZNTnJfeUVEcGJTbEg2VGl2dnRnRlFZWXFyRk95MTFPUXlZVmJvd2Z1ZnVjbWcwTGFQSzViTTRGUm43d3VOWXNaTjR2enBKR19ZX1p5Q2JfSzQya3o1Rm1mNlFzektfTWFVUlZlTGtqWE9QQVNlMkt1UmpQclNRd2NybHRCQnh3ZTdIX1FZQmFyU2ItVWUwUWlMZ1ZXdXJpVzFzX01VWkxqZw?oc=5",
+          "source": "Data Centre Magazine",
+          "time": "10/16 16:59",
+          "title": "OCP: Cooler Master Unveils 2,500kW CDU for AI Data Centres",
+          "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPV3RMY3ctMHpvTVFpWTVJUGJqZFN6d1lNUmZHbWZBR0pkXzByQkw2N1BNSnY4VFkxMnlseWY0bS1STlNuZTZMUHRCX2VQazV6R3JmSHUyMlJGUFA2aFRoMkx6bFlLVDlGY2VWQUNIUGd1alk3a1dLSlhyVGxhVTRPNlREQS1MeXMzQXRha0xvYVJVcnc?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -941,6 +941,15 @@
           "time": "10/16 16:32",
           "title": "奇鋐澄清內線交易案調查僅聚焦特定員工- 產業",
           "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE4tRFNUTlB4Y0M3M05ONE5RX0JvbGtNZVRudFdySWs2ZWtqZjdiZ3dCMWE2bE5vcG04N3oxTWhyWTlsX0Zzd3M5OEMtQm5IOGxhRUhkdlVWVDltYlJkeEhj?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國內",
+          "source": "Newtalk新聞",
+          "time": "10/16 17:21",
+          "title": "奇鋐捲富世達內線交易案！調查局曾赴新莊辦公室兩公司都發重訊澄清| 財經",
+          "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9oTW90SEV4LUtWb0Y3ZDR4OWtQaDNZU2xhWkZLNGxjNjI1cDliS3FWTmE3bE9ZU3JhMDNlbVl3ZHgwTWN6VFlZRTA2YzAwLWwyVnh1SFoxMzJXZHc?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -961,15 +970,6 @@
           "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNZl9ZZVJNeVA5aEN3aWVLUnpkNjdDVF9zX2treTNsRmhNSWt0ZDFNNXZxZXJwS2kwYUZMOE1FQzhYUkNybGNFMmpacWV0cVZVS3pSYjJLQy10QTNJNW5mdnh0Nnl0MGJHcVBKMmhPOG5ZeThvTjdFTDZqUFp4bGFCa0FXemptUEg4TmJOMHZR?oc=5",
           "sentiment": "中立",
           "score": 0
-        },
-        {
-          "region": "國內",
-          "source": "Newtalk新聞",
-          "time": "10/16 17:22",
-          "title": "奇鋐捲富世達內線交易案！調查局曾赴新莊辦公室 兩公司都發重訊澄清 | 財經",
-          "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9oTW90SEV4LUtWb0Y3ZDR4OWtQaDNZU2xhWkZLNGxjNjI1cDliS3FWTmE3bE9ZU3JhMDNlbVl3ZHgwTWN6VFlZRTA2YzAwLWwyVnh1SFoxMzJXZHc?oc=5",
-          "sentiment": "中立",
-          "score": 0
         }
       ]
     },
@@ -982,8 +982,8 @@
       "revYoY": 1.97,
       "revMoM": -13.69,
       "revMonth": "2026-09",
-      "pe": 68.79,
-      "dividendYield": 1.28,
+      "pe": 70.19,
+      "dividendYield": 1.26,
       "instDays": "外資連8賣 / 投信連5買",
       "foreign5d": -17135,
       "trust5d": 1398,
@@ -1064,9 +1064,18 @@
         {
           "region": "國際",
           "source": "Yahoo! Finance Canada",
-          "time": "10/16 10:14",
+          "time": "10/16 14:19",
           "title": "MediaTek Inc. (2454.TW) Stock Price, News, Quote & History",
           "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5EVVZuZ3pWN1Z3VVFGYWk3b1FHdHBxZ0oxYUtkUTlKQXNERktVNnI5bVdYb3gwZ1plVi1hYVZFQXFkWF9peURQR1V0eXZsY29KczZQbW1B?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國際",
+          "source": "MediaTek",
+          "time": "10/17 03:14",
+          "title": "NVIDIA RTX Spark PCs Are Here: A New Chip, Built with MediaTek, for AI Agents",
+          "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOeGRfZEwyaS11dmQ3bEF5bDM1Q0pyX0E1eHp5QldhckcyM0JKQ3lkbUFzS3BjQmVnY0h5SE10c1hDdzg2SDVwS2ZFTENBTE9yaWs3dUJ2dmNqc1ROMVg3cmVrb19QRkJPZENFV1dBMC1DcnZtQnlPSlJlR0tsTmFrWENYOVU0di0zd1JLWWJkalhPWEM1WWZ5WTVfOEdTdEtHV05ncmFON3dtTHhXc3NIdTk2X04?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -1081,19 +1090,10 @@
         },
         {
           "region": "國際",
-          "source": "Bloomberg",
+          "source": "Bloomberg.com",
           "time": "10/15 10:39",
           "title": "ByteDance in Talks to Secure MediaTek AI Chips for Data Centers",
           "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNaFlzZWE3cWRERDdpeHZBaFdCbFEtYkpCOUFaamFJNURYQmNVWExxWnQ2NmNHRUIwXzR1dFgzaVhOUnZkS25yQk1Sd3VvTDFTQnFlSlN5YzI0Q210bGVuS0NhZkFFRDJvU08wSjRqNEdxZXhtVVhYZTRaTGEybmxBWjgxUGNKMjZoclhLTDFSYnFGQlluaTdabW1hQjV4a1RORTRUbkxvdjFUQ256c2JGR0pvcnk?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
-        {
-          "region": "國際",
-          "source": "www.briefasia.com",
-          "time": "10/17 00:03",
-          "title": "ByteDance in Late-Stage Talks with MediaTek for Custom Data Centre ASICs",
-          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNUDY4emNjTDRJTmdhQVVXeUVycUwyd1NsWDRaVUtBcVhpdEJTS2pGVm04SVZKRGJnZTQwWnJ5U3B2aDBQUW5vUndfR3JFZUs2ZWxkVTZIY3psWGo5MnFuaENudXdJOWxpcFdrUEEtOS1YdjRjWWo0UVh0WnZDenlhZ0NSdWdkbEk?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -1109,9 +1109,18 @@
         {
           "region": "國內",
           "source": "Yahoo股市",
-          "time": "10/17 02:44",
-          "title": "進軍Windows PC市場 輝達攜手台廠推超強算力AI筆電",
-          "link": "https://news.google.com/rss/articles/CBMiuAJBVV95cUxQbk9OVFhjeVp0Z1JyQm4tSmFTN3NqUW5vMGZwM1RRVUVYXzA0QllUeXpHZlNZRnA4RXd5a1JPR2l4WTY2WXZJTzdLR25oQnZPTzhnU285SUg2dEJUc0lCcndGUk9VaFJuS2pMRU5XRzNIVmphRFhlM3JtTnhZUzlxLUtjLUVhYU1IWDRodzlnTFlxeDVBYVo2QW5NREYzZ1F1YkJuYW96a1U4WDh6SFhWZnBiNzltUFE0enE2YmxyMXpjR0Y5bVowRUlSQ3JYcG5JQVQ1a05SZFJySDFiVXUteFU2QTF2NFJuNm1Tb2VtVF9qSTdwcFhSYlNSZW5NdDBKaXd6QzRZRDNMX0dtNVJGZ0pOQUFleFJqeWZ5MDkyOHVjRFVIZEtKZUVMeGFVX05ZQVlyOXZDcEk?oc=5",
+          "time": "10/15 12:19",
+          "title": "搶到字節跳動大單也沒用？聯發科慘摔315元苦吞7連黑 分析師喊話：未來夢很大",
+          "link": "https://news.google.com/rss/articles/CBMi7gNBVV95cUxPa1F6QVRZYTJraHB4N3RHOHBMaDlCMFlaTnNFMFpxZld0cGd6Wl9Ca0d0RHMtSDBFSlFWc2VWVHRpWURHRjhrTUNDeXBqR0EtaThEWHE1cU9UZkZ6aDBNd1BuWkFPQWdqTjhOVXN1M1I5aUNaMUMydU1kZXNpMzk5NlM1MlhmVkVQV25BbFhrby10OHcxQXFwOXRhcncySDg5WWtOU1NyWE15QnhaV1BKdHhCUE9oWWlPck1WM3hnOThhVlIyQm9NV0FRZWNvb1o4LUtKZzc4VG5NbHpJcmp6d2Z5S09lc2dMbldVZUJTUDhfd214S3VScTVEOTNOWGZaY1ZvUmhvMDZlRzJwX1FNd3Qtd21VS01xbC03SmI2RkdBd2plUC10YUVlVFYxeXZhMEtrZFFIR24zbE9XS05wcTc2T3owRmF5OVNfOWZrRzJoNTZITkpZTzhHbUtSc1BOYVpKTUtIMG1YVjBoZVBEcnRSdm85NHV3MTdQYlRqSnZwVGgxNWVFZDBDM08xSDJMY0lObC1FWnVBeV9qV29YdDRxQUtfNjdCSU1nMEF0WW92c2thbnpYT2xMTVR3aThJZ0lMTEhhZjZqNW1ORHJEalZqZ191YjJuSUxlbFY2dEdwYml4a3RjVHhHX1UxZw?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國內",
+          "source": "非凡新聞台",
+          "time": "10/17 05:23",
+          "title": "熱門股／聯發科傳拿下字節跳動AI晶片訂單終止連7跌、重返季線| 產經",
+          "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1JcTJja3VGMlFSeUJpajhfU2l0R0hZV0ZuWnNubkZWalJOVFk0WWtHNXF5SlZ6M1dtLWZBeXdDQkp4VWlUZDZSXzhreEJlRlkyc0ZjMklHZzd5cWxRX1Nv?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -1121,15 +1130,6 @@
           "time": "10/16 19:39",
           "title": "焦點股》聯發科：搶單傳言衝擊股價 外資力挺市場低估",
           "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5WTzEyNko2MUVoSFkzWk1sR2tZeUlYb01PYnVwbHphOE5kUk9SUzFRcllZRUVqbWR3U09LMEVZcElwMGtSVGtELW9laVJucGRtOWxPZV9HREM?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
-        {
-          "region": "國內",
-          "source": "口袋證券",
-          "time": "10/16 17:32",
-          "title": "聯發科傳洽ByteDance ASIC：新客戶機會，距離營收還有幾關？",
-          "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9vcFBGZmw2VFZobXNzc1c0NzZDaUJsWE52QkxoNXAxdlhHOTdPbElPbFBYcFBGSXRrQk1saFRpMHZzOTYxMkZhb2dqX09kZVUyR2pyWUR6Wkh0TC1RWUtuU1ZfNGNUdw?oc=5",
           "sentiment": "中立",
           "score": 0
         }
@@ -1144,7 +1144,7 @@
       "revYoY": 14.61,
       "revMoM": 1.26,
       "revMonth": "2026-09",
-      "pe": 51.88,
+      "pe": 52.04,
       "dividendYield": 0.71,
       "instDays": "外資連7賣 / 投信連2買",
       "foreign5d": -21893,
@@ -1214,14 +1214,14 @@
         1630.0,
         1635.0
       ],
-      "sentimentScore": 0.0,
+      "sentimentScore": -0.04,
       "scores": {
         "fundamental": 66,
         "chips": 45,
         "technical": 33,
-        "news": 60
+        "news": 58
       },
-      "summary": "2026-09 月營收年增 +14.6%、月增 +1.3%；收盤 1635.0（月線 1848.25／季線 1778.08，RSI 36.8）；近5日外資 -21,893 張、投信 -1,805 張；國內外新聞 8 則，平均情緒 +0.00。",
+      "summary": "2026-09 月營收年增 +14.6%、月增 +1.3%；收盤 1635.0（月線 1848.25／季線 1778.08，RSI 36.8）；近5日外資 -21,893 張、投信 -1,805 張；國內外新聞 8 則，平均情緒 -0.04。",
       "news": [
         {
           "region": "國際",
@@ -1252,10 +1252,19 @@
         },
         {
           "region": "國際",
-          "source": "PR Newswire UK",
-          "time": "10/17 02:43",
-          "title": "Green Data Center Market to Reach USD 90.38 Billion by 2035 as AI Density Accelerates Liquid Cooling, Power Efficiency and Retrofit Spending - DC Market Insights",
-          "link": "https://news.google.com/rss/articles/CBMivwJBVV95cUxPbDRSUjhsLTJTQjV1N3R5eWlIQXdFdHN4QTQwSjdpNUhHaGdxbUVwSmdrWWhteHNZaVEzQ21lcEpqZkdjNTQxUXBqUUtBSkxGejVPcVpFUlpiNHZ1NU9MUnhGaDdtYW5IMkFRc2lRd05GcnA5bXVSTzdoYzlENVhmMkhzX1NJZWV0SDhGR0Z5Wmsta2tjVkF0Qm9TVW4tZ09TaVRmOGp1djE4eHltUXI5Q0JqV0k5UzBQN0tmZXBNb2QxcUdkUkVraTcwRmtGdExOR0JEQi1DTlVqckxwWEpJdXExUk9ueWFIa282TWYyUGlHU211V3JmR3VWZG5OQmt4M2tGdkRTWUJMWUNabDNuNHFsTndLU0VuM3ZjZUlpZ0tnWmNqS3pndXBMTXFuRTdXTVhXampwVVJtMGhMalRZ?oc=5",
+          "source": "Taipei Times",
+          "time": "10/15 00:00",
+          "title": "Delta forecasts increases in solid-state transformer shipments for data centers",
+          "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1Qa3dDM1hZUXRhMVVmbTV0c29nVmlSUHRUTGZnamZVUlBETEZHcklhYlJENGQtdEg3X2sxNmltYjVHY3VuY0xPcFNibE9mWXhGZlFzZjBqSk9aVDdkTHFHR1dBbkkwVWh5WGVDbmFqU2tuSVk1QWc?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國內",
+          "source": "自由時報",
+          "time": "10/17 04:05",
+          "title": "焦點股》台達電：輝達激勵權值股 觸及1800元大關",
+          "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9fM2RjSDBUYl81MWpweFVUaXNFOHllcVUyYXNiUnFTQzVIb19KaGJBQjM2bFBqR2NwbndjY3o3X3Vhb1pjQkFONDVseFJOSmRwaUQzQndDeUE?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -1270,28 +1279,19 @@
         },
         {
           "region": "國內",
+          "source": "CMoney",
+          "time": "10/17 10:20",
+          "title": "2308 台達電 - 台達電跌破1000 - 股市爆料同學會",
+          "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5YZWZERkZob1dQSXk4dHZmQXg1NjlnS0JXcS0yX3lYZHRWMG9WTWN1NTdtSDA5UWlPVHJrMjR5Sld5VElaS29oQjhNQVg0WnVqSFJlMlpGVzk?oc=5",
+          "sentiment": "利空",
+          "score": -0.35
+        },
+        {
+          "region": "國內",
           "source": "鉅亨網",
           "time": "10/15 12:25",
           "title": "台達電鄭平：三因素限制電力設施建置 供電缺口成AI發展關鍵挑戰",
           "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5UR1Zyb1pFR25mMEpPRy1Bb1lYT0tMQUNVS2VPdjIwZjh5ZjJ3Z1FjY0s0TXlMOGgwemJlcHVRZUVqZWljaUxCUXdvSlhreXM?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
-        {
-          "region": "國內",
-          "source": "BigGo 財經",
-          "time": "10/16 09:59",
-          "title": "台達電子 | 2308.TW 股價走勢與即時報價",
-          "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE55X3A0aHRQTnQxbXc1UXZSdWR0YmZybjUtcEptM18wSGp4MFRSamROaGJoTmhkUVJZSmxFNXpfYldqUWthTm5IcndOR2VVRVRxNGhRdw?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
-        {
-          "region": "國內",
-          "source": "自由時報",
-          "time": "10/16 12:54",
-          "title": "台達電布局星馬AI 雙引擎同步啟動",
-          "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFB3OWl4MVRObG45SFhndDg5VTFOSDc4MTZ1ZmVOZHJnV3pqTXVFSzY4eklob2JscVVWSi02S2lldVFLU3VXLWw3aVgtSDJJWjM1LTd6bkgwdWQ?oc=5",
           "sentiment": "中立",
           "score": 0
         }
@@ -1306,8 +1306,8 @@
       "revYoY": 7.19,
       "revMoM": 5.85,
       "revMonth": "2026-09",
-      "pe": 42.47,
-      "dividendYield": 1.85,
+      "pe": 42.93,
+      "dividendYield": 1.83,
       "instDays": "法人動向中性",
       "foreign5d": -1792,
       "trust5d": -95,
@@ -1376,24 +1376,15 @@
         649.0,
         656.0
       ],
-      "sentimentScore": 0.04,
+      "sentimentScore": 0.0,
       "scores": {
         "fundamental": 54,
         "chips": 59,
         "technical": 43,
-        "news": 61
+        "news": 60
       },
-      "summary": "2026-09 月營收年增 +7.2%、月增 +5.8%；收盤 656.0（月線 694.45／季線 693.34，RSI 40.9）；近5日外資 -1,792 張、投信 -95 張；國內外新聞 8 則，平均情緒 +0.04。",
+      "summary": "2026-09 月營收年增 +7.2%、月增 +5.8%；收盤 656.0（月線 694.45／季線 693.34，RSI 40.9）；近5日外資 -1,792 張、投信 -95 張；國內外新聞 8 則，平均情緒 +0.00。",
       "news": [
-        {
-          "region": "國際",
-          "source": "Taiwan News",
-          "time": "10/16 15:11",
-          "title": "Taiwan electrical equipment makers benefit from AI power demand",
-          "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE0yTnZqZTlWYi1pNzlhbVhaaXNVUVNiR2N5QlZjNkczbDRkWXphMWZ5QTBvSXlnT0Rpa185Ti1JSXpXeXpFZ1NBbjBhTGJySkdIUFI1aG5hT2o?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
         {
           "region": "國際",
           "source": "energynews.pro",
@@ -1405,12 +1396,12 @@
         },
         {
           "region": "國際",
-          "source": "IndexBox",
-          "time": "10/14 19:01",
-          "title": "Signal Transformer Market To 2035: Industrial Iot and Medical Isolation Drive Growth - News and Statistics",
-          "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQOXdncnFrQ3JyR25BYXB3eW54czFoYmdTSkp3Y3ZDRHR3QjVId1hzd0YyUjRpaFBIZWtFN01fdEFrS0FqcDZoX3hzem1GbjRlWkx3dXlOWi16WklmeTdQWUZLTU02THZQUldqSWQ3ajNCV1lBbjBESF9BOXVCcVY4eUVpejlJRE15aHJLWWZJSHg4MHU1MVRGZWJyU2Q4dnhybnozLXpHdkVyMFhiOVNEa0JqZE5Md3NFWVBiaXhFYzNXN2NLZnBaN0doNm1rUQ?oc=5",
-          "sentiment": "利多",
-          "score": 0.35
+          "source": "Taiwan News",
+          "time": "10/16 15:11",
+          "title": "Taiwan electrical equipment makers benefit from AI power demand",
+          "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE0yTnZqZTlWYi1pNzlhbVhaaXNVUVNiR2N5QlZjNkczbDRkWXphMWZ5QTBvSXlnT0Rpa185Ti1JSXpXeXpFZ1NBbjBhTGJySkdIUFI1aG5hT2o?oc=5",
+          "sentiment": "中立",
+          "score": 0
         },
         {
           "region": "國際",
@@ -1418,6 +1409,24 @@
           "time": "10/14 15:56",
           "title": "TECO's New Transformer Plant in Indonesia to Begin Production in Second Half of Next Year, Targeting U.S. and Southeast Asian Markets",
           "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBOXzJhZTJseTMtTGV2dDdsUnJUbmhWRWFycGZ0SDI1clhuU0kxXzVuclNjMkJ1ZW0yaF9MVGxLTnJVVExxYWF1ZGhHalduZi1CWXVVVTJVdVR0U3FNOWN4NEIwUmhiNEhYRDhpQjMyeHpMbC04cmc?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國際",
+          "source": "The Manila Times",
+          "time": "10/14 19:50",
+          "title": "Delta Unveils Microgrid Solutions and the Newly Launched SST-based DC Power System for the AI Era at Energy Taiwan 2026.",
+          "link": "https://news.google.com/rss/articles/CBMioAJBVV95cUxQUURkNjhOQ3lZQ2t4MnBpaUliNGVURzBORm5Id2NNN1FQM0pjb0Y4dHdLQWxqdlg5bjFnODlVZ0djU3BFZlo3VmRtYWtDWFQwbFlJdlpjYU1BMFc1M0g2R2FMOTliRkU0ZG5EYnR6cDdTUjY0Z1dJY0gwbTA0NVZjTjBYZDNYM0Vob0o1SXhtdVBNRlNYQzY2eXZ4MEVsX0VyYkZya2VpMjZFZXJMalFIcllRRkV3ODBWOGFERHlxYzVvdk1SMDhLdG9kMXFhcjY5eVdISEdpdExNR3JLdmUtMzNjU3Viem5RN0t3ODJHS3RDdnhTTEdhWmZCSlhFNlhITXhEcWVWSWhLNk9mekJvNWNpUkxiSmZJMVVPdmtFQzfSAaACQVVfeXFMUFFEZDY4TkN5WUNreDJwaWlJYjRlVEcwTkZuSHdjTTdRUDNKY29GOHR3S0FsanZYOW4xZzg5VWdHY1NwRWZaN1ZkbWFrQ1hUMGxZSXZaY2FNQTBXNTNINkdhTDk5YkZFNGRuRGJ0enA3U1I2NGdXSWNIMG0wNDVWY04wWGQzWDNFaG9KNUl4bXVQTUZTWEM2Nnl2eDBFbF9FcmJGcmtlaTI2RWVyTGpRSHJZUUZFdzgwVjhhRER5cWM1b3ZNUjA4S3RvZDFxYXI2OXlXSEhHaXRMTUdyS3ZlLTMzY1N1YnpuUTdLdzgyR0t0Q3Z4U0xHYVpmQkpYRTZYSE14RHFlVkloSzZPZnpCbzVjaVJMYkpmSTFVT3ZrRUM3?oc=5",
+          "sentiment": "中立",
+          "score": 0
+        },
+        {
+          "region": "國內",
+          "source": "旺得富理財網",
+          "time": "10/17 05:32",
+          "title": "重電4雄1表比》士電、華城、中興電、亞力...4大投顧給看法：這檔「 目標價砍到136元」原因曝- 上市櫃",
+          "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBFYURoWW1tN2hvOGw0UUI4ck5DU0VseEZsVWd4aThSZlVvZUZBbjlPZWUzWHFBbU9BVkZsSGtHRXNiZXpXQlMwTEtwbnMtLWdUV0dVaDNwOXZMSDlkQVdwTnh4Qkp1bWgxU1E?oc=5",
           "sentiment": "中立",
           "score": 0
         },
@@ -1441,19 +1450,10 @@
         },
         {
           "region": "國內",
-          "source": "數位時代",
-          "time": "10/16 17:10",
-          "title": "台灣邁入5兆元零售時代！電商、百貨、超商為何成大型集團布局焦點？",
-          "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxON2Fmb2VIWGlNbjVKWldFTVJyYWFTVDJsQW1BaUlPLUhMY0daVVN1eEFpbGZmbGxWNHhiZzN5TlNQTHBkeHhWY0lMWnNsRDM1ZDVtNVp1ZFpVaUJfSGhwQm1vWXp4dUlDMjhSeFlENGNyOGJ6NnBrWnJxdXFhWjVrNmhtcw?oc=5",
-          "sentiment": "中立",
-          "score": 0
-        },
-        {
-          "region": "國內",
-          "source": "旺得富理財網",
-          "time": "10/14 11:18",
-          "title": "目標價、評等1表看》重電股Q4拚回溫！華城、亞力、中興電、東元…法人「4選2」：潛在空間近5成 - 上市櫃",
-          "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1VeWdqRHYwa0szeTVSUlpDQ2daV0h5M1h3YkVnZVdxQWpKOUszLVdaMUd1ZVFudlIzbkNuNUdpNTU0QWpCRFUzY3hOdEVDc0cxNDRnQVpTeXhQMUhodVJCODRaMGFNRE5hZEE?oc=5",
+          "source": "CMoney投資網誌",
+          "time": "10/15 19:26",
+          "title": "半導體用電2035年翻倍，重電與電網工程何時轉成訂單-子敏左側交易",
+          "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNcTNIdlVJTWJvXy1KNDg5UEx1SDNOM3FjT2tUX3FiQ1Q0WFlpajQwZmw1cWdCSUxNWlVCandKU254MVotRWN4UFYzSDNFeGlRUTB3NVhqYmNZLWx3aXNQa3M5d1FGemxRazFCVy1nc0tpN2FWd2R6WmxCODRLRzExWGlfRQ?oc=5",
           "sentiment": "中立",
           "score": 0
         }
