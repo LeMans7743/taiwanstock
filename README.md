@@ -24,7 +24,7 @@
 到 https://aistudio.google.com/apikey 申請免費金鑰，放到 repo 的 **Settings → Secrets and variables → Actions → New repository secret**，名稱 `GEMINI_API_KEY`。
 
 - 未設定金鑰時會自動改用關鍵字詞庫評分，網站照常更新。
-- 想換模型：在同一頁的 **Variables** 新增 `GEMINI_MODEL`（預設 `gemini-2.5-flash`）。
+- 想換模型：在同一頁的 **Variables** 新增 `GEMINI_MODEL`（預設 `gemini-3.8-flash`）。
 
 ## 本機執行
 

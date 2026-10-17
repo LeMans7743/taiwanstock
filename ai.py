@@ -12,7 +12,7 @@ import requests
 from sources import log
 
 API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
-MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash").strip()
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash").strip()
 MIN_INTERVAL = float(os.environ.get("GEMINI_MIN_INTERVAL", "6.5"))  # 免費額度約每分鐘 10 次
 ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 
