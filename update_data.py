@@ -1,469 +1,210 @@
-"""台股多因子 × 國內外新聞趨勢 — 每日資料更新腳本
+"""台股多因子 × 國內外新聞趨勢 — 每日資料更新
 
-資料來源（皆免費、免 API Key）：
-- 證交所 OpenAPI：本益比/殖利率 (BWIBBU_ALL)、上市公司月營收 (t187ap05_L)
-- 證交所三大法人買賣超日報 (T86)
-- yfinance：日 K 線（均線、量能、RSI）、加權指數、費城半導體
-- Google News RSS：國內 / 國際新聞，以關鍵字詞庫計算情緒分數
-
-輸出：data/stocks_data.json（供 index.html 讀取）
-任何單一資料源失敗都不會中斷，該欄位會以 null 輸出。
+流程：
+1. 全市場（上市 + 上櫃）依成交金額選出流動性足夠的股票池
+2. 每檔計算基本面（月營收、毛利率、EPS、本益比）、籌碼面（法人連買、融資融券、千張大戶）、技術面
+3. 量化分數前段班 + 核心追蹤清單 → 收集國內外新聞（Google News、鉅亨網、重大訊息）→ Gemini AI 評分與解讀
+4. 大盤數據 + 宏觀新聞 → Gemini AI 大盤研判
+輸出 data/stocks_data.json；集保大戶歷史存於 data/tdcc_history.json（計算週變化用）
 """
 import datetime
-import io
 import json
 import os
-import time
-import urllib.parse
 
-import feedparser
 import pandas as pd
-import requests
-import yfinance as yf
 
-HEADERS = {"User-Agent": "Mozilla/5.0"}
-TW_TZ = datetime.timezone(datetime.timedelta(hours=8))
-OUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "stocks_data.json")
+import ai
+import scoring
+import sources as src
+from sources import log
 
-# 追蹤清單：代號、名稱、產業、國際/國內新聞關鍵字
-WATCHLIST = [
-    {"code": "2330", "name": "台積電", "sector": "晶圓與先進封裝", "us_kw": "TSMC", "tw_kw": "台積電"},
-    {"code": "3711", "name": "日月光投控", "sector": "晶圓與先進封裝", "us_kw": "ASE Technology packaging", "tw_kw": "日月光投控"},
-    {"code": "2317", "name": "鴻海", "sector": "AI伺服器與散熱", "us_kw": "Foxconn AI server", "tw_kw": "鴻海 AI"},
-    {"code": "2382", "name": "廣達", "sector": "AI伺服器與散熱", "us_kw": "Quanta AI server", "tw_kw": "廣達 伺服器"},
-    {"code": "3017", "name": "奇鋐", "sector": "AI伺服器與散熱", "us_kw": "AI server liquid cooling", "tw_kw": "奇鋐"},
-    {"code": "2454", "name": "聯發科", "sector": "IC設計與邊緣AI", "us_kw": "MediaTek", "tw_kw": "聯發科"},
-    {"code": "2308", "name": "台達電", "sector": "電源與重電綠能", "us_kw": "Delta Electronics data center power", "tw_kw": "台達電"},
-    {"code": "1519", "name": "華城", "sector": "電源與重電綠能", "us_kw": "Taiwan power grid transformer", "tw_kw": "華城 重電"},
-]
+BASE = os.path.dirname(os.path.abspath(__file__))
+OUT_PATH = os.path.join(BASE, "data", "stocks_data.json")
+TDCC_PATH = os.path.join(BASE, "data", "tdcc_history.json")
 
-# 宏觀新聞牆的三個類別
+TOP_TWSE = 250        # 上市取成交金額前 N 名
+TOP_TPEX = 120        # 上櫃取成交金額前 N 名
+DEEP_TOP = 30         # 量化分數前 N 名做新聞 + AI 深度分析
+QUANT_WEIGHTS = {"fundamental": 30, "chips": 30, "technical": 20}
+
+# 核心追蹤清單：一定納入深度分析，並搜尋英文國際新聞
+CORE = {
+    "2330": "TSMC", "2317": "Foxconn Hon Hai", "2454": "MediaTek", "2382": "Quanta Computer",
+    "2308": "Delta Electronics Taiwan", "3711": "ASE Technology", "3017": "Asia Vital Components",
+    "2303": "United Microelectronics UMC", "2412": "Chunghwa Telecom", "2881": "Fubon Financial",
+    "3231": "Wistron", "6669": "Wiwynn", "2345": "Accton Technology", "3008": "Largan Precision",
+    "1519": "Fortune Electric Taiwan", "2603": "Evergreen Marine",
+}
+
 MACRO_TOPICS = [
-    {"category": "🇺🇸 國際科技與美股財報", "region": "國際", "query": "NVIDIA OR hyperscaler capex OR semiconductor stocks"},
-    {"category": "🏦 全球總經與聯準會", "region": "國際", "query": "Federal Reserve rates OR CPI inflation OR dollar index"},
-    {"category": "🇹🇼 台灣月營收與法說會", "region": "國內", "query": "台股 月營收 OR 法說會 OR 外資"},
+    {"category": "🇺🇸 美股科技與 AI 供應鏈", "google": [("NVIDIA OR hyperscaler capex OR AI chips", "國際"),
+                                                    ("semiconductor stocks Nasdaq", "國際")]},
+    {"category": "🏦 全球總經與聯準會", "google": [("Federal Reserve OR CPI inflation OR Treasury yields", "國際"),
+                                              ("tariffs Taiwan OR dollar index", "國際")]},
+    {"category": "🇹🇼 台股資金與產業動態", "google": [("台股 外資 OR 月營收 OR 法說會", "國內")], "cnyes": True},
 ]
 
-POS_WORDS = ["創高", "新高", "大增", "買超", "上修", "強勁", "滿載", "利多", "突破", "成長", "優於預期", "看好", "調升", "增溫", "暢旺",
-             "surge", "beat", "bullish", "record", "upgrade", "raise", "strong", "soar", "rally", "growth", "jump", "gain"]
-NEG_WORDS = ["下修", "砍單", "賣超", "衰退", "跌破", "利空", "不如預期", "延後", "匯損", "下滑", "重挫", "調降", "疲弱", "虧損",
-             "drop", "cut", "bearish", "miss", "downgrade", "plunge", "fall", "slump", "weak", "decline", "tariff", "loss"]
 
-
-def log(msg):
-    print(f"[{datetime.datetime.now(TW_TZ):%H:%M:%S}] {msg}", flush=True)
-
-
-def to_num(v):
+def load_tdcc_history():
     try:
-        return float(str(v).replace(",", "").strip())
-    except (TypeError, ValueError):
-        return None
-
-
-def round2(v):
-    n = to_num(v)
-    return round(n, 2) if n is not None else None
-
-
-def clamp(v, lo, hi):
-    return max(lo, min(hi, v))
-
-
-def get_json(url, **kw):
-    res = requests.get(url, headers=HEADERS, timeout=30, **kw)
-    res.raise_for_status()
-    return res.json()
-
-
-# ==========================================
-# 1. 證交所：本益比 / 殖利率 / 月營收
-# ==========================================
-def fetch_valuation():
-    try:
-        rows = get_json("https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL")
-        return {r["Code"]: {"pe": to_num(r.get("PEratio")), "yield": to_num(r.get("DividendYield")),
-                            "pb": to_num(r.get("PBratio"))} for r in rows}
-    except Exception as e:
-        log(f"⚠️ 本益比資料失敗：{e}")
+        with open(TDCC_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except (FileNotFoundError, ValueError):
         return {}
 
 
-def fetch_monthly_revenue():
-    try:
-        rows = get_json("https://openapi.twse.com.tw/v1/opendata/t187ap05_L")
-        out = {}
-        for r in rows:
-            ym = r.get("資料年月", "")
-            out[r["公司代號"]] = {
-                "revYoY": round2(r.get("營業收入-去年同月增減(%)")),
-                "revMoM": round2(r.get("營業收入-上月比較增減(%)")),
-                "revCumYoY": round2(r.get("累計營業收入-前期比較增減(%)")),
-                "revMonth": f"{int(ym[:3]) + 1911}-{ym[3:]}" if len(ym) == 5 else ym,
-            }
-        return out
-    except Exception as e:
-        log(f"⚠️ 月營收資料失敗：{e}")
-        return {}
+def save_tdcc_history(hist, date, data, codes):
+    if not date or not data:
+        return hist
+    hist[date] = {c: [data[c]["big1000"], data[c]["big400"], data[c]["retailPeople"]] for c in codes if c in data}
+    for old in sorted(hist)[:-8]:  # 保留 8 週
+        del hist[old]
+    with open(TDCC_PATH, "w", encoding="utf-8") as f:
+        json.dump(hist, f, ensure_ascii=False, separators=(",", ":"))
+    return hist
 
 
-# ==========================================
-# 2. 證交所：三大法人買賣超（近 N 個交易日）
-# ==========================================
-def fetch_institutional(codes, n_days=10, max_lookback=25):
-    """由今天往回找最近 n_days 個有資料的交易日。
-    回傳 (交易日清單(新到舊), {code: [{"date", "foreign", "trust"}...]})，單位：張"""
-    hist = {c: [] for c in codes}
-    trading_dates = []
-    today = datetime.datetime.now(TW_TZ).date()
-    for back in range(max_lookback):
-        if len(trading_dates) >= n_days:
-            break
-        d = today - datetime.timedelta(days=back)
-        if d.weekday() >= 5:
-            continue
-        url = f"https://www.twse.com.tw/rwd/zh/fund/T86?date={d:%Y%m%d}&selectType=ALLBUT0999&response=json"
-        try:
-            payload = get_json(url)
-            time.sleep(3)  # 證交所限制請求頻率
-            if payload.get("stat") != "OK" or not payload.get("data"):
-                continue
-            trading_dates.append(d)
-            fields = payload["fields"]
-            i_code = fields.index("證券代號")
-            i_foreign = next(i for i, f in enumerate(fields) if f.startswith("外陸資買賣超股數"))
-            i_trust = fields.index("投信買賣超股數")
-            for row in payload["data"]:
-                code = row[i_code].strip()
-                if code in hist:
-                    hist[code].append({
-                        "date": f"{d:%Y-%m-%d}",
-                        "foreign": round((to_num(row[i_foreign]) or 0) / 1000),
-                        "trust": round((to_num(row[i_trust]) or 0) / 1000),
-                    })
-        except Exception as e:
-            log(f"⚠️ 法人資料 {d:%Y-%m-%d} 失敗：{e}")
-    return trading_dates, hist
+def append_latest_bar(df, quote, d):
+    """yfinance 當日資料常延遲，以交易所收盤行情補上最新一根"""
+    if df is None or not quote or df.index[-1].date() >= d:
+        return df
+    row = pd.DataFrame([{"Open": quote["open"], "High": quote["high"], "Low": quote["low"],
+                         "Close": quote["close"], "Volume": quote["volume"]}], index=pd.DatetimeIndex([pd.Timestamp(d)]))
+    return pd.concat([df, row])
 
 
-def fetch_latest_quotes(d):
-    """證交所當日全部上市個股收盤行情（yfinance 當日資料常延遲，用來補最新一根 K 棒）"""
-    if d is None:
-        return {}
-    url = f"https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY_ALL?date={d:%Y%m%d}&response=csv"
-    try:
-        res = requests.get(url, headers=HEADERS, timeout=30)
-        res.raise_for_status()
-        df = pd.read_csv(io.StringIO(res.content.decode("utf-8-sig")), dtype=str)
-        out = {}
-        for _, r in df.iterrows():
-            close = to_num(r.get("收盤價"))
-            if close is None:
-                continue
-            out[str(r["證券代號"]).strip()] = {
-                "Open": to_num(r.get("開盤價")), "High": to_num(r.get("最高價")),
-                "Low": to_num(r.get("最低價")), "Close": close, "Volume": to_num(r.get("成交股數")),
-            }
-        return out
-    except Exception as e:
-        log(f"⚠️ 當日行情失敗：{e}")
-        return {}
-
-
-def streak(values):
-    """連續買(+)/賣(-)天數，values 由新到舊"""
-    if not values or values[0] == 0:
-        return 0
-    sign = 1 if values[0] > 0 else -1
-    n = 0
-    for v in values:
-        if v * sign > 0:
-            n += 1
-        else:
-            break
-    return n * sign
-
-
-def describe_streak(label, s):
-    if s >= 2:
-        return f"{label}連{s}買"
-    if s <= -2:
-        return f"{label}連{-s}賣"
-    return None
-
-
-def fetch_taiex(d):
-    if d is None:
-        return None
-    url = f"https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date={d:%Y%m%d}&type=IND&response=json"
-    try:
-        res = requests.get(url, headers=HEADERS, timeout=30)
-        res.raise_for_status()
-        payload = json.loads(res.text, strict=False)
-        for row in payload["tables"][0]["data"]:
-            if row[0] == "發行量加權股價指數":
-                sign = -1 if "-" in row[2] else 1
-                return {"close": to_num(row[1]), "changePct": sign * to_num(row[4])}
-    except Exception as e:
-        log(f"⚠️ 加權指數失敗：{e}")
-    return None
-
-
-# ==========================================
-# 3. yfinance：技術面
-# ==========================================
-def download_history(symbol, period="6mo"):
-    df = yf.download(symbol, period=period, interval="1d", progress=False, auto_adjust=True)
-    if isinstance(df.columns, pd.MultiIndex):
-        df.columns = df.columns.get_level_values(0)
-    return df.dropna(subset=["Close"])
-
-
-def rsi(close, n=14):
-    delta = close.diff()
-    gain = delta.clip(lower=0).ewm(alpha=1 / n, adjust=False).mean()
-    loss = (-delta.clip(upper=0)).ewm(alpha=1 / n, adjust=False).mean()
-    rs = gain / loss.replace(0, float("nan"))
-    return 100 - 100 / (1 + rs)
-
-
-def analyze_technical(code, latest=None, latest_date=None):
-    try:
-        df = download_history(f"{code}.TW")
-        if latest and latest_date and (df.empty or df.index[-1].date() < latest_date):
-            row = pd.DataFrame([latest], index=pd.DatetimeIndex([pd.Timestamp(latest_date)]))
-            df = pd.concat([df[["Open", "High", "Low", "Close", "Volume"]], row])
-        if len(df) < 60:
-            return None
-        close, vol = df["Close"], df["Volume"]
-        last, prev = float(close.iloc[-1]), float(close.iloc[-2])
-        ma20 = float(close.rolling(20).mean().iloc[-1])
-        ma60 = close.rolling(60).mean()
-        ma60_now, ma60_prev = float(ma60.iloc[-1]), float(ma60.iloc[-6])
-        vol_ma5 = float(vol.rolling(5).mean().iloc[-2])
-        high20 = float(close.iloc[-21:-1].max())
-        rsi14 = float(rsi(close).iloc[-1])
-
-        bullish = last > ma20 > ma60_now
-        vol_breakout = float(vol.iloc[-1]) > vol_ma5 * 1.5
-        new_high = last >= high20
-        ma60_up = ma60_now > ma60_prev
-
-        score = 50
-        score += 12 if last > ma60_now else -8
-        score += 10 if last > ma20 else -5
-        score += 8 if bullish else 0
-        score += 6 if ma60_up else -4
-        score += 8 if new_high else 0
-        score += 5 if vol_breakout and last > prev else 0
-        score += -6 if rsi14 > 80 else (4 if 50 <= rsi14 <= 70 else 0)
-
-        signals = []
-        if bullish:
-            signals.append("多頭排列")
-        if new_high:
-            signals.append("創20日高")
-        if vol_breakout:
-            signals.append("爆量")
-        if last < ma60_now:
-            signals.append("跌破季線")
-
-        return {
-            "close": round(last, 2),
-            "changePct": round((last - prev) / prev * 100, 2),
-            "ma20": round(ma20, 2),
-            "ma60": round(ma60_now, 2),
-            "rsi": round(rsi14, 1),
-            "volumeLots": int(float(vol.iloc[-1]) // 1000),
-            "signals": signals,
-            "score": int(clamp(score, 20, 99)),
-            "spark": [round(float(v), 2) for v in close.iloc[-60:]],
-        }
-    except Exception as e:
-        log(f"⚠️ {code} 技術面失敗：{e}")
-        return None
-
-
-# ==========================================
-# 4. 新聞：Google News RSS + 詞庫情緒分數
-# ==========================================
-def score_headline(title):
-    t = title.lower()
-    s = sum(0.35 for w in POS_WORDS if w in t) - sum(0.35 for w in NEG_WORDS if w in t)
-    return round(clamp(s, -0.95, 0.95), 2)
-
-
-def fetch_news(query, region, limit=4):
-    q = urllib.parse.quote(f"{query} when:3d")
-    if region == "國際":
-        url = f"https://news.google.com/rss/search?q={q}&hl=en-US&gl=US&ceid=US:en"
-    else:
-        url = f"https://news.google.com/rss/search?q={q}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
-    try:
-        feed = feedparser.parse(requests.get(url, headers=HEADERS, timeout=20).content)
-    except Exception as e:
-        log(f"⚠️ 新聞 {query} 失敗：{e}")
-        return []
-    items = []
-    for entry in feed.entries[:limit]:
-        source = entry.get("source", {}).get("title", "Google News")
-        title = entry.title
-        if title.endswith(f" - {source}"):
-            title = title[: -len(source) - 3]
-        s = score_headline(title)
-        published = None
-        if entry.get("published_parsed"):
-            published = datetime.datetime(*entry.published_parsed[:6], tzinfo=datetime.timezone.utc).astimezone(TW_TZ)
-        items.append({
-            "region": region,
-            "source": source,
-            "time": f"{published:%m/%d %H:%M}" if published else "",
-            "title": title,
-            "link": entry.get("link", ""),
-            "sentiment": "利多" if s >= 0.3 else ("利空" if s <= -0.3 else "中立"),
-            "score": s,
-        })
-    return items
-
-
-def avg(values):
-    values = [v for v in values if v is not None]
-    return round(sum(values) / len(values), 2) if values else 0.0
-
-
-# ==========================================
-# 5. 評分
-# ==========================================
-def fundamental_score(rev, val):
-    score = 60
-    yoy = rev.get("revYoY")
-    if yoy is not None:
-        score += clamp(yoy * 0.6, -25, 25)
-    cum = rev.get("revCumYoY")
-    if cum is not None:
-        score += clamp(cum * 0.2, -8, 8)
-    pe = val.get("pe")
-    if pe:
-        score += 6 if pe < 15 else (2 if pe < 25 else (-4 if pe < 40 else -10))
-    elif val and not pe:
-        score -= 6  # 無本益比代表虧損
-    return int(clamp(score, 20, 99))
-
-
-def chips_score(hist):
-    if not hist:
-        return 60, "無法人資料", None, None
-    f_streak = streak([h["foreign"] for h in hist])
-    t_streak = streak([h["trust"] for h in hist])
-    f5 = sum(h["foreign"] for h in hist[:5])
-    t5 = sum(h["trust"] for h in hist[:5])
-    score = 60
-    score += clamp(f_streak * 3, -15, 15)
-    score += clamp(t_streak * 4, -15, 18)
-    score += 5 if f5 > 0 else -5
-    score += 5 if t5 > 0 else (-3 if t5 < 0 else 0)
-    parts = [p for p in (describe_streak("外資", f_streak), describe_streak("投信", t_streak)) if p]
-    desc = " / ".join(parts) if parts else "法人動向中性"
-    return int(clamp(score, 20, 99)), desc, f5, t5
+def quant_total(scores):
+    total = sum(QUANT_WEIGHTS.values())
+    return round(sum(scores[k] * w for k, w in QUANT_WEIGHTS.items()) / total, 1)
 
 
 def main():
-    log("啟動台股自動分析引擎...")
-    codes = [w["code"] for w in WATCHLIST]
+    log(f"啟動台股自動分析引擎（AI：{'Gemini ' + ai.MODEL if ai.enabled() else '關鍵字詞庫'}）")
 
-    valuation = fetch_valuation()
-    revenue = fetch_monthly_revenue()
-    log(f"本益比 {len(valuation)} 檔、月營收 {len(revenue)} 檔")
-    trading_dates, inst = fetch_institutional(codes)
-    log(f"法人資料 {len(trading_dates)} 個交易日")
-    latest_date = trading_dates[0] if trading_dates else None
-    quotes = fetch_latest_quotes(latest_date)
-    log(f"當日行情 {len(quotes)} 檔（{latest_date}）")
+    # ---------- 1. 交易日、法人、行情 ----------
+    dates, inst = src.fetch_institutional_history()
+    if not dates:
+        raise SystemExit("❌ 取不到任何交易日資料，終止")
+    d = dates[0]
+    log(f"法人資料 {len(dates)} 個交易日，最新 {d}")
+    quotes = src.fetch_quotes(d)
+    log(f"當日行情 {len(quotes)} 檔")
+
+    by_value = sorted(quotes.items(), key=lambda kv: kv[1]["value"], reverse=True)
+    universe = [c for c, q in by_value if q["market"] == "上市"][:TOP_TWSE]
+    universe += [c for c, q in by_value if q["market"] == "上櫃"][:TOP_TPEX]
+    universe += [c for c in CORE if c in quotes and c not in universe]
+    log(f"股票池 {len(universe)} 檔")
+
+    # ---------- 2. 基本面、籌碼、K 線 ----------
+    valuation = src.fetch_valuation()
+    revenue = src.fetch_revenue()
+    profit = src.fetch_profitability()
+    margin, market_margin = src.fetch_margin(d)
+    tdcc_date, tdcc = src.fetch_tdcc()
+    tdcc_hist = load_tdcc_history()
+    prev_weeks = sorted(k for k in tdcc_hist if k != tdcc_date)
+    tdcc_prev = tdcc_hist[prev_weeks[-1]] if prev_weeks else {}
+    save_tdcc_history(tdcc_hist, tdcc_date, tdcc, universe)
+    log(f"本益比 {len(valuation)}、月營收 {len(revenue)}、營益 {len(profit)}、融資券 {len(margin)}、集保 {len(tdcc)}（{tdcc_date}）")
+
+    histories = src.download_histories({c: quotes[c]["market"] for c in universe})
+    log(f"K 線 {len(histories)} 檔")
 
     stocks = []
-    for w in WATCHLIST:
-        code = w["code"]
-        log(f"分析 {code} {w['name']}")
-        tech = analyze_technical(code, quotes.get(code), latest_date) or {}
-        val = valuation.get(code, {})
-        rev = revenue.get(code, {})
-        c_score, inst_desc, f5, t5 = chips_score(inst.get(code, []))
-        news = fetch_news(w["us_kw"], "國際") + fetch_news(w["tw_kw"], "國內")
-        sentiment = avg([n["score"] for n in news])
-        news_score = int(clamp(60 + sentiment * 40, 20, 99))
-        f_score = fundamental_score(rev, val)
-
-        summary_bits = []
-        if rev.get("revYoY") is not None:
-            summary_bits.append(f"{rev['revMonth']} 月營收年增 {rev['revYoY']:+.1f}%、月增 {rev['revMoM']:+.1f}%")
-        if tech:
-            summary_bits.append(f"收盤 {tech['close']}（月線 {tech['ma20']}／季線 {tech['ma60']}，RSI {tech['rsi']}）")
-        if f5 is not None:
-            summary_bits.append(f"近5日外資 {f5:+,} 張、投信 {t5:+,} 張")
-        summary_bits.append(f"國內外新聞 {len(news)} 則，平均情緒 {sentiment:+.2f}")
-
-        stocks.append({
-            "code": code,
-            "name": w["name"],
-            "sector": w["sector"],
-            "close": tech.get("close"),
-            "changePct": tech.get("changePct"),
-            "revYoY": rev.get("revYoY"),
-            "revMoM": rev.get("revMoM"),
-            "revMonth": rev.get("revMonth"),
-            "pe": val.get("pe"),
-            "dividendYield": val.get("yield"),
-            "instDays": inst_desc,
-            "foreign5d": f5,
-            "trust5d": t5,
-            "signals": tech.get("signals", []),
-            "spark": tech.get("spark", []),
-            "sentimentScore": sentiment,
-            "scores": {
-                "fundamental": f_score,
-                "chips": c_score,
-                "technical": tech.get("score", 50),
-                "news": news_score,
-            },
-            "summary": "；".join(summary_bits) + "。",
-            "news": news,
-        })
-
-    # 大盤（證交所，與個股同一交易日）與費半（yfinance）
-    market = {}
-    taiex = fetch_taiex(latest_date)
-    if taiex:
-        market["taiex"] = taiex
-    for key, sym in (("taiex", "^TWII"), ("sox", "^SOX")):
-        if key in market:
+    for code in universe:
+        q = quotes[code]
+        df = append_latest_bar(histories.get(code), q, d)
+        if df is None or len(df) < 40:
             continue
-        try:
-            df = download_history(sym, period="1mo")
-            last, prev = float(df["Close"].iloc[-1]), float(df["Close"].iloc[-2])
-            market[key] = {"close": round(last, 2), "changePct": round((last - prev) / prev * 100, 2)}
-        except Exception as e:
-            log(f"⚠️ {sym} 失敗：{e}")
+        tech = scoring.technical(df)
+        rev, prof, val = revenue.get(code, {}), profit.get(code, {}), valuation.get(code, {})
+        f_score, f_notes = scoring.fundamental(rev, prof, val)
+        c_score, inst_desc, chip_detail = scoring.chips(inst.get(code, []), tech["avgVolLots"], margin.get(code),
+                                                        tdcc.get(code), tdcc_prev.get(code))
+        scores = {"fundamental": f_score, "chips": c_score, "technical": tech["score"]}
+        stocks.append({
+            "code": code, "name": q["name"], "market": q["market"], "sector": rev.get("industry") or "其他",
+            "close": tech["close"], "changePct": tech["changePct"], "valueYi": round(q["value"] / 1e8, 1),
+            "revYoY": rev.get("revYoY"), "revMoM": rev.get("revMoM"), "revCumYoY": rev.get("revCumYoY"),
+            "revMonth": rev.get("revMonth"),
+            "grossMargin": prof.get("grossMargin"), "opMargin": prof.get("opMargin"), "eps": prof.get("eps"),
+            "finPeriod": prof.get("period"),
+            "pe": val.get("pe"), "pb": val.get("pb"), "dividendYield": val.get("yield"),
+            "instDays": inst_desc, "chips": chip_detail,
+            "tech": {k: tech[k] for k in ("ma20", "ma60", "rsi", "ret20", "bias60", "volumeLots")},
+            "signals": f_notes + tech["signals"], "spark": tech["spark"],
+            "scores": scores, "quantScore": quant_total(scores),
+            "sentimentScore": None, "news": [], "ai": None, "deep": False,
+        })
+    stocks.sort(key=lambda s: s["quantScore"], reverse=True)
+    log(f"完成量化評分 {len(stocks)} 檔")
 
+    # ---------- 3. 深度分析：新聞 + AI ----------
+    material = src.fetch_material_news()
+    deep = [s for s in stocks if s["code"] in CORE]
+    deep += [s for s in stocks[:DEEP_TOP] if s["code"] not in CORE]
+    for i, s in enumerate(deep, 1):
+        log(f"深度分析 {i}/{len(deep)} {s['code']} {s['name']}")
+        news = src.google_news(s["name"], "國內", limit=5) + src.cnyes_news(s["name"], limit=5)
+        news += material.get(s["code"], [])[:3]
+        if s["code"] in CORE:
+            news += src.google_news(CORE[s["code"]], "國際", limit=5)
+        news = src.dedupe_news(news)[:14]
+        facts = {
+            "收盤": s["close"], "漲跌%": s["changePct"], "20日報酬%": s["tech"]["ret20"], "季線乖離%": s["tech"]["bias60"],
+            "RSI": s["tech"]["rsi"], "技術訊號": s["signals"], "月營收年增%": s["revYoY"], "累計營收年增%": s["revCumYoY"],
+            "毛利率%": s["grossMargin"], "營益率%": s["opMargin"], "EPS(今年累計)": s["eps"], "本益比": s["pe"],
+            "法人": s["instDays"], "外資5日張數": s["chips"].get("foreign5d"), "投信5日張數": s["chips"].get("trust5d"),
+            "融資增減張數": s["chips"].get("marginChg"), "千張大戶%": s["chips"].get("big1000"),
+            "千張大戶週變化": s["chips"].get("big1000Chg"),
+        }
+        news, result = ai.analyze_stock({"code": s["code"], "name": s["name"], "sector": s["sector"], "facts": facts}, news)
+        s["news"] = news
+        s["sentimentScore"] = result["sentiment"]
+        s["scores"]["news"] = int(scoring.clamp(60 + result["sentiment"] * 38, 20, 99))
+        s["deep"] = True
+        if result.get("engine") == "gemini":
+            s["ai"] = {k: result.get(k) for k in ("outlook", "summary", "bullPoints", "risks")}
+
+    # ---------- 4. 大盤 ----------
+    market = {"taiex": src.fetch_taiex(d) or src.yf_last("^TWII"), "otc": src.fetch_otc_index(),
+              "sox": src.yf_last("^SOX"), "nasdaq": src.yf_last("^IXIC"), "usdtwd": src.yf_last("TWD=X"),
+              "futuresOI": src.fetch_futures_oi(), **market_margin}
+    # 外資現貨買賣超金額（張數 × 最新收盤價估算，單位：億元）
+    def foreign_yi(days):
+        return round(sum(h["foreign"] * 1000 * quotes[c]["close"] for c in inst if c in quotes
+                         for h in inst[c][:days]) / 1e8, 1)
+    market["foreignTodayYi"] = foreign_yi(1)
+    market["foreign5dYi"] = foreign_yi(5)
     macro = []
     for t in MACRO_TOPICS:
-        items = fetch_news(t["query"], t["region"], limit=5)
-        macro.append({"category": t["category"], "sentiment": avg([n["score"] for n in items]), "news": items})
+        items = []
+        for query, region in t["google"]:
+            items += src.google_news(query, region, limit=6)
+        if t.get("cnyes"):
+            items += src.cnyes_category("tw_stock", limit=8)
+        macro.append({"category": t["category"], "news": src.dedupe_news(items)[:10]})
+    top_brief = [{"code": s["code"], "name": s["name"], "sector": s["sector"], "quant": s["quantScore"],
+                  "outlook": (s["ai"] or {}).get("outlook")} for s in stocks[:15]]
+    mkt_ai = ai.analyze_market(market, macro, top_brief)
 
     payload = {
-        "updatedAt": datetime.datetime.now(TW_TZ).strftime("%Y-%m-%d %H:%M"),
-        "dataDate": f"{trading_dates[0]:%Y-%m-%d}" if trading_dates else None,
+        "updatedAt": datetime.datetime.now(src.TW_TZ).strftime("%Y-%m-%d %H:%M"),
+        "dataDate": f"{d:%Y-%m-%d}",
+        "tdccDate": tdcc_date,
+        "ai": ai.status(),
         "market": market,
-        "globalSentiment": avg([n["score"] for s in stocks for n in s["news"] if n["region"] == "國際"]
-                               + [n["score"] for m in macro for n in m["news"] if n["region"] == "國際"]),
-        "localSentiment": avg([n["score"] for s in stocks for n in s["news"] if n["region"] == "國內"]
-                              + [n["score"] for m in macro for n in m["news"] if n["region"] == "國內"]),
+        "marketAI": mkt_ai,
+        "globalSentiment": mkt_ai["globalSentiment"],
+        "localSentiment": mkt_ai["localSentiment"],
         "macro": macro,
         "stocks": stocks,
     }
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
     with open(OUT_PATH, "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
-    log(f"✅ 已更新 {OUT_PATH}（{len(stocks)} 檔）")
+        json.dump(payload, f, ensure_ascii=False, separators=(",", ":"))
+    log(f"✅ 已更新 {OUT_PATH}（{len(stocks)} 檔，深度分析 {len(deep)} 檔，AI 呼叫成功 {ai.stats['ok']} 次）")
 
 
 if __name__ == "__main__":
