@@ -76,6 +76,15 @@
       </div>
     </section>
 
+    <!-- 產業資金流向 -->
+    <section class="bg-cardBg border border-slate-800 rounded-xl p-4 shadow">
+      <div class="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 class="text-sm font-bold text-white">🏭 產業資金流向（外資＋投信近 5 日，億元）</h2>
+        <span class="text-[11px] text-slate-500">以股票池個股買賣超張數 × 收盤價估算；點產業可篩選下方排行</span>
+      </div>
+      <div id="sectorFlows" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1 mt-3 text-xs"></div>
+    </section>
+
     <!-- 主分析區 -->
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
       <div class="lg:col-span-7 bg-cardBg border border-slate-800 rounded-xl p-4 shadow flex flex-col min-w-0">
@@ -277,6 +286,35 @@ function outlookBadge(o) {
   const cls = o === "偏多" ? "bg-red-500/20 text-red-300" : o === "偏空" ? "bg-emerald-500/20 text-emerald-300" : "bg-slate-700 text-slate-300";
   return `<span class="text-xs px-2 py-0.5 rounded font-semibold ${cls}">${esc(o)}</span>`;
 }
+
+// ---------- 產業資金流向 ----------
+function renderSectorFlows() {
+  const rows = db.market?.sectorFlows || [];
+  const box = document.getElementById("sectorFlows");
+  if (!rows.length) { box.innerHTML = `<p class="text-slate-500">無資料</p>`; return; }
+  const net = r => r.foreign5dYi + r.trust5dYi;
+  const max = Math.max(...rows.map(r => Math.abs(net(r)))) || 1;
+  const line = r => {
+    const v = net(r), w = Math.max(2, Math.abs(v) / max * 100);
+    return `<div class="flex items-center gap-2 py-0.5 cursor-pointer hover:bg-slate-800/60 rounded px-1" data-sector="${esc(r.sector)}">
+      <span class="w-24 truncate text-slate-300">${esc(r.sector)}</span>
+      <div class="flex-1 h-2.5 bg-slate-800 rounded overflow-hidden"><div class="h-full ${v >= 0 ? "bg-red-500/70" : "bg-emerald-500/70"}" style="width:${w}%"></div></div>
+      <span class="w-20 text-right font-mono ${upDown(v)}">${fmtSigned(v, 0)}</span>
+      <span class="w-28 text-right font-mono text-[10px] text-slate-500 hidden sm:inline">外${fmtSigned(r.foreign5dYi, 0)} 投${fmtSigned(r.trust5dYi, 0)}</span>
+    </div>`;
+  };
+  const inflow = rows.filter(r => net(r) > 0).slice(0, 6);
+  const outflow = rows.filter(r => net(r) < 0).slice(-6).reverse();
+  box.innerHTML = `<div><div class="text-slate-400 mb-1">資金流入</div>${inflow.map(line).join("") || `<p class="text-slate-500">無</p>`}</div>
+    <div><div class="text-slate-400 mb-1">資金流出</div>${outflow.map(line).join("") || `<p class="text-slate-500">無</p>`}</div>`;
+}
+document.getElementById("sectorFlows").addEventListener("click", e => {
+  const el = e.target.closest("[data-sector]");
+  if (!el) return;
+  document.getElementById("sectorFilter").value = el.dataset.sector;
+  page = 0; renderStockTable();
+  document.getElementById("stockTableBody").scrollIntoView({ behavior: "smooth", block: "start" });
+});
 
 // ---------- 表格 ----------
 function filteredStocks() {
@@ -513,7 +551,7 @@ function renderAll() {
   if (!db.stocks.some(s => s.code === selectedStockCode)) {
     selectedStockCode = [...db.stocks].sort((a, b) => calcTotalScore(b) - calcTotalScore(a))[0]?.code;
   }
-  renderMarket(); renderWeightControls(); renderStockTable(); renderDetail(); renderMacroNewsWall();
+  renderMarket(); renderSectorFlows(); renderWeightControls(); renderStockTable(); renderDetail(); renderMacroNewsWall();
 }
 
 async function loadData() {

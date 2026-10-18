@@ -1,10 +1,12 @@
 """新聞情緒與 AI 解讀。
 
-有設定環境變數 GEMINI_API_KEY 時使用 Gemini API（REST，免安裝 SDK）；
-沒有金鑰或呼叫失敗時，自動退回關鍵字詞庫評分，網站仍可正常更新。
+有設定環境變數 GEMINI_API_KEY 時使用 Gemini API（REST，免安裝 SDK）。
+免費額度以「模型」為單位計算，一個模型用完會自動換同金鑰下的其他 flash 模型接力；
+全部用完或沒有金鑰時，退回關鍵字詞庫評分，網站仍可正常更新。
 """
 import json
 import os
+import re
 import time
 
 import requests
@@ -13,74 +15,128 @@ from sources import log
 
 API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash").strip()
+MAX_MODELS = int(os.environ.get("GEMINI_MAX_MODELS", "4"))  # 接力最多用幾個模型
 MIN_INTERVAL = float(os.environ.get("GEMINI_MIN_INTERVAL", "13"))  # 免費額度每分鐘次數有限
-ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+BASE_URL = "https://generativelanguage.googleapis.com/v1beta"
+SKIP_WORDS = ("image", "tts", "audio", "live", "embed", "vision", "robotics", "computer-use")
 
 _last_call = 0.0
+_models = None          # 接力順序
+_model_idx = 0
 _disabled_reason = None if API_KEY else "未設定 GEMINI_API_KEY"
-stats = {"calls": 0, "ok": 0, "failed": 0}
+stats = {"calls": 0, "ok": 0, "failed": 0, "byModel": {}}
+
+
+def _version_key(name):
+    nums = [int(x) for x in re.findall(r"\d+", name)]
+    return (0 if "preview" in name or "exp" in name else 1, "lite" not in name, nums)
+
+
+def _discover_models():
+    """向 Google 查詢此金鑰可用的 flash 模型；每個模型各有獨立的免費額度，可接力使用。"""
+    chain = [MODEL]
+    try:
+        res = requests.get(f"{BASE_URL}/models?pageSize=200", headers={"x-goog-api-key": API_KEY}, timeout=30)
+        res.raise_for_status()
+        names = [m["name"].split("/", 1)[1] for m in res.json().get("models", [])
+                 if "generateContent" in m.get("supportedGenerationMethods", [])]
+        flash = [n for n in names if "flash" in n and not any(w in n for w in SKIP_WORDS) and n != MODEL]
+        chain += sorted(flash, key=_version_key, reverse=True)
+    except Exception as e:
+        log(f"⚠️ 查詢 Gemini 模型清單失敗：{e}")
+    chain = chain[:MAX_MODELS]
+    log(f"Gemini 模型接力順序：{' → '.join(chain)}")
+    return chain
+
+
+def current_model():
+    return _models[_model_idx] if _models and _model_idx < len(_models) else None
+
+
+def _next_model(reason):
+    """目前模型無法使用，換下一個；全部用完則停用 AI。"""
+    global _model_idx, _disabled_reason
+    log(f"⚠️ {current_model()}：{reason}")
+    _model_idx += 1
+    if current_model():
+        log(f"↪ 改用 {current_model()}")
+    else:
+        _disabled_reason = f"所有 Gemini 模型皆無法使用（最後原因：{reason}）"
+        log(f"⚠️ {_disabled_reason}，其餘改用詞庫")
 
 
 def enabled():
-    return _disabled_reason is None
+    global _models
+    if _disabled_reason is None and _models is None:
+        _models = _discover_models()
+    return _disabled_reason is None and current_model() is not None
 
 
 def status():
-    return {"engine": f"Gemini ({MODEL})" if stats["ok"] else "關鍵字詞庫",
-            "aiCalls": stats["ok"], "aiFailed": stats["failed"],
+    used = [m for m, n in stats["byModel"].items() if n]
+    return {"engine": "Gemini (" + " / ".join(used) + ")" if used else "關鍵字詞庫",
+            "aiCalls": stats["ok"], "aiFailed": stats["failed"], "byModel": stats["byModel"],
             "note": _disabled_reason}
 
 
 def _call(prompt, schema, retries=3):
-    """呼叫 Gemini，回傳解析後的 JSON；失敗回傳 None。"""
+    """呼叫 Gemini，回傳解析後的 JSON；額度用完自動換下一個模型；全部失敗回傳 None。"""
     global _last_call, _disabled_reason
-    if not enabled():
-        return None
     body = {
         "contents": [{"role": "user", "parts": [{"text": prompt}]}],
         "generationConfig": {"temperature": 0.2, "responseMimeType": "application/json", "responseSchema": schema},
     }
-    res = None
-    for attempt in range(retries):
-        wait = MIN_INTERVAL - (time.time() - _last_call)
-        if wait > 0:
-            time.sleep(wait)
-        _last_call = time.time()
-        stats["calls"] += 1
-        try:
-            res = requests.post(ENDPOINT.format(model=MODEL), json=body, timeout=180,
-                                headers={"x-goog-api-key": API_KEY, "Content-Type": "application/json"})
-        except requests.RequestException as e:
-            log(f"⚠️ Gemini 連線失敗：{e}")
-            time.sleep(5)
-            continue
-        if res.status_code == 200:
+    while enabled():
+        model = current_model()
+        res = None
+        for attempt in range(retries):
+            wait = MIN_INTERVAL - (time.time() - _last_call)
+            if wait > 0:
+                time.sleep(wait)
+            _last_call = time.time()
+            stats["calls"] += 1
             try:
-                text = res.json()["candidates"][0]["content"]["parts"][0]["text"]
+                res = requests.post(f"{BASE_URL}/models/{model}:generateContent", json=body, timeout=180,
+                                    headers={"x-goog-api-key": API_KEY, "Content-Type": "application/json"})
+            except requests.RequestException as e:
+                log(f"⚠️ Gemini 連線失敗：{e}")
+                time.sleep(5)
+                continue
+            if res.status_code == 200:
+                try:
+                    text = res.json()["candidates"][0]["content"]["parts"][0]["text"]
+                    result = json.loads(text)
+                except (KeyError, IndexError, ValueError) as e:
+                    log(f"⚠️ {model} 回應格式錯誤：{e}")
+                    break
                 stats["ok"] += 1
-                return json.loads(text)
-            except (KeyError, IndexError, ValueError) as e:
-                log(f"⚠️ Gemini 回應格式錯誤：{e}")
+                stats["byModel"][model] = stats["byModel"].get(model, 0) + 1
+                return result
+            try:
+                msg = res.json()["error"]["message"][:200]
+            except (ValueError, KeyError, TypeError):
+                msg = res.text[:200]
+            if res.status_code in (401, 403) and "API key" in msg:
+                _disabled_reason = f"Gemini 金鑰錯誤：{msg}"
+                log(f"⚠️ {_disabled_reason}")
+                return None
+            if res.status_code in (400, 403, 404):
+                _next_model(f"錯誤 {res.status_code} {msg[:100]}")
                 break
-        try:
-            msg = res.json()["error"]["message"][:200]
-        except (ValueError, KeyError, TypeError):
-            msg = res.text[:200]
-        if res.status_code in (400, 401, 403, 404):
-            _disabled_reason = f"Gemini 錯誤 {res.status_code}：{msg}"
-            log(f"⚠️ {_disabled_reason}（停用 AI，改用詞庫）")
-            break
-        if res.status_code == 429 and "PerDay" in res.text:  # quotaId 在 details 裡，需檢查完整內容
-            _disabled_reason = "Gemini 今日免費額度已用完"
-            log(f"⚠️ {_disabled_reason}：{msg}")
-            break
-        log(f"⚠️ Gemini {res.status_code}，{20 * (attempt + 1)} 秒後重試：{msg[:120]}")
-        time.sleep(20 * (attempt + 1))
-    else:
-        if res is not None and res.status_code == 429:
-            # 重試後仍被限流，視為額度用盡，避免耗到逾時
-            _disabled_reason = "Gemini 持續限流（免費額度可能已用完）"
-            log(f"⚠️ {_disabled_reason}，其餘改用詞庫")
+            if res.status_code == 429 and "PerDay" in res.text:  # quotaId 在 details 裡，需檢查完整內容
+                _next_model("今日免費額度已用完")
+                break
+            log(f"⚠️ {model} {res.status_code}，{20 * (attempt + 1)} 秒後重試：{msg[:120]}")
+            time.sleep(20 * (attempt + 1))
+        else:
+            if res is not None and res.status_code == 429:
+                _next_model("持續限流（額度可能已用完）")
+                continue
+            stats["failed"] += 1
+            return None
+        if res is not None and res.status_code == 200:  # 回應格式錯誤，不換模型
+            stats["failed"] += 1
+            return None
     stats["failed"] += 1
     return None
 
@@ -252,7 +308,14 @@ def analyze_market(market, macro, top_stocks):
 【量化評分前段班個股】
 {json.dumps(top_stocks, ensure_ascii=False)}
 
-要求：categories 請依類別0、1、2…的順序各給一個情緒分數；commentary 用 120~200 字繁體中文，說明資金面（外資現貨/期貨、融資）、國際連動與產業輪動；不要給買賣建議。"""
+要求：
+1. categories 請依類別0、1、2…的順序各給一個情緒分數。
+2. commentary 用 120~200 字繁體中文，說明資金面（外資現貨/期貨、融資）、國際連動與產業動向。
+3. 資金流向的描述必須以市場數據中的 sectorFlows（各產業外資、投信近 5 日買賣超金額，單位億元）為依據：
+   - 只有買超金額為正的產業才能說「資金流入」；若流入金額遠小於流出金額，應描述為「資金撤出」而非「轉向」。
+   - 不要僅因個股量化排名高或新聞提及，就推論資金流入該產業。
+4. hotThemes：每個題材後面用括號註明依據，例如「航運（外資買超）」、「CPO（新聞熱議）」、「驅動IC（營收與技術面強）」。
+5. 不要給買賣建議。"""
     result = _call(prompt, MARKET_SCHEMA)
     if not result:
         return fallback

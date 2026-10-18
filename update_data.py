@@ -74,13 +74,30 @@ def append_latest_bar(df, quote, d):
     return pd.concat([df, row])
 
 
+def sector_flows(stocks):
+    """依產業加總股票池內外資／投信近 5 日買賣超金額（億元，以最新收盤價估算）與平均 20 日報酬"""
+    agg = {}
+    for s in stocks:
+        a = agg.setdefault(s["sector"], {"sector": s["sector"], "foreign5dYi": 0.0, "trust5dYi": 0.0, "ret": [], "count": 0})
+        c = s["chips"]
+        a["foreign5dYi"] += (c.get("foreign5d") or 0) * 1000 * s["close"] / 1e8
+        a["trust5dYi"] += (c.get("trust5d") or 0) * 1000 * s["close"] / 1e8
+        a["ret"].append(s["tech"]["ret20"])
+        a["count"] += 1
+    rows = []
+    for a in agg.values():
+        rows.append({"sector": a["sector"], "foreign5dYi": round(a["foreign5dYi"], 1), "trust5dYi": round(a["trust5dYi"], 1),
+                     "ret20": round(sum(a["ret"]) / len(a["ret"]), 1), "count": a["count"]})
+    return sorted(rows, key=lambda r: r["foreign5dYi"] + r["trust5dYi"], reverse=True)
+
+
 def quant_total(scores):
     total = sum(QUANT_WEIGHTS.values())
     return round(sum(scores[k] * w for k, w in QUANT_WEIGHTS.items()) / total, 1)
 
 
 def main():
-    log(f"啟動台股自動分析引擎（AI：{'Gemini ' + ai.MODEL if ai.enabled() else '關鍵字詞庫'}）")
+    log(f"啟動台股自動分析引擎（AI：{'Gemini 接力' if ai.enabled() else '關鍵字詞庫'}）")
 
     # ---------- 1. 交易日、法人、行情 ----------
     dates, inst = src.fetch_institutional_history()
@@ -152,6 +169,7 @@ def main():
                          for h in inst[c][:days]) / 1e8, 1)
     market["foreignTodayYi"] = foreign_yi(1)
     market["foreign5dYi"] = foreign_yi(5)
+    market["sectorFlows"] = sector_flows(stocks)
     macro = []
     for t in MACRO_TOPICS:
         items = []
